@@ -1,0 +1,29 @@
+function log(text)
+{   
+$(document).ready(function() {
+    $('body').append('<div>' + text + '</div>');   
+});
+}
+
+function log(text)
+{   
+var tmp = document.createElement('p');
+tmp.innerText = text;
+document.body.appendChild(tmp);
+}
+
+$(document).ready(function() {
+    $('div.main').replaceWith(text);   
+});
+
+
+/* 
+// for jquery example
+$(document).ready(function() {
+    $('div.main').replaceWith(text);   
+});
+// for default example
+var tmp = document.createElement('p');
+tmp.innerText = text;
+document.body.appendChild(tmp);
+*/  

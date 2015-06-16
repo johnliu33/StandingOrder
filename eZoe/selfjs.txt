@@ -1,0 +1,30 @@
+function markData(myId)
+{
+var choose = document.getElementById(myId);
+return(choose.innerHTML);
+};
+function getParent()
+{var o,path = [];
+o = document.all? document.selection.createRange().parentElement(): window.getSelection().focusNode.parentNode;
+do{path.push(o.tagName);
+}while(o=o.parentNode,o&&o!==document.body)
+return(path.reverse().join('->'))
+};
+function log(text)
+{
+document.open();
+document.write(text);
+document.close(); 
+}
+var click_count = 0;
+function processPage(n)
+{jsBridge.postNotification('oc',{message:'page='+n});
+}
+function processNote(n)
+{
+jsBridge.postNotification('oc',{message:'note='+n});
+}
+jsBridge.bind('test', function(object){log(object.message);
+}
+);
+

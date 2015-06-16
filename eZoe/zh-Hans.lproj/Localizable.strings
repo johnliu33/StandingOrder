@@ -1,0 +1,187 @@
+/*
+ Localizable.strings
+ eZoe
+ 
+ Created by John Liu on 2011/5/27.
+ Copyright 2011年 __MyCompanyName__. All rights reserved.
+ */
+/* lang */
+"lang" = "Simplify";
+
+/* eZoe */
+"電子書報eZoe" = "晨兴圣言";
+
+/* Store */
+"門市" = "门市";
+
+/* OK */
+"確定" = "确定";
+
+/* Chest */
+"書櫃" = "书柜";
+
+/* Mainpage */
+"門市首頁" = "门市首页";
+
+/* Mainpage url */
+"main_url" = "http://ipad.twgbr.org/mon1s.php";
+
+/* Mainpage url iphone */
+"main_url_iphone" = "http://ipad.twgbr.org/iphone_mon1s.php";
+
+/* Catalogue */
+"分類瀏覽" = "分类浏览";
+
+/* Catalogue url */
+"catalogue_url" = "http://ipad.twgbr.org/mon2s.php";
+
+/* Catalogue url iphone */
+"catalogue_url_iphone" = "http://ipad.twgbr.org/iphone_mon2s.php";
+
+/* Book Search */
+"書報搜尋" = "书报搜寻";
+
+/* SnapShot */
+"快速瀏覽" = "快速浏览";
+
+/* SearchJump */
+"跳轉至該頁" = "跳转至该页";
+
+/* Search */
+"搜尋" = "搜寻";
+
+/* CopyTheText */
+"拷貝" = "拷贝";
+
+/* MarkTheText */
+"標記" = "标记";
+
+/* DelTheText */
+"移除標記" = "移除标记";
+
+/* Search url */
+"search_url" = "http://ipad.twgbr.org/mon3s.php";
+
+/* Search url iphone */
+"search_url_iphone" = "http://ipad.twgbr.org/iphone_mon3s.php";
+
+/* About */
+"關於" = "关于";
+
+/* About url */
+"about_url" = "http://ipad.twgbr.org/aboutmons.html";
+
+/* About url iphone */
+"about_url_iphone" = "http://ipad.twgbr.org/aboutmons-iphone.html";
+
+
+/* Bookmark Page Number */
+"書籤頁數" = "书籤页数";
+
+/* Bookmark List */
+"書籤列表" = "书籤列表";
+
+/* Marktext List */
+"標記列表" = "标记列表";
+
+/* setting */
+"設定" = "设定";
+
+/* Option Setting */
+"設定選項" = "设定选项";
+
+/* Font Size */
+"字型大小" = "字型大小";
+
+/* Font Level1 */
+"最小字" = "最小字";
+
+/* Font Level2 */
+"小字" = "小字";
+
+/* Font Level3 */
+"標準" = "标准";
+
+/* Font Level4 */
+"大字" = "大字";
+
+/* Font Level5 */
+"最大字" = "最大字";
+
+/* Background */
+"佈景主題" = "布景主题";
+
+/* Back1 */
+"米黃色" = "米黄色";
+
+/* Back2 */
+"純白色" = "纯白色";
+
+/* Back3 */
+"報紙灰" = "报纸灰";
+
+/* Back4 */
+"夜間黑" = "夜间黑";
+
+/* Back5 */
+"水藍色" = "水蓝色";
+
+/* Font Type */
+"字體設定" = "字体设定";
+
+/* Font1 */
+"楷體" = "楷体";
+
+/* Font2 */
+"黑體" = "黑体";
+
+/* Preface */
+"內封" = "内封";
+
+/* Processing */
+"處理中" = "处理中";
+
+/* Start Download */
+"開始下載" = "开始下载";
+
+/* Downloading */
+"下載中" = "下载中";
+
+/* Finish Download */
+"下載完成" = "下载完成";
+
+/* Fail Download */
+"下載失敗" = "下载失败";
+
+/* Cancel Download */
+"下載取消" = "下载取消";
+
+/* Finish Install */
+"安裝完成" = "安装完成";
+
+/* Installed */
+"已安裝" = "已安装";
+
+/* Purchased */
+"已購買" = "已购买";
+
+/* Close */
+"關閉" = "关闭";
+
+/* No Network */
+"無網路連線" = "无网路连线";
+
+/* Need Network */
+"Need_Network" = "门市功能需网路连线，请确认网路于连线状态后，再试一次!";
+
+/* Need Upgrade1 */
+"Need_Upgrade1" = "购买此产品需更新程式版本";
+
+/* Need Upgrade2 */
+"Need_Upgrade2" = "您目前的程式版本较旧，请更新至最新版后，再进行购买!";
+
+/* In-App Close1 */
+"In-App_Close1" = "应用程式内建购买功能关闭";
+
+/* In-App Close2 */
+"In-App_Close2" = "请至设定中将您的应用程式内建购买功能开启后再试一次!";

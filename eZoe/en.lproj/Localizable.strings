@@ -1,0 +1,187 @@
+/*
+ Localizable.strings
+ eZoe
+ 
+ Created by John Liu on 2011/5/27.
+ Copyright 2011年 __MyCompanyName__. All rights reserved.
+ */
+/* lang */
+"lang" = "Traditional";
+
+/* eZoe */
+"電子書報eZoe" = "晨興聖言";
+
+/* Store */
+"門市" = "門市";
+
+/* OK */
+"確定" = "確定";
+
+/* Chest */
+"書櫃" = "書櫃";
+
+/* Mainpage */
+"門市首頁" = "門市首頁";
+
+/* Mainpage url */
+"main_url" = "http://ipad.twgbr.org/subs/free.php";
+
+/* Mainpage url iphone */
+"main_url_iphone" = "http://ipad.twgbr.org/subs/free.php";
+
+/* Catalogue */
+"分類瀏覽" = "分類瀏覽";
+
+/* Catalogue url */
+"catalogue_url" = "http://ipad.twgbr.org/mon2.php";
+
+/* Catalogue url iphone */
+"catalogue_url_iphone" = "http://ipad.twgbr.org/iphone_mon2.php";
+
+/* Book Search */
+"書報搜尋" = "書報搜尋";
+
+/* Search url */
+"search_url" = "http://ipad.twgbr.org/mon3.php";
+
+/* Search url iphone */
+"search_url_iphone" = "http://ipad.twgbr.org/iphone_mon3.php";
+
+/* About */
+"關於" = "關於";
+
+/* About url */
+"about_url" = "http://ipad.twgbr.org/aboutmon.html";
+
+/* About url iphone */
+"about_url_iphone" = "http://ipad.twgbr.org/aboutmon-iphone.html";
+
+
+/* SnapShot */
+"快速瀏覽" = "快速瀏覽";
+
+/* SearchJump */
+"跳轉至該頁" = "跳轉至該頁";
+
+/* Search */
+"搜尋" = "搜尋";
+
+/* CopyTheText */
+"拷貝" = "拷貝";
+
+/* MarkTheText */
+"標記" = "標記";
+
+/* DelTheText */
+"移除標記" = "移除標記";
+
+/* Bookmark Page Number */
+"書籤頁數" = "書籤頁數";
+
+/* Bookmark List */
+"書籤列表" = "書籤列表";
+
+/* Marktext List */
+"標記列表" = "標記列表";
+
+/* setting */
+"設定" = "設定";
+
+/* Option Setting */
+"設定選項" = "設定選項";
+
+/* Font Size */
+"字型大小" = "字型大小";
+
+/* Font Level1 */
+"最小字" = "最小字";
+
+/* Font Level2 */
+"小字" = "小字";
+
+/* Font Level3 */
+"標準" = "標準";
+
+/* Font Level4 */
+"大字" = "大字";
+
+/* Font Level5 */
+"最大字" = "最大字";
+
+/* Background */
+"佈景主題" = "佈景主題";
+
+/* Back1 */
+"米黃色" = "米黃色";
+
+/* Back2 */
+"純白色" = "純白色";
+
+/* Back3 */
+"報紙灰" = "報紙灰";
+
+/* Back4 */
+"夜間黑" = "夜間黑";
+
+/* Back5 */
+"水藍色" = "水藍色";
+
+/* Font Type */
+"字體設定" = "字體設定";
+
+/* Font1 */
+"楷體" = "楷體";
+
+/* Font2 */
+"黑體" = "黑體";
+
+/* Preface */
+"內封" = "內封";
+
+/* Processing */
+"處理中" = "處理中";
+
+/* Start Download */
+"開始下載" = "開始下載";
+
+/* Downloading */
+"下載中" = "下載中";
+
+/* Finish Download */
+"下載完成" = "下載完成";
+
+/* Fail Download */
+"下載失敗" = "下載失敗";
+
+/* Cancel Download */
+"下載取消" = "下載取消";
+
+/* Finish Install */
+"安裝完成" = "安裝完成";
+
+/* Installed */
+"已安裝" = "已安裝";
+
+/* Purchased */
+"已購買" = "已購買";
+
+/* Close */
+"關閉" = "關閉";
+
+/* No Network */
+"無網路連線" = "無網路連線";
+
+/* Need Network */
+"Need_Network" = "門市功能需網路連線，請確認網路於連線狀態後，再試一次!";
+
+/* Need Upgrade1 */
+"Need_Upgrade1" = "購買此產品需更新程式版本";
+
+/* Need Upgrade2 */
+"Need_Upgrade2" = "您目前的程式版本較舊，請更新至最新版後，再進行購買!";
+
+/* In-App Close1 */
+"In-App_Close1" = "應用程式內建購買功能關閉";
+
+/* In-App Close2 */
+"In-App_Close2" = "請至設定中將您的應用程式內建購買功能開啟後再試一次!";

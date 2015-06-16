@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bookName</key>
+	<string>晨興聖言—初信餧養（一）</string>
+	<key>bookName_c</key>
+	<string>晨兴圣言—初信喂养（一）</string>
+	<key>bookNumber</key>
+	<string>4204_1</string>
+	<key>countOfChapter</key>
+	<integer>6</integer>
+	<key>lastOrientation</key>
+	<string>0</string>
+	<key>lastPageNum</key>
+	<string>0</string>
+	<key>lastPagePercent</key>
+	<string>0</string>
+	<key>option0</key>
+	<string>0</string>
+	<key>option1</key>
+	<string>0</string>
+	<key>option2</key>
+	<string>0</string>
+	<key>option3</key>
+	<string>0</string>
+	<key>option4</key>
+	<string>0</string>
+	<key>option5</key>
+	<string>0</string>
+	<key>option6</key>
+	<string>0</string>
+	<key>option7</key>
+	<string>0</string>
+	<key>option8</key>
+	<string>0</string>
+	<key>option9</key>
+	<string>0</string>
+</dict>
+</plist>
