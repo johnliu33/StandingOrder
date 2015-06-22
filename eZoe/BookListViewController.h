@@ -12,6 +12,8 @@
 #import "BookListDataSource.h"
 #import "ReaderViewController.h"
 
+#import "MFSideMenu.h"
+
 #import "CustomSegmentedControl.h"
 @class CustomSegmentedControl;
 @class Reachability;

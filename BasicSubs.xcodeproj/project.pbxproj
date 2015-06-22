@@ -256,6 +256,12 @@
 		045F33621B32D5D8003D349A /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 045F33601B32D5D8003D349A /* iTunesArtwork */; };
 		045F33631B32D5D8003D349A /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 045F33611B32D5D8003D349A /* iTunesArtwork.png */; };
 		046A4FCD185B896200471707 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 046A4FCC185B896200471707 /* navbar.png */; };
+		046D31441B38469700E4C4E2 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D313F1B38469700E4C4E2 /* MFSideMenuContainerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		046D31451B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D31411B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		046D31461B38469700E4C4E2 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D31431B38469700E4C4E2 /* MFSideMenuShadow.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		046D31511B384AED00E4C4E2 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D31501B384AED00E4C4E2 /* SideMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		046D31541B384FAE00E4C4E2 /* menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D31521B384FAE00E4C4E2 /* menu-icon.png */; };
+		046D31551B384FAE00E4C4E2 /* menu-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D31531B384FAE00E4C4E2 /* menu-icon@2x.png */; };
 		047B834D1A7CDEA3008ABEEB /* engDict.db in Resources */ = {isa = PBXBuildFile; fileRef = 047B834C1A7CDEA3008ABEEB /* engDict.db */; };
 		0498DD981A7F32C90052D866 /* DBHelperEngDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498DD971A7F32C90052D866 /* DBHelperEngDict.m */; };
 		0498DDA21A7F36270052D866 /* KNModalEngDictTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498DDA11A7F36270052D866 /* KNModalEngDictTableViewController.m */; };
@@ -897,6 +903,17 @@
 		045F33601B32D5D8003D349A /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		045F33611B32D5D8003D349A /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		046A4FCC185B896200471707 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
+		046D313D1B38469700E4C4E2 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		046D313E1B38469700E4C4E2 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		046D313F1B38469700E4C4E2 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		046D31401B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		046D31411B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		046D31421B38469700E4C4E2 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		046D31431B38469700E4C4E2 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		046D314F1B384AED00E4C4E2 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		046D31501B384AED00E4C4E2 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		046D31521B384FAE00E4C4E2 /* menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon.png"; sourceTree = "<group>"; };
+		046D31531B384FAE00E4C4E2 /* menu-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon@2x.png"; sourceTree = "<group>"; };
 		047B834C1A7CDEA3008ABEEB /* engDict.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = engDict.db; sourceTree = "<group>"; };
 		0498DD961A7F32C90052D866 /* DBHelperEngDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHelperEngDict.h; sourceTree = "<group>"; };
 		0498DD971A7F32C90052D866 /* DBHelperEngDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelperEngDict.m; sourceTree = "<group>"; };
@@ -1279,6 +1296,7 @@
 		02990FF91330D225006C98C5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				046D314E1B3846A400E4C4E2 /* MFSideMenu */,
 				02AA42CF13326E410051D5F4 /* ELCSlider */,
 				023CCD5D13DFC3BE0092650A /* LoadingView */,
 				042D51F61845D77800269A12 /* SupportPDF */,
@@ -1882,6 +1900,20 @@
 			name = SupportPDF;
 			sourceTree = "<group>";
 		};
+		046D314E1B3846A400E4C4E2 /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				046D313D1B38469700E4C4E2 /* MFSideMenu.h */,
+				046D313E1B38469700E4C4E2 /* MFSideMenuContainerViewController.h */,
+				046D313F1B38469700E4C4E2 /* MFSideMenuContainerViewController.m */,
+				046D31401B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.h */,
+				046D31411B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.m */,
+				046D31421B38469700E4C4E2 /* MFSideMenuShadow.h */,
+				046D31431B38469700E4C4E2 /* MFSideMenuShadow.m */,
+			);
+			name = MFSideMenu;
+			sourceTree = "<group>";
+		};
 		049BCCD91A481E380069ADEB /* TUKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -2044,6 +2076,10 @@
 		04B9599418DDE4110048FA50 /* NewBookList */ = {
 			isa = PBXGroup;
 			children = (
+				046D31521B384FAE00E4C4E2 /* menu-icon.png */,
+				046D31531B384FAE00E4C4E2 /* menu-icon@2x.png */,
+				046D314F1B384AED00E4C4E2 /* SideMenuViewController.h */,
+				046D31501B384AED00E4C4E2 /* SideMenuViewController.m */,
 				04B959A118DDE76E0048FA50 /* FileDownloadHelper */,
 				04B9597018DDE3FE0048FA50 /* BookListDataSource.h */,
 				04B9597118DDE3FE0048FA50 /* BookListDataSource.m */,
@@ -2417,6 +2453,7 @@
 				290AA829187878E500CF00B7 /* Default-Landscape@2x.png in Resources */,
 				042D51561845D59D00269A12 /* Reader-Mark-N.png in Resources */,
 				042D51551845D59D00269A12 /* Reader-Email@2x.png in Resources */,
+				046D31551B384FAE00E4C4E2 /* menu-icon@2x.png in Resources */,
 				042D526A1845D86C00269A12 /* Default-Portrait.png in Resources */,
 				049BCD401A4826980069ADEB /* __default_highlighted_star.png in Resources */,
 				045F33631B32D5D8003D349A /* iTunesArtwork.png in Resources */,
@@ -2492,6 +2529,7 @@
 				042D52631845D86C00269A12 /* bookBox@2x.png in Resources */,
 				04D1994A1A4C1A7500476843 /* 4247.plist in Resources */,
 				0238C2D215F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt in Resources */,
+				046D31541B384FAE00E4C4E2 /* menu-icon.png in Resources */,
 				045F335F1B32D5B5003D349A /* Icon-Small@3x.png in Resources */,
 				29DAECE31856D5E900F4458B /* chest_iphone-568h@2x.png in Resources */,
 				042D51511845D59D00269A12 /* Reader-Button-H@2x.png in Resources */,
@@ -2524,6 +2562,7 @@
 			files = (
 				02B48229132FD76E001B9B7D /* main.m in Sources */,
 				049BCCE61A481E530069ADEB /* NSMutableArray+WeakReference.m in Sources */,
+				046D31461B38469700E4C4E2 /* MFSideMenuShadow.m in Sources */,
 				042D51131845D4C700269A12 /* Global.m in Sources */,
 				0498DDA21A7F36270052D866 /* KNModalEngDictTableViewController.m in Sources */,
 				049BCD691A4826CD0069ADEB /* TESwitchItem.m in Sources */,
@@ -2535,6 +2574,7 @@
 				02A14B9B1341541F004AE545 /* YLUIKitAddition.m in Sources */,
 				049BCD761A4826E50069ADEB /* TESelectCell.m in Sources */,
 				049BCD5E1A4826B00069ADEB /* TETableViewExpandableDelegate.m in Sources */,
+				046D31441B38469700E4C4E2 /* MFSideMenuContainerViewController.m in Sources */,
 				042D51761845D5B900269A12 /* ReaderMainToolbar.m in Sources */,
 				04B959A018DDE7660048FA50 /* NSString+Path.m in Sources */,
 				29C05DC91854DC8800EE6585 /* TabBarController.m in Sources */,
@@ -2565,6 +2605,7 @@
 				049BCD6A1A4826CD0069ADEB /* TESelectItem.m in Sources */,
 				022BF11F137B9841002191E0 /* inflate.c in Sources */,
 				022BF120137B9841002191E0 /* inftrees.c in Sources */,
+				046D31451B38469700E4C4E2 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				049BCD341A48265B0069ADEB /* AFUIImageReflection.m in Sources */,
 				049BCD5A1A4826B00069ADEB /* TETableViewItem.m in Sources */,
 				042D517C1845D5B900269A12 /* ThumbsMainToolbar.m in Sources */,
@@ -2672,6 +2713,7 @@
 				04B9598818DDE3FE0048FA50 /* BookListDelegate.m in Sources */,
 				049BCD361A48265B0069ADEB /* TEPhoto.m in Sources */,
 				0238C02415C00B2200F90DE4 /* StreamPlayer.m in Sources */,
+				046D31511B384AED00E4C4E2 /* SideMenuViewController.m in Sources */,
 				29DAED3B185735F300F4458B /* MKSKSubscriptionProduct.m in Sources */,
 				02A85B181605B34E00ABA86D /* ASIAuthenticationDialog.m in Sources */,
 				042D51941845D67100269A12 /* MyCustomStylesheet.m in Sources */,

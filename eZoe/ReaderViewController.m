@@ -36,6 +36,11 @@
 
 #import <MessageUI/MessageUI.h>
 
+#import "MFSideMenu.h"
+#import "SideMenuViewController.h"
+
+
+
 @interface ReaderViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,
 									ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate>
 @end
@@ -611,6 +616,39 @@
    
 }
 
+#pragma mark -
+#pragma mark - UIBarButtonItems
+
+- (void)setupMenuBarButtonItems {
+    
+    if(self.menuContainerViewController.menuState == MFSideMenuStateClosed &&
+       ![[self.navigationController.viewControllers objectAtIndex:0] isEqual:self]) {
+        NSLog(@"Menu Closed");
+        //self.navigationItem.leftBarButtonItem = [self backBarButtonItem];
+    } else {
+        NSLog(@"Menu Not Closed");
+        //self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
+    }
+}
+
+#pragma mark -
+#pragma mark - IndexJumpEvent
+
+- (void)bookDidJumpIndex:(NSNotification *)notification {
+    NSString *indexNumber = notification.object;
+    NSLog(@"index %@",indexNumber);
+    
+    eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSInteger totalPage = [document.pageCount integerValue];
+    NSInteger value = [indexNumber integerValue]; // Number
+    if(appDelegate.bookDirectionMode == ReaderFlipModeRight) {
+        value = totalPage - value+1;
+        
+    }
+    [self showDocumentPage:value]; // Show the page
+    
+    
+}
 
 #pragma mark UIViewController methods
 
@@ -777,7 +815,19 @@
 	[singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
 
 	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate date];
+    
+    
+    [self setupMenuBarButtonItems];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(bookDidJumpIndex:)
+                                                 name:kBookDidJumpIndex
+                                               object:nil];
+
 }
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -1250,7 +1300,7 @@
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button
 {
-	if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
+	/*if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
 
 	ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document];
 
@@ -1259,8 +1309,22 @@
 	thumbsViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	thumbsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-	[self presentModalViewController:thumbsViewController animated:NO];
+	[self presentModalViewController:thumbsViewController animated:NO];*/
+    
+    NSLog(@"present thumb");
+    
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:^{
+        [self setupMenuBarButtonItems];
+    }];
+    /*- (void)leftSideMenuButtonPressed:(id)sender {
+        [self.menuContainerViewController toggleLeftSideMenuCompletion:^{
+            [self setupMenuBarButtonItems];
+        }];
+    }*/
 }
+
+
+
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button
 {

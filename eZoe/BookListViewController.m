@@ -23,6 +23,11 @@
 
 #import "MyLauncherView.h"
 
+
+#import "SideMenuViewController.h"
+#import "MFSideMenuContainerViewController.h"
+
+
 #define BUTTON_WIDTH 54.0
 #define BUTTON_SEGMENT_WIDTH 51.0
 #define CAP_WIDTH 5.0
@@ -990,6 +995,8 @@
         [fileManager removeItemAtPath:dataPath error:&error];
     }
     
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadBooks) name:@"TableLoadBooks" object:nil];//johnliu
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBooks) name:@"TableRefreshBooks" object:nil];//johnlius
     
@@ -1415,15 +1422,10 @@
         NSLog(@"%s", __FUNCTION__);
 #endif
         
-        NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
-        
-        //NSString *filePath = [[NSString stringWithFormat:@"%@.pdf",sBookNumber] getDocPathWithPList];
-        
+        NSString *phrase = nil;
+    
         eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSLog(@"appDelegate.bookDirectionMode:%d",appDelegate.bookDirectionMode);
-        //ReaderDocument *document = [[ReaderDocument alloc] initWithFilePath:filePath password:nil flipMode:appDelegate.bookDirectionMode];
-        //ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase flipMode:0];
-        //NSLog(@"filePath:%@",filePath);
         NSString *filePath = [[NSString stringWithFormat:@"%@.pdf",sBookNumber] getDocPathWithPList];
         
         ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase flipMode:appDelegate.bookDirectionMode];
@@ -1434,6 +1436,22 @@
         if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
         {
             ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+             
+            readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+            
+            
+            SideMenuViewController *leftMenuViewController = [[SideMenuViewController alloc] init];
+            [leftMenuViewController setBookId:sBookNumber];
+            
+            MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                            containerWithCenterViewController:readerViewController
+                                                            leftMenuViewController:leftMenuViewController
+                                                            rightMenuViewController:nil];
+            
+            [self presentViewController:container animated:YES completion:nil];
+            [readerViewController release];
+            
+            /*ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
             
             readerViewController.delegate = self; // Set the ReaderViewController delegate to self
             
@@ -1442,23 +1460,7 @@
             
             
             [self presentModalViewController:readerViewController animated:YES];
-            //[self presentViewController:readerViewController animated:YES completion:nil];
-            //[self presentModalViewController:readerViewController animated:YES];
-            //#if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-            
-            //[[TTNavigator navigator] pushViewController:readerViewController animated:YES];
-            //[[self view] addSubview:readerViewController];
-            
-            /*#else // present in a modal view controller
-             
-             readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-             readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-             
-             [self presentModalViewController:readerViewController animated:YES];
-             
-             #endif // DEMO_VIEW_CONTROLLER_PUSH
-             */
-            [readerViewController release]; // Release the ReaderViewController
+            [readerViewController release]; // Release the ReaderViewController*/
         }
 }
 
