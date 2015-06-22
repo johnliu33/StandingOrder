@@ -7,32 +7,32 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0622FDE9-37EC-4906-B7DE-D786FA756B78</string>
 	<key>IDESourceControlProjectName</key>
-	<string>BasicSubs</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>A8BD1517B835FB2DAD26CFD440DC622CBB7118F0</key>
-		<string>bitbucket.org:samountech/holyword2014.git</string>
+		<key>193F46DBD8B4E957C575F3A3AC9929151AB711C4</key>
+		<string>bitbucket.org:samountech/basicsubs.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BasicSubs.xcodeproj</string>
+	<string>BasicSubs.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A8BD1517B835FB2DAD26CFD440DC622CBB7118F0</key>
+		<key>193F46DBD8B4E957C575F3A3AC9929151AB711C4</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>bitbucket.org:samountech/holyword2014.git</string>
+	<string>bitbucket.org:samountech/basicsubs.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A8BD1517B835FB2DAD26CFD440DC622CBB7118F0</string>
+	<string>193F46DBD8B4E957C575F3A3AC9929151AB711C4</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A8BD1517B835FB2DAD26CFD440DC622CBB7118F0</string>
+			<string>193F46DBD8B4E957C575F3A3AC9929151AB711C4</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BasicSubs_2015</string>
 		</dict>

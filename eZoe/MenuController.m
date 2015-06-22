@@ -748,21 +748,7 @@
         NSString *_verLimit = [_value objectAtIndex:1];
         NSString *_contentType = [_value objectAtIndex:2];
         
-        eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSString *_verNow = appDelegate.numVersion;
-        NSInteger ivNow = [_verNow integerValue];
-        NSInteger ivRequire = [_verLimit integerValue];
-        if(ivRequire > ivNow)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Need_Upgrade1", @"Need Upgrade1")
-                                                            message:NSLocalizedString(@"Need_Upgrade2", @"Need Upgrade2")
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"關閉", @"Close")
-                                                  otherButtonTitles: nil];
-            [alert show];
-            [alert release];
-            return NO;
-        }
+        
         
         
         
@@ -787,14 +773,17 @@
         
         
         ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentModalViewController:ctrl animated:YES];
+        //[self presentModalViewController:ctrl animated:YES];
+        //it's important to do this after presentModalViewController
         
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);//it's important to do this after presentModalViewController
+        ctrl.preferredContentSize = CGSizeMake(600, 480);
+        
+        
+        [self presentViewController:ctrl animated:NO completion:nil];
+        
+        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
         
         ctrl.view.superview.center = self.view.center;
-        
-        
-        return NO;
         
         
     }
@@ -817,20 +806,6 @@
         NSString *_contentType = [_value objectAtIndex:2];
         NSLog(@"%@ %@ %@",_subsid,_verLimit,_contentType);
         
-        /*SubscriptControllerViewController *ctrl = [[[SubscriptControllerViewController alloc] init] autorelease];
-        ctrl.subscriptId = _subsid;
-        
-        
-        ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
-        
-        
-        ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentModalViewController:ctrl animated:YES];
-        
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);//it's important to do this after presentModalViewController
-        
-        ctrl.view.superview.center = self.view.center;
-        */
          
         
         return NO;

@@ -188,9 +188,10 @@
 {
     UIInterfaceOrientation orientation= [[UIApplication sharedApplication] statusBarOrientation];
     NSUInteger  totalPage = [document.pageCount integerValue];
+    eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
     if(UIInterfaceOrientationIsLandscape(orientation)){
 
-        eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+       
         
         if(appDelegate.bookDirectionMode == ReaderFlipModeLeft)
         {
@@ -1089,8 +1090,13 @@
 				{
 					if ([target isKindOfClass:[NSNumber class]]) // Goto page
 					{
+                        eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+                        NSInteger totalPage = [document.pageCount integerValue];
 						NSInteger value = [target integerValue]; // Number
-
+                        if(appDelegate.bookDirectionMode == ReaderFlipModeRight) {
+                            value = totalPage - value+1;
+                            
+                        }
 						[self showDocumentPage:value]; // Show the page
 					}
 				}
