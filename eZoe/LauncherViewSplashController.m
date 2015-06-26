@@ -1050,7 +1050,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     
-    hostReach = [[Reachability reachabilityWithHostName: @"ipad.twgbr.org"] retain];
+    hostReach = [[Reachability reachabilityWithHostName: @"so.twgbr.org"] retain];
     iMsgCount = 0;
     [hostReach startNotifier];
     
@@ -1255,14 +1255,12 @@
 	{
         
         
-	    [self copyFileFromResource:@"4204_1l.png"];
-        [self copyFileFromResource:@"4204_2l.png"];
-        [self copyFileFromResource:@"4247l.png"];
+        [self copyFileFromResource:@"8887l.png"];
         [self copyFileFromResource:@"voice.plist"];
         [self copyFileFromResource:@"bookInfo.plist"];
         
         
-        NSArray *_initArray = [NSArray arrayWithObjects:@"4204_1",@"4204_2",@"4247", nil];
+        NSArray *_initArray = [NSArray arrayWithObjects:@"8887", nil];
         
         TTLauncherItem *_it;
         NSMutableArray *_t = [NSMutableArray arrayWithObjects:nil];

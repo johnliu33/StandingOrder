@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0622FDE9-37EC-4906-B7DE-D786FA756B78</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>BasicSubs</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>193F46DBD8B4E957C575F3A3AC9929151AB711C4</key>
 		<string>bitbucket.org:samountech/basicsubs.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BasicSubs.xcodeproj/project.xcworkspace</string>
+	<string>BasicSubs.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>193F46DBD8B4E957C575F3A3AC9929151AB711C4</key>

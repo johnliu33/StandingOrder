@@ -101,14 +101,14 @@
 
     //Test for 64bit
     
-     if (sizeof(void*) == 4) {
+     /*if (sizeof(void*) == 4) {
          NSLog(@"You're running in 32 bit");
      } else if (sizeof(void*) == 8) {
          NSLog(@"You're running in 64 bit");
-     }
+     }*/
     
-    [Parse setApplicationId:@"oGilhsZwlM1vxpn1wYsJxZumLckdANWXZWcIz01T"
-                  clientKey:@"igH1xkTOrNmii4yzJpdmbAWJExGR0TEYuFnNAjPl"];
+    [Parse setApplicationId:@"ChSMLWtqR4jlMjESLi13uHB8xEM6ahv49ACKVG9J"
+                  clientKey:@"7tX9CXryVtkOLkasJJBef0cWQ57QLlUEac6LRNpe"]; 
     
     
     //-- Set Notification

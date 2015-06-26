@@ -20,14 +20,17 @@
 /* Chest */
 "書櫃" = "书柜";
 
+/* Guide */
+"基本訂戶操作指引" = "基本订户操作指引";
+
 /* Mainpage */
-"門市首頁" = "门市首页";
+"門市首頁" = "基本订户";
 
 /* Mainpage url */
-"main_url" = "http://ipad.twgbr.org/mon1s.php";
+"main_url" = "http://so.twgbr.org/subs/basic_main.php";
 
 /* Mainpage url iphone */
-"main_url_iphone" = "http://ipad.twgbr.org/iphone_mon1s.php";
+"main_url_iphone" = "http://so.twgbr.org/subs/basic_main.php";
 
 /* Catalogue */
 "分類瀏覽" = "分类浏览";
@@ -138,6 +141,9 @@
 /* Preface */
 "內封" = "内封";
 
+/* Menu Index */
+"目錄索引" = "目录索引";
+
 /* Processing */
 "處理中" = "处理中";
 
@@ -150,11 +156,20 @@
 /* Finish Download */
 "下載完成" = "下载完成";
 
+/* Finish Order */
+"請至下載書報處下載報刊!" = "请至下载书报处下载报刊!";
+
 /* Fail Download */
 "下載失敗" = "下载失败";
 
 /* Cancel Download */
 "下載取消" = "下载取消";
+
+/* Download Books */
+"下載書報" = "下载书报";
+
+/* Order First */
+"請先購買基本訂戶" = "请先购买基本订户";
 
 /* Finish Install */
 "安裝完成" = "安装完成";
@@ -164,6 +179,9 @@
 
 /* Purchased */
 "已購買" = "已购买";
+
+/* Batch Restore */
+"梯次基本訂戶購買已回復" = "梯次基本订户购买已回复";
 
 /* Close */
 "關閉" = "关闭";

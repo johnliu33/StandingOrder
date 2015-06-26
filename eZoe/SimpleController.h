@@ -42,6 +42,8 @@
     
     NSString          *_bookid;
     NSString          *_booktype;
+    NSString          *_storeType;
+    NSString          *_batchNumber;
     TTButton          *_downloadButton;
     TTButton          *_dismissButton;
     
@@ -57,6 +59,8 @@
 @property(nonatomic, retain)IBOutlet UILabel *_statusLabel;
 @property(nonatomic, retain)NSString *bookid;
 @property(nonatomic, retain)NSString *booktype;
+@property(nonatomic, retain)NSString *storeType;
+@property(nonatomic, retain)NSString *batchNumber;
 
 @property(nonatomic, assign) BOOL hasPackageFiles;
 @property(nonatomic, assign) NSMutableArray *packageList;

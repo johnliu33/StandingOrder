@@ -169,8 +169,15 @@
     
 }
 
-- (void)restorePhurchase
-{
+- (void)resetPurchase {
+    [[MKStoreManager sharedManager] removeSOKeychainData];
+    //NSLog(@"Remove Standing Order keychanData");
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"" message:@"重設購買完成" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+    [alertView show];
+}
+
+- (void)restorePurchase {
+
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
@@ -188,12 +195,14 @@
         [self setPage:MenuPageRestore];
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"" message:@"購買回復完成" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
         [alertView show];
+
     }
      onError:^(NSError *error) {
          NSLog(@"Restore failed: %@", [error localizedDescription]);
          [HUD hide:YES];
          UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"回復失敗" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
          [alertView show];
+    
      }];
 
    
@@ -404,113 +413,73 @@
                                      target:self
                                      action:@selector(changeToBookShelf)] autorelease];
     
-    /*self.navigationItem.rightBarButtonItem =
-    [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"書櫃",@"Chest") style:UIBarButtonItemStyleBordered
-                                     target:@"tt://bookList"
-                                     action:@selector(openURLFromButton:)] autorelease];
-    */
-    //  [button addTarget:@"tt://launcherSplashTest" action: @selector(openURLFromButton:) forControlEvents: UIControlEventTouchUpInside];
-    
     _key = nil;
     eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     _key = [NSArray arrayWithArray:[appDelegate.restoredBooks allKeys]];
+    
+    
     
     if (_page == MenuPageRestore) {
         
         self.navigationItem.leftBarButtonItem =
         [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"回復購買",@"Chest") style:UIBarButtonItemStyleBordered
                                          target:self
-                                         action:@selector(restorePhurchase)] autorelease];
+                                         action:@selector(restorePurchase)] autorelease];
         
         NSMutableArray *_itemarray = [NSMutableArray arrayWithCapacity:10];
         
         
-         eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+        /* eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSMutableDictionary *_pdict = appDelegate.productBooks;
         
         
         if([_pdict count] == 0)
         {
-
             NSString *_bookNamePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"bookName.plist"];
             _pdict = [NSMutableDictionary dictionaryWithContentsOfFile:_bookNamePath];
 
-            
-
-        }
+        }*/
         
     
         
         TTTableControlItem* buttonItem;
-        //NSString *_idtemp;
+
          if([_key count] > 0)
          {
              for(int i = 0; i < [_key count]; i++)//NSString* _id in _key
             {
                 NSString *_id = [_key objectAtIndex:i];
                 
-                UIButton* button = [UIButton buttonWithType:UIButtonTypeContactAdd];//UIButtonTypeRoundedRect
+                //tw.org.twgbr.BasicSubs.SO47
+                //NSLog(@"_id subsstrig:%@",[_id substringToIndex:25]);
+                NSString *itemCaption = _id;
+                if(![[_id substringToIndex:25] isEqualToString:[NSString stringWithFormat:@"%@SO",kProductPrefix]]) {
+                    UIButton* button = [UIButton buttonWithType:UIButtonTypeContactAdd];//UIButtonTypeRoundedRect
                 
-                [button setTitle:@"" forState:UIControlStateNormal];
+                    [button setTitle:@"" forState:UIControlStateNormal];
                 
-                //_idtemp = [_id substringFromIndex:18];
-                //NSString *_myid = [NSString stringWithFormat:@"tw.org.twgbr.eZoe.%@",_idtemp];
-                //NSLog(@"_idtemp:%@",_idtemp);
-                button.tag = i;
-                [button addTarget:self action:@selector(ASIDownload:) forControlEvents:UIControlEventTouchUpInside];
-                
-                
-                NSString *urlString = [NSString stringWithFormat:@"http://%@/subs_product_desc/%@.txt",kSiteHttpRoot,[_id substringFromIndex:24]];
-                
-                
-                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
-                                                [NSURL URLWithString:urlString]];
-                
-                NSData *data = [ NSURLConnection sendSynchronousRequest:request returningResponse: nil error: nil ];
-                
-                NSString *returnData = [[NSString alloc] initWithBytes: [data bytes] length:[data length] encoding: NSUTF8StringEncoding];
+                    button.tag = i;
+                    [button addTarget:self action:@selector(ASIDownload:) forControlEvents:UIControlEventTouchUpInside];
+                   
+                    buttonItem = [TTTableControlItem itemWithCaption:itemCaption control:button];
+                    [_itemarray addObject:buttonItem];
+                } else {
+                    NSString *p_ = [_id substringFromIndex:25];
+                    NSString *batch_ = NSLocalizedString(@"梯次基本訂戶購買已回復",@"Batch Restore");
+                    NSString *soCaption = [NSString stringWithFormat:@"%@%@",p_,batch_];
+                    
+                    buttonItem = [TTTableControlItem itemWithCaption:soCaption control:nil];
+                    [_itemarray addObject:buttonItem];
+                }
                 
                 
-                NSString *stopBefore = @"</span></b>";
-                NSRange firstRange = [returnData rangeOfString:@"<b><span class='largeText'>"];
-                NSRange secondRange = [[returnData substringFromIndex:firstRange.location + 0] rangeOfString:stopBefore];
-                NSRange finalRange = NSMakeRange(firstRange.location + firstRange.length, secondRange.location - firstRange.length);
-                
-                NSString *match =  [returnData substringWithRange:finalRange];
-                NSLog(@"Found string '%@'", match);
-                
-                NSString *itemCaption = match;//[_pdict objectForKey:_id];
-                buttonItem = [TTTableControlItem itemWithCaption:itemCaption control:button];
-                [_itemarray addObject:buttonItem];
                 
             }
          }
         
-        //[_tempDict release];
-         /*UIButton* button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect] ;
-         
-         [button2 setTitle:@"下載" forState:UIControlStateNormal];
-         [button2 addTarget:@"tt://order/food" action:@selector(openURLFromButton:)
-         forControlEvents:UIControlEventTouchUpInside];
-         
-         TTTableControlItem* button2Item = [TTTableControlItem itemWithCaption:@"電影啟示錄二" control:button2];
-         
-         [_itemarray addObject:button2Item];*/
-        
-        /*UIButton* button3 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] autorelease];
-         
-         [button3 setTitle:@"下載" forState:UIControlStateNormal];
-         [button3 addTarget:@"tt://order/food" action:@selector(openURLFromButton:)
-         forControlEvents:UIControlEventTouchUpInside];
-         
-         TTTableControlItem* button3Item = [TTTableControlItem itemWithCaption:@"UIButton" control:button3];
-         [_list.items addObject:button3Item];*/
-          //[_itemarray addObject:item];
          self.dataSource = [TTListDataSource dataSourceWithItems:_itemarray];
-          /*UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"購買回復" message:@"購買及訂閱已回復" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-          [alertView show];*/
-        
+
         return;
     }
     
@@ -594,6 +563,11 @@
         } else if (_page == MenuPageAbout) {
             NSString *_address = [NSString stringWithString:NSLocalizedString(@"about_url",@"About url")];
             
+            self.navigationItem.leftBarButtonItem =
+            [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"重設購買",@"Reset") style:UIBarButtonItemStyleBordered
+                                             target:self
+                                             action:@selector(resetPurchase)] autorelease];
+
             
             NSLog(@"%@",_address);
             NSURL *url = [NSURL URLWithString:_address];
@@ -745,15 +719,15 @@
         }
         
         NSString *_bookid = [_value objectAtIndex:0];
-        NSString *_verLimit = [_value objectAtIndex:1];
-        NSString *_contentType = [_value objectAtIndex:2];
+        NSString *_batchNumber = [_value objectAtIndex:1];
+        NSString *_storeType = [_value objectAtIndex:2];
         
         
         
         
         
         // = [url substringFromIndex:13];
-        NSLog(@"%@ %@ %@",_bookid,_verLimit,_contentType);
+        NSLog(@"%@ %@ %@",_bookid,_batchNumber,_storeType);
         SimpleController *ctrl = [[[SimpleController alloc] init] autorelease];
         ctrl.bookid = _bookid;
         NSString *_firstWord = [_bookid substringToIndex:1];
@@ -765,8 +739,11 @@
         }
         else
         {
+            //NSString *_type = @"debug";
             NSString *_type = @"singlebook";
             ctrl.booktype = _type;
+            ctrl.storeType = _storeType;
+            ctrl.batchNumber = _batchNumber;
             
         }
         ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -786,10 +763,9 @@
         ctrl.view.superview.center = self.view.center;
         
         
-    }
-    else if([url hasPrefix:@"http://subs"]==YES){
+    } else if([url hasPrefix:@"http://subscode"]==YES){
         
-        NSString *content=[url substringFromIndex:13];
+        NSString *content=[url substringFromIndex:17];
         //NSLog(@"content String: %@", content);
         NSArray *lines = [content componentsSeparatedByString:@"&"];
         NSMutableArray *_value = [NSMutableArray arrayWithCapacity:3];
@@ -801,15 +777,82 @@
             [_value addObject:[value objectAtIndex: 1]];
         }
         
-        NSString *_subsid = [_value objectAtIndex:0];
-        NSString *_verLimit = [_value objectAtIndex:1];
-        NSString *_contentType = [_value objectAtIndex:2];
-        NSLog(@"%@ %@ %@",_subsid,_verLimit,_contentType);
+        NSString *_batch = [_value objectAtIndex:0];
+        NSString *_option1 = [_value objectAtIndex:1];
+        NSString *_option2 = [_value objectAtIndex:2];
+        NSLog(@"%@ %@ %@",_batch,_option1,_option2);
         
-         
+        
+        NSString *myMsg = [NSString stringWithFormat:@"%@期兌換成功！",_batch];
+        
+        [MKStoreManager setObject:[NSNumber numberWithInt:1] forKey:[NSString stringWithFormat:@"%@SO%@",kProductPrefix,_batch]];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"基本訂戶兌換" message:myMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
+        
+        
+        NSString *_address = [NSString stringWithString:NSLocalizedString(@"main_url",@"Mainpage url")];
+        NSURL *url = [NSURL URLWithString:_address];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self.webView  loadRequest:request];
         
         return NO;
-    }else if([url hasPrefix:@"http://link"]==YES){
+    } else if([url hasPrefix:@"http://substore"]==YES){
+        
+        NSString *content=[url substringFromIndex:17];
+        //NSLog(@"content String: %@", content);
+        NSArray *lines = [content componentsSeparatedByString:@"&"];
+        NSMutableArray *_value = [NSMutableArray arrayWithCapacity:3];
+        for(NSString *line in lines)
+        {
+            //NSLog(@"line String: %@", line);
+            NSArray *value =[line componentsSeparatedByString:@"="];
+            //NSLog(@"value is: %@",  [value objectAtIndex: 1] );
+            [_value addObject:[value objectAtIndex: 1]];
+        }
+        
+        NSString *_bookid = [_value objectAtIndex:0];
+        NSString *_batch = [_value objectAtIndex:1];
+        NSString *_contentType = [_value objectAtIndex:2];
+        
+        // = [url substringFromIndex:13];
+        NSLog(@"%@ %@ %@",_bookid,_batch,_contentType);
+        SimpleController *ctrl = [[[SimpleController alloc] init] autorelease];
+        ctrl.bookid = _bookid;
+        NSString *_firstWord = [_bookid substringToIndex:1];
+        if([_firstWord isEqualToString:@"z"]) //d for debug files
+        {
+            NSString *_type = @"debug";
+            ctrl.booktype = _type;
+            
+        }
+        else
+        {
+            //SString *_type = @"debug";
+            //NSString *_type = @"singlebook";
+            NSString *_type = @"normal";
+            ctrl.booktype = _type;
+            
+        }
+        ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
+        
+        
+        ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //[self presentModalViewController:ctrl animated:YES];
+        //it's important to do this after presentModalViewController
+        
+        ctrl.preferredContentSize = CGSizeMake(600, 480);
+        
+        
+        [self presentViewController:ctrl animated:NO completion:nil];
+        
+        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
+        
+        ctrl.view.superview.center = self.view.center;
+        
+    } else if([url hasPrefix:@"http://link"]==YES){
         
         NSString *content=[url substringFromIndex:13];
         //NSLog(@"content String: %@", content);

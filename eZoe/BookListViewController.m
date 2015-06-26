@@ -778,11 +778,9 @@
 	{
         
         
-	    [bookManager copyFileFromResource:@"4204_1l.png"];
-        [bookManager copyFileFromResource:@"4204_2l.png"];
-        [bookManager copyFileFromResource:@"4247l.png"];
-        [bookManager copyFileFromResource:@"voice.plist"];
-        //[bookManager copyFileFromResource:@"bookInfo.plist"];
+	    [bookManager copyFileFromResource:@"8887l.png"];
+        [bookManager copyFileFromResource:@"8887.plist"];
+        [bookManager copyFileFromResource:@"8887.pdf"];
         
         
         
@@ -791,13 +789,9 @@
         //[bookIdDict setObject:_sName forKey:_s];
         
         
-        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"4204_1",@"bookId",@"2",@"section",@"初信餧養(一)",@"title", nil];
+        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"2",@"section",NSLocalizedString(@"基本訂戶操作指引", @"Guide"),@"title", nil];
         
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"4204_2",@"bookId",@"2",@"section",@"初信餧養(二)",@"title", nil];
-        
-         NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"4247",@"bookId",@"2",@"section",@"恢復基督在召會中作一切",@"title", nil];
-        
-        NSArray *initBooks = [NSArray arrayWithObjects:dict1,dict2,dict3, nil];
+        NSArray *initBooks = [NSArray arrayWithObjects:dict1, nil];
         [initBooks writeToFile:dataPath atomically:YES];
         
         
@@ -844,8 +838,8 @@
             for(NSString *bookId in _thebookList)
             {
                 
-                if([bookId isEqualToString:@"8889"])
-                    continue;
+                //if([bookId isEqualToString:@"SO47"])
+                //    continue;
                 
                 NSString *plistFileName = [NSString stringWithFormat:@"%@.plist",bookId];
                 NSDictionary *bookPlist = [NSDictionary dictionaryWithContentsOfFile:[plistFileName getDocPathWithPList]];
@@ -1209,7 +1203,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     
-    hostReach = [[Reachability reachabilityWithHostName: @"ipad.twgbr.org"] retain];
+    hostReach = [[Reachability reachabilityWithHostName: @"so.twgbr.org"] retain];
     iMsgCount = 0;
     [hostReach startNotifier];
     
@@ -1448,7 +1442,7 @@
                                                             leftMenuViewController:leftMenuViewController
                                                             rightMenuViewController:nil];
             
-            [self presentViewController:container animated:YES completion:nil];
+            [self presentViewController:container animated:NO completion:nil];
             [readerViewController release];
             
             /*ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
@@ -1484,7 +1478,7 @@
     
     eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.searchPageDictionary = nil;
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
     //[self loadView];
     //NSLog(@"iLauncherLastRotatePage:%d",iLauncherLastRotatePage);
     //[_launcherView setCurrentPageIndex:iLauncherLastRotatePage];

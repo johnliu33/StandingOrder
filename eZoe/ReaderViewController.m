@@ -1300,7 +1300,7 @@
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button
 {
-	/*if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
+	if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
 
 	ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document];
 
@@ -1309,20 +1309,24 @@
 	thumbsViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	thumbsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-	[self presentModalViewController:thumbsViewController animated:NO];*/
+	[self presentModalViewController:thumbsViewController animated:NO];
     
-    NSLog(@"present thumb");
+    /*NSLog(@"present thumb");
     
     [self.menuContainerViewController toggleLeftSideMenuCompletion:^{
         [self setupMenuBarButtonItems];
-    }];
-    /*- (void)leftSideMenuButtonPressed:(id)sender {
-        [self.menuContainerViewController toggleLeftSideMenuCompletion:^{
-            [self setupMenuBarButtonItems];
-        }];
-    }*/
+    }];*/
 }
 
+- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar indexButton:(UIButton *)button
+{
+    
+    NSLog(@"present index");
+     
+     [self.menuContainerViewController toggleLeftSideMenuCompletion:^{
+         [self setupMenuBarButtonItems];
+     }];
+}
 
 
 

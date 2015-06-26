@@ -46,6 +46,7 @@
 
 #define DONE_BUTTON_WIDTH 56.0f
 #define THUMBS_BUTTON_WIDTH 40.0f
+#define INDEX_BUTTON_WIDTH 40.0f
 #define PRINT_BUTTON_WIDTH 40.0f
 #define EMAIL_BUTTON_WIDTH 40.0f
 #define MARK_BUTTON_WIDTH 40.0f
@@ -112,11 +113,28 @@
 		[thumbsButton setBackgroundImage:buttonN forState:UIControlStateNormal];
 		thumbsButton.autoresizingMask = UIViewAutoresizingNone;
 
-		[self addSubview:thumbsButton]; //leftButtonX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
+		[self addSubview:thumbsButton];
+        leftButtonX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
 
-		titleX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE); titleWidth -= (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
+		//titleX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE); titleWidth -= (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
 
 #endif // end of READER_ENABLE_THUMBS Option
+        
+#if (READER_ENABLE_INDEX == TRUE) //Option
+        
+        UIButton *indexButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        indexButton.frame = CGRectMake(leftButtonX, BUTTON_Y, INDEX_BUTTON_WIDTH, BUTTON_HEIGHT);
+        [indexButton setImage:[UIImage imageNamed:@"Reader-Index"] forState:UIControlStateNormal];
+        [indexButton addTarget:self action:@selector(indexButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [indexButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
+        [indexButton setBackgroundImage:buttonN forState:UIControlStateNormal];
+        indexButton.autoresizingMask = UIViewAutoresizingNone;
+        
+        [self addSubview:indexButton]; //leftButtonX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
+        
+        //titleX += (INDEX_BUTTON_WIDTH + BUTTON_SPACE); titleWidth -= (INDEX_BUTTON_WIDTH + BUTTON_SPACE);
+#endif
 
 #if (READER_BOOKMARKS == TRUE || READER_ENABLE_MAIL == TRUE || READER_ENABLE_PRINT == TRUE)
 
@@ -306,6 +324,11 @@
 - (void)thumbsButtonTapped:(UIButton *)button
 {
 	[delegate tappedInToolbar:self thumbsButton:button];
+}
+
+- (void)indexButtonTapped:(UIButton *)button
+{
+    [delegate tappedInToolbar:self indexButton:button];
 }
 
 - (void)printButtonTapped:(UIButton *)button

@@ -10,8 +10,8 @@
 #define IS_IOS_7 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) >= 7.0)
 #define IS_IOS_6 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) < 7.0)
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-#define kSiteHttpRoot @"ipad.twgbr.org"
-#define kProductPrefix @"tw.org.twgbr.HolyWords.b"
+#define kSiteHttpRoot @"so.twgbr.org"
+#define kProductPrefix @"tw.org.twgbr.BasicSubs."
 
 #import <Foundation/Foundation.h>
 @interface UIScreen(ZBScreenRetinaAdditions)

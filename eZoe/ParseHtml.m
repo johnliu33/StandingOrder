@@ -650,7 +650,7 @@
         if(![fileManager fileExistsAtPath:desPath])
         {
             UIImage *image;
-            if([bookNumber isEqualToString:@"4204_1"] || [bookNumber isEqualToString:@"4204_2"] || [bookNumber isEqualToString:@"4247"])
+            if([bookNumber isEqualToString:@"8887"])
                 image = [UIImage imageNamed:_scName];
             else
                 image = [UIImage imageWithContentsOfFile:[_scName getDocPathWithPList]];//[UIImage i_scName];

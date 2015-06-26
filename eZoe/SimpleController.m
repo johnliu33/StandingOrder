@@ -111,6 +111,9 @@
 @synthesize _statusLabel;
 @synthesize bookid = _bookid;
 @synthesize booktype = _booktype;
+@synthesize storeType = _storeType;
+@synthesize batchNumber = _batchNumber;
+
 
 @synthesize hasPackageFiles;
 @synthesize packageList;
@@ -155,26 +158,7 @@
     _activityLabel.isAnimating = NO;
     
 }
-/*
--(void)downloadZipFile
-{
-    //NSLog(@"Begin downloading books");
-    NSString *dwnUrl = [NSString stringWithFormat:@"http://ipad.twgbr.org/product_file/%@.zip",_bookid];
-    [self loadWithUrl:[dwnUrl copy]];//[dwnUrl copy]
-    //[self downloadTest];
-    _activityLabel.isAnimating = YES;
-    NSString *sDownloadFile = [NSString stringWithFormat:@"http://ipad.twgbr.org/product_file/%@.zip",_bookid];
-    NSString *_bid;
-    if([_booktype isEqualToString:@"debug"])
-        _bid = [_bookid substringFromIndex:1];
-    else
-        _bid = _bookid;
-    self.iResources = [NSArray  arrayWithObjects:
-                       [[[InternetResource alloc] initWithTitle:_bid andURL:sDownloadFile] autorelease],
-                       nil];
-    InternetResource  *iResource = [self.iResources objectAtIndex:0];
-    [iResource start];
-}*/
+
 
 /*
 - (void)downloadTest:(NSString *)product_id
@@ -236,6 +220,8 @@
    
     [_booktype release];
     [_bookid release];
+    [_storeType release];
+    [_batchNumber release];
     
     
     self.iResources = nil;
@@ -414,23 +400,7 @@
         NSString *_coverName = [NSString stringWithFormat:@"%@l.png",_bookid];
         NSString *dataPath = [[NSString stringWithString:_coverName] getDocPathWithPList];
 
-        
-        
-        
-        /*
-        MKStoreManager *_mkmanager = [MKStoreManager sharedManager];
-        
-        NSString *_apple_productid = [NSString stringWithFormat:@"tw.org.ct.iReadCT.b%@",_bookid];
-        SKProduct *p = [_mkmanager.purchasableObjects valueForKey:_apple_productid];
-        //NSLog(@"Feature: %@, Cost: %f, ID: %@",[p localizedTitle],[[p price] doubleValue], [p productIdentifier]);
-        
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-		[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		[numberFormatter setLocale:p.priceLocale];
-		formattedString = [numberFormatter stringFromNumber:p.price];
-		[numberFormatter release];
-        */
+    
                      
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if([fileManager fileExistsAtPath:dataPath])
@@ -443,94 +413,17 @@
         }else
         {
             TT_RELEASE_SAFELY(_downloadButton);
-            //NSString *_subsid = _subscriptId;
-           
-            
-            /*[_storemanager restorePreviousTransactionsOnComplete:^(void) {
-                NSLog(@"Purchased Item Restored.");
-                
-                
-            }onError:^(NSError *error) {
-                NSLog(@"Restore failed: %@", [error localizedDescription]);
-                                 
-            }];*/
-            
-            /*
-            eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
-            if([appDelegate.auto_renew_status integerValue] == 0)
-            {
-               
-                _downloadButton = [TTButton buttonWithStyle:@"toolbarCusButton:" title:@"下載報刊"];
+            if([MKStoreManager isFeaturePurchased:[NSString stringWithFormat:@"%@%@%@",kProductPrefix,@"SO",_batchNumber]]) {
+                _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:NSLocalizedString(@"下載書報",@"Download Books")];
                 _downloadButton.userInteractionEnabled = YES;
-                
-            }else{
-                if([appDelegate.auto_renew_status integerValue] == 21006)
-                    _desc = [NSString stringWithString:NSLocalizedString(@"請再續訂",@"ReSubscription")];
-                else
-                    _desc = [NSString stringWithString:NSLocalizedString(@"請先訂閱",@"Subscription")];
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-                _downloadButton.userInteractionEnabled = NO;
-              
-            }
-            NSLog(@"auto-renew status:%d,expire-date:%@",[appDelegate.auto_renew_status integerValue],appDelegate.expireDate);
-            */
-            
-            
-            /*
-            if([[MKStoreManager sharedManager] isSubscriptionActive:kSubscription3MonthIdentifier] || [[MKStoreManager sharedManager] isSubscriptionActive:kSubscription6MonthIdentifier] || [[MKStoreManager sharedManager] isSubscriptionActive:kSubscription12MonthIdentifier])
-            {
-                _downloadButton = [TTButton buttonWithStyle:@"toolbarCusButton:" title:@"下載報刊"];
-                _downloadButton.userInteractionEnabled = YES;
-
-            }else{
-                
-                _desc = [NSString stringWithString:NSLocalizedString(@"請先訂閱",@"Subscription")];
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-                _downloadButton.userInteractionEnabled = NO;
-
-            }*/
-
-            
-            /*
-            if([MKStoreManager isFeaturePurchased:_apple_productid])
-                _desc = [NSString stringWithString:NSLocalizedString(@"已購買",@"Purchased")];
-            else
-            {
-                if(!formattedString)
-                    _desc = [NSString stringWithString:NSLocalizedString(@"查詢中",@"Checking")];
-                else
-                    _desc = [NSString stringWithFormat:@"%@",formattedString];
-            }
-            TT_RELEASE_SAFELY(_downloadButton);
-            
-            if(!formattedString)
-            {
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
+            } else {
+                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:NSLocalizedString(@"請先購買基本訂戶",@"Order First")];
                 _downloadButton.userInteractionEnabled = NO;
             }
-            else
-            {
-                NSString *_version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] substringToIndex:1];
-                //NSLog(@"Version first word:%@",_version);
-                
-                if([_version integerValue] < 2 && [_bookid isEqualToString:@"8888"])
-                {
-                    _desc = [NSString stringWithString:NSLocalizedString(@"請升級至最新版本",@"Update")];
-                    _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-                    _downloadButton.userInteractionEnabled = NO;
-                }else
-                {
-                    _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:_desc];
-                    _downloadButton.userInteractionEnabled = YES;
-                }
-            }*/
             
         }
         
     }
-
-    
-    
     
     
     
@@ -722,8 +615,8 @@
         [_storemanager buyFeature:_apple_productid onComplete:^(NSString* purchasedFeature, NSData*purchasedReceipt, NSArray* availableDownloads) {
             
             _activityLabel.isAnimating = NO;
-            //[_activityLabel setText:NSLocalizedString(@"請至報刊下載處下載報刊!",@"Finish Download")];
-            [self downloadTest:purchasedFeature];
+            [_activityLabel setText:NSLocalizedString(@"請至下載書報處下載報刊!",@"Finish Order")];
+            //[self downloadTest:purchasedFeature];
             [_dismissButton setEnabled:YES];
             
             NSLog(@"Purchased: %@", purchasedFeature);

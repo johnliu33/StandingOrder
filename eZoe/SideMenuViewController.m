@@ -66,7 +66,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"目錄";//[NSString stringWithFormat:@"Section %d", section];
+    return  NSLocalizedString(@"目錄索引", @"Menu Index");;//[NSString stringWithFormat:@"Section %d", section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

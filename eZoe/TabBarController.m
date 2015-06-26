@@ -14,13 +14,16 @@
     if(self.viewControllers == nil)
     {
         
-        
-        [self setTabURLs:[NSArray arrayWithObjects:@"tt://menu/1",
+        [self setTabURLs:[NSArray arrayWithObjects:@"tt://menu/1", //基本訂戶
+                          @"tt://menu/6", //回復購買
+                          @"tt://menu/5", //關於
+                          nil]];
+        /*[self setTabURLs:[NSArray arrayWithObjects:@"tt://menu/1",
                       @"tt://menu/2",
                       @"tt://menu/3",
                       @"tt://menu/6",
                       @"tt://menu/5",
-                      nil]];
+                      nil]];*/
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openChest) name:@"OPENCHEST" object:nil];//johnliu
     }
     
