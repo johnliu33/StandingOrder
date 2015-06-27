@@ -290,11 +290,13 @@
                                                object:nil];
     
     
-    NSString *formattedString;// = [[NSString alloc] init];
+    //NSString *formattedString;// = [[NSString alloc] init];
     CGRect _rect;
     
-    
-    _rect = CGRectMake(0, 0, 600,480);
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        _rect = CGRectMake(0, 0, 600,480);
+    else
+        _rect = [[UIScreen mainScreen] applicationFrame];
     
     
     [self setView: [[[UIView alloc] initWithFrame:_rect] autorelease]];
@@ -442,9 +444,13 @@
         imageView.autoresizesToImage = YES;
     }else
     {
-        imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(100,5,0, 180)]
+        if (IS_IPHONE_5)
+            imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(15,10,0, 180)]
+                         autorelease];
+        else
+            imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(15,5,0, 180)]
                      autorelease];
-        //imageView.autoresizesToImage = NO;
+
     }
     
     NSString *_coverurl = [NSString stringWithFormat:@"http://%@/subs_product_pic/%@.jpg",kSiteHttpRoot,_bookid];
@@ -459,7 +465,10 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(285, 20, 300, 300)]; 
     }else
     {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 190 , 300, 180)]; //170
+        if (IS_IPHONE_5)
+            _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 200 , 300, 250)];
+        else
+            _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 190 , 300, 180)]; //170
     }
    
     
@@ -476,15 +485,6 @@
     NSData *data = [ NSURLConnection sendSynchronousRequest:request returningResponse: nil error: nil ];
     
     NSString *returnData = [[NSString alloc] initWithBytes: [data bytes] length:[data length] encoding: NSUTF8StringEncoding];
-    
-    
-   // NSString *stopBefore = @"</span></b>";
-    //NSRange firstRange = [returnData rangeOfString:@"<b><span class='largeText'>"];
-    //NSRange secondRange = [[returnData substringFromIndex:firstRange.location + 0] rangeOfString:stopBefore];
-    //NSRange finalRange = NSMakeRange(firstRange.location + firstRange.length, secondRange.location - firstRange.length);
-    
-    //NSString *match =  [returnData substringWithRange:finalRange];
-    //NSLog(@"Found string '%@'", match);
    
     CGFloat contentHeight;
     TTStyledTextLabel* label1;
@@ -506,7 +506,6 @@
         label1 = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)] autorelease];//self.view.bounds
         label1.font = [UIFont systemFontOfSize:14];
     }
-    //label1.textColor = [UIColor whiteColor];
     label1.textColor = [UIColor blackColor];
     
     NSString *_lang = NSLocalizedString(@"lang",@"lang");
@@ -568,12 +567,19 @@
 		}
         [self.view addSubview:progressIndicator];
 
-        if( IS_IPHONE_5 )
-            [_activityLabel setFrame:CGRectMake(25, 435, 550, 50)];
-        else
+        
+        if( IS_IPHONE_5) {
+            [progressIndicator setFrame:CGRectMake(10, 460, 300, 2)];
+            [_activityLabel setFrame:CGRectMake(0, 460, 320, 50)];
+            [_downloadButton setFrame:CGRectMake(160, 510,145, 40)];
+            [_dismissButton setFrame:CGRectMake(10, 510, 145, 40)];
+            
+        }   else
             [_activityLabel setFrame:CGRectMake(25, 385, 550, 50)];//10, 390, 300, 40
-        //[_downloadButton setFrame:CGRectMake(160, 410,145, 40)];
-        //[_dismissButton setFrame:CGRectMake(10, 410, 145, 40)];
+        
+        [_dismissButton setFont: [UIFont systemFontOfSize: 14.0f]];
+        [_downloadButton setFont: [UIFont systemFontOfSize: 14.0f]];
+
     }
     
     
@@ -615,20 +621,11 @@
         [_storemanager buyFeature:_apple_productid onComplete:^(NSString* purchasedFeature, NSData*purchasedReceipt, NSArray* availableDownloads) {
             
             _activityLabel.isAnimating = NO;
-            [_activityLabel setText:NSLocalizedString(@"請至下載書報處下載報刊!",@"Finish Order")];
-            //[self downloadTest:purchasedFeature];
+            [_activityLabel setText:NSLocalizedString(@"請至『下載書報』頁面下載書報",@"Finish Order")];
+            
             [_dismissButton setEnabled:YES];
             
-            NSLog(@"Purchased: %@", purchasedFeature);
-            /*
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"訂閱完成", @"Subscription Finished")
-             message:NSLocalizedString(@"請至報刊下載處下載您的報刊", @"Subscription Description")
-             delegate:self
-             cancelButtonTitle:NSLocalizedString(@"關閉", @"Close")
-             otherButtonTitles: nil];
-             
-             [alert show];
-             */
+            //NSLog(@"Purchased: %@", purchasedFeature);
             
         } onCancelled:^
          {

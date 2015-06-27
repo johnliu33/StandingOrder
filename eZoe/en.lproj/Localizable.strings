@@ -9,7 +9,7 @@
 "lang" = "Traditional";
 
 /* eZoe */
-"電子書報eZoe" = "書報•訂戶";
+"書報•訂戶" = "書報•訂戶";
 
 /* Store */
 "門市" = "門市";
@@ -21,7 +21,7 @@
 "書櫃" = "書櫃";
 
 /* Guide */
-"基本訂戶操作指引" = "基本訂戶操作指引";
+"操作指引" = "操作指引";
 
 /* Mainpage */
 "門市首頁" = "基本訂戶";
@@ -54,11 +54,25 @@
 "關於" = "關於";
 
 /* About url */
-"about_url" = "http://ipad.twgbr.org/aboutmon.html";
+"about_url" = "http://so.twgbr.org/subs/about.html";
 
 /* About url iphone */
-"about_url_iphone" = "http://ipad.twgbr.org/aboutmon-iphone.html";
+"about_url_iphone" = "http://so.twgbr.org/subs/about.html";
 
+/* Sortby Bookid */
+"書號排序：共" = "書號排序：共";
+
+/* Sortby Bookname */
+"書名排序：共" = "書名排序：共";
+
+/* BookId */
+"書號" = "書號";
+
+/* BookName */
+"書名" = "書名";
+
+/* Loading Shelf */
+"載入書櫃中..." = "載入書櫃中...";
 
 /* SnapShot */
 "快速瀏覽" = "快速瀏覽";
@@ -157,7 +171,7 @@
 "下載完成" = "下載完成";
 
 /* Finish Order */
-"請至下載書報處下載報刊!" = "請至下載書報處下載報刊!";
+"請至『下載書報』頁面下載書報" = "請至『下載書報』頁面下載書報";
 
 /* Fail Download */
 "下載失敗" = "下載失敗";

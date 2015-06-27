@@ -8,6 +8,7 @@
 //  This is marked from Mac Mini
 #define IS_IOS_8 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) >= 8.0)
 #define IS_IOS_7 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) >= 7.0)
+#define IS_IOS_ONLY_7 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) < 8.0)
 #define IS_IOS_6 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) < 7.0)
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #define kSiteHttpRoot @"so.twgbr.org"

@@ -961,7 +961,7 @@
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
         [self.sb setAlpha:1.0];
         
-        NSArray *statusItems = [[NSArray alloc] initWithObjects:@"書名",@"書號", nil];
+        NSArray *statusItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"書名", "BookName"),NSLocalizedString(@"書號", "BookId"), nil];
         UISegmentedControl *statusSegments_ = [[[UISegmentedControl alloc] initWithItems:statusItems] autorelease];
         statusSegments_.frame = CGRectMake(35, 200, 250, 30);
         statusSegments_.segmentedControlStyle = UISegmentedControlStyleBar;

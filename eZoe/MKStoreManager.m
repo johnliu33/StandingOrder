@@ -297,6 +297,7 @@ static MKStoreManager* _sharedStoreManager;
     NSError *error;
     
     [SFHFKeychainUtils deleteItemForUsername:@"tw.org.twgbr.BasicSubs.SO47" andServiceName:@"MKStoreKit" error:&error];
+    [SFHFKeychainUtils deleteItemForUsername:@"tw.org.twgbr.BasicSubs.SO46" andServiceName:@"MKStoreKit" error:&error];
     
     if (!error) {
         return YES;
@@ -893,13 +894,12 @@ static MKStoreManager* _sharedStoreManager;
   {
             NSLog(@"restored purchase id:%@",_pid);
       
-      //[self.purchasableObjects valueForKey:@"productIdentifier"];
-      //NSString *_productName = [self.purchasableObjects
-      eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
-      if(![[_pid substringFromIndex:18] hasPrefix:@"sub"])
-          [appDelegate.restoredBooks setObject:@"" forKey:_pid];
+
+      //eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+      //if(![[_pid substringFromIndex:18] hasPrefix:@"sub"])
+      //    [appDelegate.restoredBooks setObject:@"" forKey:_pid];
       
-      if([_pid isEqualToString:@"tw.org.twgbr.BasicSubs.SO47"])
+      if([[_pid substringToIndex:25] isEqualToString:@"tw.org.twgbr.BasicSubs.SO"])
           [MKStoreManager setObject:[NSNumber numberWithInt:1] forKey:transaction.originalTransaction.payment.productIdentifier];
 
       

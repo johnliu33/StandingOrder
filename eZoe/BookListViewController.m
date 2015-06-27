@@ -225,14 +225,14 @@
             [self refreshByGroup];
             break;
         }
-        case BookSortByName:
-        {
-            [self refreshByName];
-            break;
-        }
         case BookSortByBookId:
         {
             [self refreshByBookId];
+            break;
+        }
+        case BookSortByName:
+        {
+            [self refreshByName];
             break;
         }
         case BookSortBySearch:
@@ -255,9 +255,9 @@
     
     TETableViewSection *gospelSection = [TETableViewSection new];
     NSInteger bookCount = [bookManager.gospelBooks count];
-    gospelSection.title = [NSString stringWithFormat:@"書名排序：共%d本",bookCount];
+    gospelSection.title = [NSString stringWithFormat:@"%@%ld本",NSLocalizedString(@"書名排序：共","Sortby Bookname"),(long)bookCount];
     TETableViewSection *createSection = [TETableViewSection new];
-    createSection.title = [NSString stringWithFormat:@"書名排序：共%d本",bookCount];
+    createSection.title = [NSString stringWithFormat:@"%@%ld本",NSLocalizedString(@"書名排序：共","Sortby Bookname"),(long)bookCount];
     
     
     NSMutableArray *gospelBookItems = [NSMutableArray new];
@@ -292,9 +292,9 @@
     
     TETableViewSection *gospelSection = [TETableViewSection new];
     NSInteger bookCount = [bookManager.gospelBooks count];
-    gospelSection.title = [NSString stringWithFormat:@"書號排序：共%d本",bookCount];
+    gospelSection.title = [NSString stringWithFormat:@"%@%ld本",NSLocalizedString(@"書號排序：共","Sortby Bookid"),(long)bookCount];
     TETableViewSection *createSection = [TETableViewSection new];
-    createSection.title = [NSString stringWithFormat:@"書號排序：共%d本",bookCount];
+    createSection.title = [NSString stringWithFormat:@"%@%ld本",NSLocalizedString(@"書號排序：共","Sortby Bookid"),(long)bookCount];
 
     
     NSMutableArray *gospelBookItems = [NSMutableArray new];
@@ -676,7 +676,7 @@
         NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
         //[self.sb setAlpha:1.0];
         
-        NSArray *statusItems = [[NSArray alloc] initWithObjects:@"書名",@"書號", nil];
+        NSArray *statusItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"書號", "BookId"),NSLocalizedString(@"書名", "BookName"), nil];
         UISegmentedControl *statusSegments_ = [[[UISegmentedControl alloc] initWithItems:statusItems] autorelease];
         statusSegments_.frame = CGRectMake(35, 200, 250, 30);
         statusSegments_.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -789,7 +789,7 @@
         //[bookIdDict setObject:_sName forKey:_s];
         
         
-        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"2",@"section",NSLocalizedString(@"基本訂戶操作指引", @"Guide"),@"title", nil];
+        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"2",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
         
         NSArray *initBooks = [NSArray arrayWithObjects:dict1, nil];
         [initBooks writeToFile:dataPath atomically:YES];
@@ -899,7 +899,10 @@
         else ios8Adjustment = 0;
         sb.frame = CGRectMake(sbOffset-ios8Adjustment, 0, sbLength, 44);
         
-        eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-125, 0, 130, 45);
+        if(IS_IOS_8)
+            eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-109, 0, 130, 45);
+        else
+            eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-106, 0, 130, 45);
     }
     
 }
@@ -1027,7 +1030,7 @@
         {
             bg = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 45)] autorelease];
             eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(bg.frame.size.width/2-125, 0, 130, 45)] autorelease];
-            eZoeTitle.text =  NSLocalizedString(@"電子書報eZoe", @"eZoe");
+            eZoeTitle.text =  NSLocalizedString(@"書報•訂戶", @"eZoe");
             eZoeTitle.textColor = [UIColor whiteColor];
             eZoeTitle.backgroundColor = [UIColor clearColor];
             [bg addSubview:eZoeTitle];
@@ -1044,8 +1047,8 @@
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             bg = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 768, 45)] autorelease];
-            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(bg.frame.size.width/2-125, 0, 130, 45)] autorelease];
-            eZoeTitle.text =  NSLocalizedString(@"電子書報eZoe", @"eZoe");
+            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(278, 0, 130, 45)] autorelease];
+            eZoeTitle.text =  NSLocalizedString(@"書報•訂戶", @"eZoe");
             eZoeTitle.textColor = [UIColor whiteColor];
             eZoeTitle.backgroundColor = [UIColor clearColor];
             [bg addSubview:eZoeTitle];
@@ -1056,11 +1059,12 @@
             sbLength = 135.0;
             sbOffset = bg.frame.size.width-70-sbLength-30;
             
+            
         }else {
             bg = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)] autorelease];
             //for iphone
-            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(52, 0, 130, 45)] autorelease];
-            eZoeTitle.text =  NSLocalizedString(@"電子書報eZoe", @"eZoe");
+            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(54, 0, 130, 45)] autorelease];
+            eZoeTitle.text =  NSLocalizedString(@"書報•訂戶", @"eZoe");
             eZoeTitle.textColor = [UIColor whiteColor];
             eZoeTitle.backgroundColor = [UIColor clearColor];
             [bg addSubview:eZoeTitle];

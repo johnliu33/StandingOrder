@@ -334,8 +334,7 @@
     [self.navigationController.view addSubview:HUD];
     
     HUD.delegate = self;
-
-    HUD.labelText = @"載入書櫃中...";
+    HUD.labelText = NSLocalizedString(@"載入書櫃中...", @"Loading Shelf");
     [HUD show:NO];
     [self performSelectorInBackground:@selector(myTask2)
                            withObject:nil];
@@ -563,11 +562,13 @@
         } else if (_page == MenuPageAbout) {
             NSString *_address = [NSString stringWithString:NSLocalizedString(@"about_url",@"About url")];
             
+            #ifdef DEBUG
+            
             self.navigationItem.leftBarButtonItem =
             [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"重設購買",@"Reset") style:UIBarButtonItemStyleBordered
                                              target:self
                                              action:@selector(resetPurchase)] autorelease];
-
+            #endif
             
             NSLog(@"%@",_address);
             NSURL *url = [NSURL URLWithString:_address];
@@ -615,6 +616,13 @@
         } else if (_page == MenuPageAbout) {
             NSString *_address = [NSString stringWithString:NSLocalizedString(@"about_url_iphone",@"About url iphone")];
             
+            #ifdef DEBUG
+    
+            self.navigationItem.leftBarButtonItem =
+            [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"重設購買",@"Reset") style:UIBarButtonItemStyleBordered
+                                             target:self
+                                             action:@selector(resetPurchase)] autorelease];
+            #endif
             
             NSLog(@"%@",_address);
             NSURL *url = [NSURL URLWithString:_address];
@@ -628,6 +636,48 @@
     
 }
 
+- (void)setupPopupDialog:(SimpleController *)ctrl {
+    
+    ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    
+    if(UIUserInterfaceIdiomPad && IS_IOS_ONLY_7 && UIInterfaceOrientationIsLandscape(orientation)) {
+       
+        //特別去處理這種狀況
+        ctrl.preferredContentSize = CGSizeMake(600, 480);
+        [self presentViewController:ctrl animated:NO completion:nil];
+        
+        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
+        
+        ctrl.view.superview.center = self.view.center;
+        
+        [ctrl.view.superview setFrame:CGRectMake(150.0, 350.0, 600.0, 480.0)];
+        [ctrl.view.superview setBackgroundColor:nil];
+        [ctrl.view setFrame:CGRectMake(0, 0, 600, 480)];
+        
+    } else {
+    
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            ctrl.preferredContentSize = CGSizeMake(600, 480);
+        else
+            ctrl.preferredContentSize = [[UIScreen mainScreen] applicationFrame].size;
+        
+        
+        [self presentViewController:ctrl animated:NO completion:nil];
+        //[self presentModalViewController:ctrl animated:NO];
+        
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
+        else
+            ctrl.view.superview.frame = [[UIScreen mainScreen] applicationFrame];
+        
+        ctrl.view.superview.center = self.view.center;
+    }
+
+}
 /////////////////////////////////////////////////
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *url=[[request URL] absoluteString];
@@ -685,23 +735,8 @@
             ctrl.booktype = _type;
             
         }
-        ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
         
-        
-        ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        //[self presentModalViewController:ctrl animated:YES];
-         //it's important to do this after presentModalViewController
-        
-        ctrl.preferredContentSize = CGSizeMake(600, 480);
-        
-
-        [self presentViewController:ctrl animated:NO completion:nil];
-        
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
-        
-        ctrl.view.superview.center = self.view.center;
-        
-        
+        [self setupPopupDialog:ctrl];
        
         return NO;
     }else if([url hasPrefix:@"http://bass"]==YES){
@@ -746,22 +781,10 @@
             ctrl.batchNumber = _batchNumber;
             
         }
-        ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
         
+        [self setupPopupDialog:ctrl];
         
-        ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        //[self presentModalViewController:ctrl animated:YES];
-        //it's important to do this after presentModalViewController
-        
-        ctrl.preferredContentSize = CGSizeMake(600, 480);
-        
-        
-        [self presentViewController:ctrl animated:NO completion:nil];
-        
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
-        
-        ctrl.view.superview.center = self.view.center;
-        
+        return NO;
         
     } else if([url hasPrefix:@"http://subscode"]==YES){
         
@@ -799,6 +822,7 @@
         [self.webView  loadRequest:request];
         
         return NO;
+        
     } else if([url hasPrefix:@"http://substore"]==YES){
         
         NSString *content=[url substringFromIndex:17];
@@ -836,21 +860,10 @@
             ctrl.booktype = _type;
             
         }
-        ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
         
+        [self setupPopupDialog:ctrl];
         
-        ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        //[self presentModalViewController:ctrl animated:YES];
-        //it's important to do this after presentModalViewController
-        
-        ctrl.preferredContentSize = CGSizeMake(600, 480);
-        
-        
-        [self presentViewController:ctrl animated:NO completion:nil];
-        
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
-        
-        ctrl.view.superview.center = self.view.center;
+        return NO;
         
     } else if([url hasPrefix:@"http://link"]==YES){
         

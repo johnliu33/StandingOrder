@@ -9,7 +9,7 @@
 "lang" = "Simplify";
 
 /* eZoe */
-"電子書報eZoe" = "书报•订户";
+"書報•訂戶" = "书报•订户";
 
 /* Store */
 "門市" = "门市";
@@ -21,16 +21,16 @@
 "書櫃" = "书柜";
 
 /* Guide */
-"基本訂戶操作指引" = "基本订户操作指引";
+"操作指引" = "操作指引";
 
 /* Mainpage */
 "門市首頁" = "基本订户";
 
 /* Mainpage url */
-"main_url" = "http://so.twgbr.org/subs/basic_main.php";
+"main_url" = "http://so.twgbr.org/subs/basic_main_c.php";
 
 /* Mainpage url iphone */
-"main_url_iphone" = "http://so.twgbr.org/subs/basic_main.php";
+"main_url_iphone" = "http://so.twgbr.org/subs/basic_main_c.php";
 
 /* Catalogue */
 "分類瀏覽" = "分类浏览";
@@ -72,17 +72,31 @@
 "關於" = "关于";
 
 /* About url */
-"about_url" = "http://ipad.twgbr.org/aboutmons.html";
+"about_url" = "http://so.twgbr.org/subs/about_c.html";
 
 /* About url iphone */
-"about_url_iphone" = "http://ipad.twgbr.org/aboutmons-iphone.html";
+"about_url_iphone" = "http://so.twgbr.org/subs/about_c.html";
 
+/* Sortby Bookid */
+"書號排序：共" = "书号排序：共";
+
+/* Sortby Bookname */
+"書名排序：共" = "书名排序：共";
 
 /* Bookmark Page Number */
 "書籤頁數" = "书籤页数";
 
 /* Bookmark List */
 "書籤列表" = "书籤列表";
+
+/* BookId */
+"書號" = "书号";
+
+/* BookName */
+"書名" = "书名";
+
+/* Loading Shelf */
+"載入書櫃中..." = "载入书柜中...";
 
 /* Marktext List */
 "標記列表" = "标记列表";
@@ -157,7 +171,7 @@
 "下載完成" = "下载完成";
 
 /* Finish Order */
-"請至下載書報處下載報刊!" = "请至下载书报处下载报刊!";
+"請至『下載書報』頁面下載書報" = "请至『下载书报』页面下载书报";
 
 /* Fail Download */
 "下載失敗" = "下载失败";

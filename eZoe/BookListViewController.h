@@ -20,8 +20,8 @@
 
 typedef enum {
     BookSortByGroup,
-    BookSortByName,
     BookSortByBookId,
+    BookSortByName,
     BookSortBySearch
 } BookListSortType;
 
