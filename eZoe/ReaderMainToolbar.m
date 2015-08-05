@@ -115,6 +115,7 @@
 
 		[self addSubview:thumbsButton];
         leftButtonX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
+        titleX -= 8;
 
 		//titleX += (THUMBS_BUTTON_WIDTH + BUTTON_SPACE); titleWidth -= (THUMBS_BUTTON_WIDTH + BUTTON_SPACE);
 

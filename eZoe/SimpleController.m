@@ -491,7 +491,7 @@
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        contentHeight = (([returnData length]/16.0) + 10)*22;
+        contentHeight = (([returnData length]/16.0) + 10)*25;
         _scrollView.contentSize = CGSizeMake(300, contentHeight);
         
         label1 = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)] autorelease];//self.view.bounds
@@ -500,9 +500,14 @@
         
     }else
     {
-        contentHeight = (([returnData length]/12.0))*18;
-        _scrollView.contentSize = CGSizeMake(300, contentHeight);
         
+        if(IS_IPHONE_5) {
+            contentHeight = (([returnData length]/12.0))*24;
+            _scrollView.contentSize = CGSizeMake(300, contentHeight);
+        } else {
+            contentHeight = (([returnData length]/12.0))*18;
+            _scrollView.contentSize = CGSizeMake(300, contentHeight);
+        }
         label1 = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)] autorelease];//self.view.bounds
         label1.font = [UIFont systemFontOfSize:14];
     }

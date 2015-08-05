@@ -900,7 +900,7 @@
         sb.frame = CGRectMake(sbOffset-ios8Adjustment, 0, sbLength, 44);
         
         if(IS_IOS_8)
-            eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-109, 0, 130, 45);
+            eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-110, 0, 130, 45);
         else
             eZoeTitle.frame = CGRectMake(bg.frame.size.width/2-106, 0, 130, 45);
     }
@@ -1047,7 +1047,7 @@
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             bg = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 768, 45)] autorelease];
-            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(278, 0, 130, 45)] autorelease];
+            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(276, 0, 130, 45)] autorelease];
             eZoeTitle.text =  NSLocalizedString(@"書報•訂戶", @"eZoe");
             eZoeTitle.textColor = [UIColor whiteColor];
             eZoeTitle.backgroundColor = [UIColor clearColor];
