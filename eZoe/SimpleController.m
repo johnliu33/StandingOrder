@@ -653,6 +653,22 @@
         
 }
 
+- (NSData *)scrambleOrDescrambleData:(NSData*)input
+{
+    unsigned char *outputBytes = malloc(input.length);
+    memcpy(outputBytes, input.bytes, input.length);
+    for (int i = 0; i < input.length; i++)
+    {
+        outputBytes[i] = outputBytes[i] ^ secretString[i % SECRET_STRING_LENGTH];
+    }
+    
+    NSData *outputData = [[NSData alloc] initWithBytes:outputBytes length:input.length];
+    free(outputBytes);
+    
+    return outputData;
+}
+
+
 - (void)fileFetchComplete:(ASIHTTPRequest *)request
 {
     NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
@@ -674,7 +690,19 @@
     
     NSFileManager *NSFm= [NSFileManager defaultManager];
     [NSFm removeItemAtPath:filePath error:NULL];
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@.pdf",_bid];
+    NSString *_pdfFilePath = [documentsDir stringByAppendingPathComponent:fileName];
+    if([NSFm fileExistsAtPath:_pdfFilePath]) {
+        //NSLog(@"scramble pdf file");
+        NSData *pdfData = [NSData dataWithContentsOfFile:_pdfFilePath];
+        NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
+        [pdfScrambledData writeToFile:_pdfFilePath atomically:YES];
+    
+    }
+    
     NSString *_pklistpath = [documentsDir stringByAppendingPathComponent:@"pklist.plist"];
+    
     if([NSFm fileExistsAtPath:_pklistpath])
     {
         hasPackageFiles = YES;

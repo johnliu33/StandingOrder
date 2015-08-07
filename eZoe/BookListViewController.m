@@ -783,12 +783,6 @@
         [bookManager copyFileFromResource:@"8887.pdf"];
         
         
-        
-        //NSString *_s = [[[_launcherView.pages objectAtIndex:p] objectAtIndex:i] bookid];
-        //NSString *_sName = [self readFromPlistData:_s];
-        //[bookIdDict setObject:_sName forKey:_s];
-        
-        
         NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"2",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
         
         NSArray *initBooks = [NSArray arrayWithObjects:dict1, nil];
