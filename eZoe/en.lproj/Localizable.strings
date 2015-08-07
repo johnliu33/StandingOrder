@@ -65,11 +65,50 @@
 /* Sortby Bookname */
 "書名排序：共" = "書名排序：共";
 
+/* Category */
+"分類" = "分類";
+
 /* BookId */
 "書號" = "書號";
 
 /* BookName */
 "書名" = "書名";
+
+/* Category Gospel */
+"福音類" = "福音類";
+
+/* Category Creation */
+"造就類" = "造就類";
+
+/* Category Church */
+"教會事奉類" = "教會事奉類";
+
+/* Category Bible */
+"讀經類" = "讀經類";
+
+/* Category Lifestudy */
+"生命讀經類" = "生命讀經類";
+
+/* Category Recovery */
+"聖經恢復本類" = "聖經恢復本類";
+
+/* Category Biology */
+"傳記文集類" = "傳記文集類";
+
+/* Category Hymn */
+"詩歌類" = "詩歌類";
+
+/* Category Resales */
+"代售期刊類" = "代售期刊類";
+
+/* Category GospelPaper */
+"福音單張類" = "福音單張類";
+
+/* Category Morning */
+"晨興聖言類" = "晨興聖言類";
+
+/* Category Etc */
+"其他類" = "其他類";
 
 /* Loading Shelf */
 "載入書櫃中..." = "載入書櫃中...";

@@ -89,11 +89,50 @@
 /* Bookmark List */
 "書籤列表" = "书籤列表";
 
+/* Category */
+"分類" = "分类";
+
 /* BookId */
 "書號" = "书号";
 
 /* BookName */
 "書名" = "书名";
+
+/* Category Gospel */
+"福音類" = "福音类";
+
+/* Category Creation */
+"造就類" = "造就类";
+
+/* Category Church */
+"教會事奉類" = "教会事奉类";
+
+/* Category Bible */
+"讀經類" = "读经类";
+
+/* Category Lifestudy */
+"生命讀經類" = "生命读经类";
+
+/* Category Recovery */
+"聖經恢復本類" = "圣经恢复本类";
+
+/* Category Biology */
+"傳記文集類" = "传记文集类";
+
+/* Category Hymn */
+"詩歌類" = "诗歌类";
+
+/* Category Resales */
+"代售期刊類" = "代售期刊类";
+
+/* Category GospelPaper */
+"福音單張類" = "福音单张类";
+
+/* Category Morning */
+"晨興聖言類" = "晨兴圣言类";
+
+/* Category Etc */
+"其他類" = "其他类";
 
 /* Loading Shelf */
 "載入書櫃中..." = "载入书柜中...";

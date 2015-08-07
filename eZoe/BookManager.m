@@ -173,16 +173,26 @@
     [_gospelBooks release];
     [_churchBooks release];
     [_bibleBooks release];
+    [_lifestudyBooks release];
+    [_recoveryBooks release];
     [_biologyBooks release];
+    [_hymnBooks release];
     [_resalesBooks release];
     [_gospelPaperBooks release];
+    [_morningBooks release];
+    [_etcBooks release];
     NSMutableArray *createBooks = [NSMutableArray array];
     NSMutableArray *gospelBooks = [NSMutableArray array];
     NSMutableArray *churchBooks = [NSMutableArray array];
     NSMutableArray *bibleBooks = [NSMutableArray array];
+    NSMutableArray *lifestudyBooks = [NSMutableArray array];
+    NSMutableArray *recoveryBooks = [NSMutableArray array];
     NSMutableArray *biologyBooks = [NSMutableArray array];
+    NSMutableArray *hymnBooks = [NSMutableArray array];
     NSMutableArray *resalesBooks = [NSMutableArray array];
     NSMutableArray *gospelPaperBooks = [NSMutableArray array];
+    NSMutableArray *morningBooks = [NSMutableArray array];
+    NSMutableArray *etcBooks = [NSMutableArray array];
     for (NSDictionary *bookInfo in self.books) {
         if ([[bookInfo objectForKey:@"section"] isEqualToString:@"1"]) {
             [gospelBooks addObject:bookInfo];
@@ -193,22 +203,35 @@
         } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"4"]) {
             [bibleBooks addObject:bookInfo];
         } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"5"]) {
+            [lifestudyBooks addObject:bookInfo];
+        } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"6"]) {
+            [recoveryBooks addObject:bookInfo];
+        } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"7"]) {
             [biologyBooks addObject:bookInfo];
-        } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"6"] || [[bookInfo objectForKey:@"section"] isEqualToString:@"7"] || [[bookInfo objectForKey:@"section"] isEqualToString:@"8"]) {
+        } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"8"]) {
+            [hymnBooks addObject:bookInfo];
+        } else  if([[bookInfo objectForKey:@"section"] isEqualToString:@"9"]) {
             [resalesBooks addObject:bookInfo];
-        } else if([[bookInfo objectForKey:@"section"] isEqualToString:@"9"]) {
+        } else if([[bookInfo objectForKey:@"section"] isEqualToString:@"10"]) {
             [gospelPaperBooks addObject:bookInfo];
-        } else {
-            [gospelBooks addObject:bookInfo];
+        } else if([[bookInfo objectForKey:@"section"] isEqualToString:@"11"]) {
+            [morningBooks addObject:bookInfo];
+        }  else {
+            [etcBooks addObject:bookInfo];
         }
     }
     _createBooks = [createBooks retain];
     _gospelBooks = [gospelBooks retain];
     _churchBooks = [churchBooks retain];
     _bibleBooks = [bibleBooks retain];
+    _lifestudyBooks = [lifestudyBooks retain];
+    _recoveryBooks = [recoveryBooks retain];
     _biologyBooks = [biologyBooks retain];
+    _hymnBooks = [hymnBooks retain];
     _resalesBooks = [resalesBooks retain];
     _gospelPaperBooks = [gospelPaperBooks retain];
+    _morningBooks = [morningBooks retain];
+    _etcBooks = [etcBooks retain];
 
 }
 
@@ -304,9 +327,14 @@
     [_gospelBooks release];
     [_churchBooks release];
     [_bibleBooks release];
+    [_lifestudyBooks release];
+    [_recoveryBooks release];
     [_biologyBooks release];
+    [_hymnBooks release];
     [_resalesBooks release];
     [_gospelPaperBooks release];
+    [_morningBooks release];
+    [_etcBooks release];
     
     [super dealloc];
 }

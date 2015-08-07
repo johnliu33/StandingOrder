@@ -153,37 +153,9 @@
 	    [bookManager requestBookList];
 }
 
-- (void)tempParseBookPlist {
- 
-    NSString *fileName = @"bookInfo.plist";
-    NSDictionary *bookIdDict = [NSDictionary dictionaryWithContentsOfFile:[fileName getDocPathWithPList]];
-    NSArray *bookIdList = [bookIdDict allKeys];
-    
-    
-    NSMutableArray *bookList = [NSMutableArray arrayWithCapacity:10];
-    
-    for(NSString *bookId in bookIdList)
-    {
-        NSMutableDictionary *newBookDict = [NSMutableDictionary dictionaryWithCapacity:10];
-        NSString *_sName = [bookIdDict objectForKey:bookId];
 
-        NSString *secOfBook = [bookId substringToIndex:2];
-        if([secOfBook isEqualToString:@"12"])
-            secOfBook = @"9";
-        [newBookDict setObject:[secOfBook substringToIndex:1] forKey:@"section"];
-        [newBookDict setObject:bookId forKey:@"bookId"];
-        [newBookDict setObject:_sName forKey:@"title"];
-        
-        [bookList addObject:newBookDict];
-        
-    }
-    
-    NSString *newfileName = @"bookListInfo.plist";
-    [bookList writeToFile:[newfileName getDocPathWithPList] atomically:NO];
-}
 
 - (void)loadBooks:(BookListSortType)sortType {
-    //[self tempParseBookPlist];
     [HUD release];
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -326,20 +298,46 @@
     BookManager *bookManager = [BookManager sharedManager];
     [bookManager refreshBooksByGroup];
     
+    /*
+     1  福音類
+     2  造就類
+     3  教會事奉類
+     4  讀經類
+     5  生命讀經類
+     6  聖經恢復本類
+     7  傳記文集類
+     8  詩歌類
+     9  代售期刊類
+     10 福音單張類 
+     11 晨興聖言類
+     12 其他類
+    */
+    
     TETableViewSection *gospelSection = [TETableViewSection new];
-    gospelSection.title = @"福音類";
+    gospelSection.title = NSLocalizedString(@"福音類","Category Gospel");
     TETableViewSection *createSection = [TETableViewSection new];
-    createSection.title = @"造就類";
+    createSection.title = NSLocalizedString(@"造就類","Category Creation");
     TETableViewSection *churchSection = [TETableViewSection new];
-    churchSection.title = @"教會事奉類";
+    churchSection.title = NSLocalizedString(@"教會事奉類","Category Church");
     TETableViewSection *bibleSection = [TETableViewSection new];
-    bibleSection.title = @"讀經類";
+    bibleSection.title = NSLocalizedString(@"讀經類","Category Bible");
+    TETableViewSection *lifestudySection = [TETableViewSection new];
+    lifestudySection.title =  NSLocalizedString(@"生命讀經類","Category Lifestudy");
+    TETableViewSection *recoverySection = [TETableViewSection new];
+    recoverySection.title = NSLocalizedString(@"聖經恢復本類","Category Recovery");
     TETableViewSection *biologySection = [TETableViewSection new];
-    biologySection.title = @"傳記文學類";
+    biologySection.title = NSLocalizedString(@"傳記文學類","Category Biology");
+    TETableViewSection *hymnSection = [TETableViewSection new];
+    hymnSection.title = NSLocalizedString(@"詩歌類","Category Hymn");
     TETableViewSection *resalesSection = [TETableViewSection new];
-    resalesSection.title = @"代售及期刊類";
+    resalesSection.title = NSLocalizedString(@"代售及期刊類","Category Resales");
     TETableViewSection *gospelPaperSection = [TETableViewSection new];
-    gospelPaperSection.title = @"福音單張類";
+    gospelPaperSection.title = NSLocalizedString(@"福音單張類","Category GospelPaper");
+    TETableViewSection *morningSection = [TETableViewSection new];
+    morningSection.title = NSLocalizedString(@"晨興聖言類","Category Morning");
+    TETableViewSection *etcSection = [TETableViewSection new];
+    etcSection.title = NSLocalizedString(@"其他類","Category Etc");
+
     
     NSMutableArray *gospelBookItems = [NSMutableArray new];
     for (NSDictionary *bookInfo in bookManager.gospelBooks) {
@@ -365,11 +363,31 @@
         [bibleBookItems addObject:item];
     }
     
+    
+    NSMutableArray *lifestudyBookItems = [NSMutableArray new];
+    for (NSDictionary *bookInfo in bookManager.lifestudyBooks) {
+        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
+        [lifestudyBookItems addObject:item];
+    }
+    
+    NSMutableArray *recoveryBookItems = [NSMutableArray new];
+    for (NSDictionary *bookInfo in bookManager.recoveryBooks) {
+        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
+        [recoveryBookItems addObject:item];
+    }
+    
     NSMutableArray *biologyBookItems = [NSMutableArray new];
     for (NSDictionary *bookInfo in bookManager.biologyBooks) {
         BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
         [biologyBookItems addObject:item];
     }
+    
+    NSMutableArray *hymnBookItems = [NSMutableArray new];
+    for (NSDictionary *bookInfo in bookManager.hymnBooks) {
+        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
+        [hymnBookItems addObject:item];
+    }
+
     
     NSMutableArray *resalesBookItems = [NSMutableArray new];
     for (NSDictionary *bookInfo in bookManager.resalesBooks) {
@@ -383,14 +401,31 @@
         [gospelPaperBookItems addObject:item];
     }
     
+    NSMutableArray *morningBookItems = [NSMutableArray new];
+    for (NSDictionary *bookInfo in bookManager.morningBooks) {
+        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
+        [morningBookItems addObject:item];
+    }
+    
+    NSMutableArray *etcBookItems = [NSMutableArray new];
+    for (NSDictionary *bookInfo in bookManager.etcBooks) {
+        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
+        [etcBookItems addObject:item];
+    }
+    
     gospelSection.items = gospelBookItems;
     createSection.items = createBookItems;
     churchSection.items = churchBookItems;
     bibleSection.items = bibleBookItems;
+    lifestudySection.items = lifestudyBookItems;
+    recoverySection.items = recoveryBookItems;
     biologySection.items = biologyBookItems;
+    hymnSection.items = hymnBookItems;
     resalesSection.items = resalesBookItems;
     gospelPaperSection.items = gospelPaperBookItems;
-    _dataSource.items = @[gospelSection, createSection, churchSection,bibleSection,biologySection,resalesSection,gospelPaperSection];
+    morningSection.items = morningBookItems;
+    etcSection.items = etcBookItems;
+    _dataSource.items = @[gospelSection, createSection, churchSection,bibleSection,lifestudySection,recoverySection,biologySection,hymnSection,resalesSection,gospelPaperSection,morningSection,etcSection];
 
 }
 
@@ -556,82 +591,7 @@
     
     
     _dataSource.items = newDatasource;
-    
-    //johnliu
-    
-    //NSLog(@"deleteItem:section%i",deleteItem )
-    //BookManager *bookManager = [BookManager sharedManager];
-    //[bookManager refreshBooksByGroup];
-    
-    
-    /*
-    TETableViewSection *gospelSection = [TETableViewSection new];
-    gospelSection.title = @"福音類";
-    TETableViewSection *createSection = [TETableViewSection new];
-    createSection.title = @"造就類";
-    TETableViewSection *churchSection = [TETableViewSection new];
-    churchSection.title = @"教會事奉類";
-    TETableViewSection *bibleSection = [TETableViewSection new];
-    bibleSection.title = @"讀經類";
-    TETableViewSection *biologySection = [TETableViewSection new];
-    biologySection.title = @"傳記文學類";
-    TETableViewSection *resalesSection = [TETableViewSection new];
-    resalesSection.title = @"代售及期刊類";
-    TETableViewSection *gospelPaperSection = [TETableViewSection new];
-    gospelPaperSection.title = @"福音單張類";
-    
-    NSMutableArray *gospelBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.gospelBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [gospelBookItems addObject:item];
-        //[gospelBookItems removeAllObjects];
-    }
-    
-    NSMutableArray *createBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.createBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [createBookItems addObject:item];
-    }
-    
-    NSMutableArray *churchBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.churchBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [churchBookItems addObject:item];
-    }
-    
-    NSMutableArray *bibleBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.bibleBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [bibleBookItems addObject:item];
-    }
-    
-    NSMutableArray *biologyBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.biologyBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [biologyBookItems addObject:item];
-    }
-    
-    NSMutableArray *resalesBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.resalesBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [resalesBookItems addObject:item];
-    }
-    
-    NSMutableArray *gospelPaperBookItems = [NSMutableArray new];
-    for (NSDictionary *bookInfo in bookManager.gospelPaperBooks) {
-        BookListItem *item = [[[BookListItem alloc] initWithBookInfo:bookInfo] autorelease];
-        [gospelPaperBookItems addObject:item];
-    }
-    
-    gospelSection.items = gospelBookItems;
-    createSection.items = createBookItems;
-    churchSection.items = churchBookItems;
-    bibleSection.items = bibleBookItems;
-    biologySection.items = biologyBookItems;
-    resalesSection.items = resalesBookItems;
-    gospelPaperSection.items = gospelPaperBookItems;
-    _dataSource.items = @[gospelSection, createSection, churchSection,bibleSection,biologySection,resalesSection,gospelPaperSection];
-    */
+
 }
 
 
@@ -673,10 +633,10 @@
         
         //[self tableView];
         //Create an array to hold the list of bar button items
-        NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
+        NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:3];
         //[self.sb setAlpha:1.0];
         
-        NSArray *statusItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"書號", "BookId"),NSLocalizedString(@"書名", "BookName"), nil];
+        NSArray *statusItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"分類","Category"),NSLocalizedString(@"書號", "BookId"),NSLocalizedString(@"書名", "BookName"), nil];
         UISegmentedControl *statusSegments_ = [[[UISegmentedControl alloc] initWithItems:statusItems] autorelease];
         statusSegments_.frame = CGRectMake(35, 200, 250, 30);
         statusSegments_.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -718,16 +678,16 @@
     
     switch (iIndex) {
         case 0:
-           [self loadBooks:1];
+           [self loadBooks:0];
             break;
         case 1:
+            [self loadBooks:1];
+            break;
+        case 2:
             [self loadBooks:2];
             break;
-        //case 2:
-        //    [self loadBooks:2];
-        //    break;
         default:
-            [self loadBooks:1];
+            [self loadBooks:0];
             break;
     }
 }
@@ -735,20 +695,20 @@
 - (void) pickOne:(id)sender{
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     NSInteger _selectedSegment = [segmentedControl selectedSegmentIndex];
-    NSLog(@"You have changed to pick segment control index:%i",_selectedSegment);
+    //NSLog(@"You have changed to pick segment control index:%i",_selectedSegment);
     
     switch (_selectedSegment) {
         case 0:
-            [self loadBooks:1];//0
+            [self loadBooks:0];//0
             break;
         case 1:
-            [self loadBooks:2]; //
+            [self loadBooks:1]; //
             break;
-        //case 2:
-        //    [self loadBooks:2];
-        //    break;
+        case 2:
+            [self loadBooks:2];
+            break;
         default:
-            [self loadBooks:1];
+            [self loadBooks:0];
             break;
     }
 
@@ -783,7 +743,7 @@
         [bookManager copyFileFromResource:@"8887.pdf"];
         
         
-        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"2",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
+        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"1",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
         
         NSArray *initBooks = [NSArray arrayWithObjects:dict1, nil];
         [initBooks writeToFile:dataPath atomically:YES];
@@ -832,9 +792,6 @@
             for(NSString *bookId in _thebookList)
             {
                 
-                //if([bookId isEqualToString:@"SO47"])
-                //    continue;
-                
                 NSString *plistFileName = [NSString stringWithFormat:@"%@.plist",bookId];
                 NSDictionary *bookPlist = [NSDictionary dictionaryWithContentsOfFile:[plistFileName getDocPathWithPList]];
                 
@@ -842,10 +799,9 @@
                 
                 NSMutableDictionary *newBookDict = [NSMutableDictionary dictionaryWithCapacity:10];
                 
-                NSString *secOfBook = [bookId substringToIndex:2];
-                if([secOfBook isEqualToString:@"12"])
-                    secOfBook = @"9";
-                [newBookDict setObject:[secOfBook substringToIndex:1] forKey:@"section"];
+                NSString *secOfBook = [bookPlist objectForKey:@"bookCategory"];
+                //NSLog(@"secOfBook:%@",secOfBook);
+                [newBookDict setObject:secOfBook forKey:@"section"];
                 [newBookDict setObject:bookId forKey:@"bookId"];
                 [newBookDict setObject:_sName forKey:@"title"];
                 
