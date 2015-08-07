@@ -299,6 +299,8 @@
 		049BCD771A4826E50069ADEB /* TETextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BCD731A4826E50069ADEB /* TETextFieldCell.m */; };
 		049D44321853097700D8C789 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D44311853097700D8C789 /* searchbar.png */; };
 		049D70B01900EDE0001E0BA0 /* product_ezoe.plist in Resources */ = {isa = PBXBuildFile; fileRef = 049D70AF1900EDE0001E0BA0 /* product_ezoe.plist */; };
+		04A798BA1B750C6600905641 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A798B91B750C6600905641 /* libGoogleAnalyticsServices.a */; };
+		04A798CE1B750CE600905641 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A798CD1B750CE600905641 /* CoreData.framework */; };
 		04B9598718DDE3FE0048FA50 /* BookListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9597118DDE3FE0048FA50 /* BookListDataSource.m */; };
 		04B9598818DDE3FE0048FA50 /* BookListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9597318DDE3FE0048FA50 /* BookListDelegate.m */; };
 		04B9598918DDE3FE0048FA50 /* BookListTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9597518DDE3FE0048FA50 /* BookListTitleView.m */; };
@@ -979,6 +981,18 @@
 		049BCD791A4827950069ADEB /* libTUKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libTUKit-Prefix.pch"; sourceTree = "<group>"; };
 		049D44311853097700D8C789 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		049D70AF1900EDE0001E0BA0 /* product_ezoe.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = product_ezoe.plist; sourceTree = "<group>"; };
+		04A798B91B750C6600905641 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		04A798C21B750C9F00905641 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		04A798C31B750C9F00905641 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		04A798C41B750C9F00905641 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		04A798C51B750C9F00905641 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		04A798C61B750C9F00905641 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		04A798C71B750C9F00905641 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		04A798C81B750C9F00905641 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		04A798C91B750C9F00905641 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		04A798CA1B750C9F00905641 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		04A798CB1B750C9F00905641 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		04A798CD1B750CE600905641 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		04B9597018DDE3FE0048FA50 /* BookListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListDataSource.h; sourceTree = "<group>"; };
 		04B9597118DDE3FE0048FA50 /* BookListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListDataSource.m; sourceTree = "<group>"; };
 		04B9597218DDE3FE0048FA50 /* BookListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListDelegate.h; sourceTree = "<group>"; };
@@ -1072,6 +1086,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A798CE1B750CE600905641 /* CoreData.framework in Frameworks */,
 				04552BAD1A4C2E5900EAD308 /* Accounts.framework in Frameworks */,
 				04552BA91A4C2CC700EAD308 /* Social.framework in Frameworks */,
 				04552BA01A4C27EC00EAD308 /* libsqlite3.dylib in Frameworks */,
@@ -1080,6 +1095,7 @@
 				02A85B2A1605B40900ABA86D /* libz.dylib in Frameworks */,
 				02A85B261605B3DF00ABA86D /* Security.framework in Frameworks */,
 				02A85B241605B3CF00ABA86D /* MobileCoreServices.framework in Frameworks */,
+				04A798BA1B750C6600905641 /* libGoogleAnalyticsServices.a in Frameworks */,
 				02A85B221605B3BF00ABA86D /* CFNetwork.framework in Frameworks */,
 				026B36D815CD906300B94720 /* AVFoundation.framework in Frameworks */,
 				025E78AA15B58A1D005B2421 /* AudioToolbox.framework in Frameworks */,
@@ -1276,6 +1292,7 @@
 		02990FF91330D225006C98C5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				04A798CC1B750CA500905641 /* GoogleAnalytics */,
 				046D314E1B3846A400E4C4E2 /* MFSideMenu */,
 				02AA42CF13326E410051D5F4 /* ELCSlider */,
 				023CCD5D13DFC3BE0092650A /* LoadingView */,
@@ -1424,6 +1441,7 @@
 		02B4821A132FD76D001B9B7D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04A798CD1B750CE600905641 /* CoreData.framework */,
 				04552BAC1A4C2E5900EAD308 /* Accounts.framework */,
 				04552BAA1A4C2DFD00EAD308 /* Bolts.framework */,
 				04552BA81A4C2CC700EAD308 /* Social.framework */,
@@ -2049,6 +2067,24 @@
 				049BCD791A4827950069ADEB /* libTUKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04A798CC1B750CA500905641 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				04A798B91B750C6600905641 /* libGoogleAnalyticsServices.a */,
+				04A798C21B750C9F00905641 /* GAI.h */,
+				04A798C31B750C9F00905641 /* GAIDictionaryBuilder.h */,
+				04A798C41B750C9F00905641 /* GAIEcommerceFields.h */,
+				04A798C51B750C9F00905641 /* GAIEcommerceProduct.h */,
+				04A798C61B750C9F00905641 /* GAIEcommerceProductAction.h */,
+				04A798C71B750C9F00905641 /* GAIEcommercePromotion.h */,
+				04A798C81B750C9F00905641 /* GAIFields.h */,
+				04A798C91B750C9F00905641 /* GAILogger.h */,
+				04A798CA1B750C9F00905641 /* GAITrackedViewController.h */,
+				04A798CB1B750C9F00905641 /* GAITracker.h */,
+			);
+			name = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		04B9599418DDE4110048FA50 /* NewBookList */ = {
@@ -2838,7 +2874,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/eZoeTests\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = BasicSubs;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6164fb78-3e1d-4cc7-bbdd-32431f62ba48";
@@ -2904,7 +2941,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/eZoeTests\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = BasicSubs;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00436cc4-0379-4b13-ad81-4c75f04849fb";
@@ -2997,7 +3035,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/eZoeTests\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = BasicSubs;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4cf17511-be34-4b31-99b5-99f7a5d046b4";
@@ -3032,7 +3071,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/eZoeTests\"",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = BasicSubs;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3EFF939B-28BA-4B86-AA1C-106261A673A9";

@@ -9,6 +9,12 @@
 #import "ASINetworkQueue.h"
 #import "BookListViewController.h"
 
+#import "GAI.h"
+
+/******* Set your tracking ID here *******/
+static NSString *const kTrackingId = @"UA-66094417-1";
+static NSString *const kAllowTracking = @"allowTracking";
+
 typedef enum {
     None,
     Facebook,
@@ -146,6 +152,8 @@ typedef enum {
 
 @property (nonatomic, retain)NSMutableDictionary *curtableNumberDict;
 @property (nonatomic, retain)NSMutableDictionary *downtableNumberDict;
+
+@property(nonatomic, strong) id<GAITracker> tracker;
 
 - (void)moveFileFromDoc:(NSString *)fileName;
 - (void)backupFromOldVersion;

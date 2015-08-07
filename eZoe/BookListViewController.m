@@ -27,6 +27,9 @@
 #import "SideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
 
 #define BUTTON_WIDTH 54.0
 #define BUTTON_SEGMENT_WIDTH 51.0
@@ -440,9 +443,9 @@
     
     NSInteger bookCount = [bookManager.gospelBooks count];
     TETableViewSection *gospelSection = [TETableViewSection new];
-    gospelSection.title = [NSString stringWithFormat:@"共搜尋到%d本",bookCount];
+    gospelSection.title = [NSString stringWithFormat:@"共搜尋到%ld本",(long)bookCount];
     TETableViewSection *createSection = [TETableViewSection new];
-    createSection.title = [NSString stringWithFormat:@"共搜尋到%d本",bookCount];
+    createSection.title = [NSString stringWithFormat:@"共搜尋到%ld本",(long)bookCount];
     
     NSMutableArray *gospelBookItems = [NSMutableArray new];
     for (NSDictionary *bookInfo in bookManager.gospelBooks) {
@@ -1410,7 +1413,17 @@
             [self presentModalViewController:readerViewController animated:YES];
             [readerViewController release]; // Release the ReaderViewController*/
         }
-}
+    
+        id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    
+        NSString *plistFileName = [NSString stringWithFormat:@"%@.plist",sBookNumber];
+        NSDictionary *bookPlist = [NSDictionary dictionaryWithContentsOfFile:[plistFileName getDocPathWithPList]];
+    
+        NSString *_bookName = [bookPlist objectForKey:@"bookName"];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Book Opened Analysis"
+                                                          action:sBookNumber
+                                                           label:_bookName
+                                                           value:@1] build]];}
 
 #pragma mark dismissModalViewController methods
 - (void)dismissMyModalViewController
