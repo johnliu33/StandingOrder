@@ -695,9 +695,11 @@
     NSString *_pdfFilePath = [documentsDir stringByAppendingPathComponent:fileName];
     if([NSFm fileExistsAtPath:_pdfFilePath]) {
         //NSLog(@"scramble pdf file");
-        NSData *pdfData = [NSData dataWithContentsOfFile:_pdfFilePath];
+        NSData *pdfData = [[NSData alloc] initWithContentsOfFile:_pdfFilePath];
         NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
-        [pdfScrambledData writeToFile:_pdfFilePath atomically:YES];
+        [pdfScrambledData writeToFile:_pdfFilePath atomically:NO];
+        [pdfData release];
+        [pdfScrambledData release];
     
     }
     

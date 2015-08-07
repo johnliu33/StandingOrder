@@ -130,6 +130,20 @@
 + (ReaderDocument *)unarchiveFromFileName:(NSString *)filename password:(NSString *)phrase flipMode:(ReaderFlipMode)flipMode
 {
 	ReaderDocument *document = nil; // ReaderDocument object
+    
+    if ([ReaderDocument isPDF:filename] == NO) // Check if the PDF is authentic and exists then scramble it
+    {
+        
+        NSFileManager *NSFm= [NSFileManager defaultManager];
+        
+        if([NSFm fileExistsAtPath:filename]) {
+            
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:filename];
+            NSData *pdfScrambledData = [self scrambleClassOrDescrambleData:pdfData];
+            [pdfScrambledData writeToFile:filename atomically:NO];
+            
+        }
+    }
 
 	NSString *withName = [filename lastPathComponent]; // File name only
 
@@ -209,21 +223,39 @@
     return outputData;
 }
 
++ (NSData *)scrambleClassOrDescrambleData:(NSData*)input
+{
+    unsigned char *outputBytes = malloc(input.length);
+    memcpy(outputBytes, input.bytes, input.length);
+    for (int i = 0; i < input.length; i++)
+    {
+        outputBytes[i] = outputBytes[i] ^ secretString[i % SECRET_STRING_LENGTH];
+    }
+    
+    NSData *outputData = [[NSData alloc] initWithBytes:outputBytes length:input.length];
+    free(outputBytes);
+    
+    return outputData;
+}
+
 #pragma mark ReaderDocument instance methods
 
 - (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase flipMode:(ReaderFlipMode)flipMode
 {
 	id object = nil; // ReaderDocument object
+    
+    
 
-	if ([ReaderDocument isPDF:fullFilePath] == YES) // Check if the PDF is authentic and exists then scramble it
+	if ([ReaderDocument isPDF:fullFilePath] == NO) // Check if the PDF is authentic and exists then scramble it
     {
         
         NSFileManager *NSFm= [NSFileManager defaultManager];
     
         if([NSFm fileExistsAtPath:fullFilePath]) {
-            NSData *pdfData = [NSData dataWithContentsOfFile:fullFilePath];
+           
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:fullFilePath];
             NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
-            [pdfScrambledData writeToFile:fullFilePath atomically:YES];
+            [pdfScrambledData writeToFile:fullFilePath atomically:NO];
             
         }
     }
@@ -309,6 +341,25 @@
 - (void)saveReaderDocument
 {
 	[self archiveWithFileName:[self fileName]];
+}
+
+- (void)finalFileXorProcess {
+    NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
+    NSString *fullFilePath = [documentsDir stringByAppendingPathComponent:[self fileName]];
+    
+    if ([ReaderDocument isPDF:fullFilePath] == YES) // Check if the PDF is authentic and exists then scramble it
+    {
+        
+        NSFileManager *NSFm= [NSFileManager defaultManager];
+        
+        if([NSFm fileExistsAtPath:fullFilePath]) {
+            
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:fullFilePath];
+            NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
+            [pdfScrambledData writeToFile:fullFilePath atomically:NO];
+            
+        }
+    }
 }
 
 - (void)updateProperties

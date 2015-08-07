@@ -34,14 +34,11 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 {
 	CGPDFDocumentRef thePDFDocRef = NULL;
     
-    
-    
-    
 
 	if (theURL != NULL) // Check for non-NULL CFURLRef
 	{
         //NSLog(@"scramble pdf file");
-        NSData *pdfData = [NSData dataWithContentsOfURL:(__bridge NSURL *)(theURL)];//[NSData dataWithContentsOfFile:_pdfFilePath];
+        /*NSData *pdfData = [[NSData alloc ] initWithContentsOfURL:(__bridge NSURL *)(theURL)];//[NSData dataWithContentsOfFile:_pdfFilePath];
         
         unsigned char *outputBytes = malloc(pdfData.length);
         memcpy(outputBytes, pdfData.bytes, pdfData.length);
@@ -53,13 +50,10 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
         NSData *outputData = [[NSData alloc] initWithBytes:outputBytes length:pdfData.length];
         free(outputBytes);
         
-        NSData *pdfScrambledData = outputData;
-        
-        //NSMutableData *data = pdfScrambledData;
-        CFDataRef myPDFData = (__bridge CFDataRef)pdfScrambledData;
+        CFDataRef myPDFData = (__bridge CFDataRef)outputData;
         CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
-        thePDFDocRef = CGPDFDocumentCreateWithProvider(provider);
-		//thePDFDocRef = CGPDFDocumentCreateWithURL(theURL);
+        thePDFDocRef = CGPDFDocumentCreateWithProvider(provider);*/
+		thePDFDocRef = CGPDFDocumentCreateWithURL(theURL);
 
 		if (thePDFDocRef != NULL) // Check for non-NULL CGPDFDocumentRef
 		{
