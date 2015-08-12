@@ -1279,6 +1279,8 @@
 #if (READER_STANDALONE == FALSE) // Option
 
 	[document saveReaderDocument]; // Save any ReaderDocument object changes
+    
+    [document finalFileXorProcess];
 
 	[[ReaderThumbQueue sharedInstance] cancelOperationsWithGUID:document.guid];
 

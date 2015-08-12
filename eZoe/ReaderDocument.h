@@ -50,4 +50,10 @@
 
 - (void)updateProperties;
 
+- (void)finalFileXorProcess;
+
+- (NSData *)scrambleOrDescrambleData:(NSData*)input;
+
++ (NSData *)scrambleClassOrDescrambleData:(NSData*)input;
+
 @end

@@ -15,6 +15,15 @@
 #import <Parse/Parse.h>
 
 
+
+@interface eZoeAppDelegate ()
+
+// Used for sending Google Analytics traffic in the background.
+@property(nonatomic, assign) BOOL okToWait;
+@property(nonatomic, copy) void (^dispatchHandler)(GAIDispatchResult result);
+
+@end
+
 @implementation eZoeAppDelegate
 @synthesize sBookLastOpened;
 @synthesize tazzecuid;
@@ -106,6 +115,24 @@
      } else if (sizeof(void*) == 8) {
          NSLog(@"You're running in 64 bit");
      }*/
+    
+    NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    // User must be able to opt out of tracking
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+    //[GAI sharedInstance].optOut = @{kAllowTracking: @(YES)};
+    // If your app runs for long periods of time in the foreground, you might consider turning
+    // on periodic dispatching.  This app doesn't, so it'll dispatch all traffic when it goes
+    // into the background instead.  If you wish to dispatch periodically, we recommend a 120
+    // second dispatch interval.
+    [GAI sharedInstance].dispatchInterval = 120;
+    //[GAI sharedInstance].dispatchInterval = -1;
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    self.tracker = [[GAI sharedInstance] trackerWithName:@"StandingOrder"
+                                              trackingId:kTrackingId];
+    
     
     [Parse setApplicationId:@"ChSMLWtqR4jlMjESLi13uHB8xEM6ahv49ACKVG9J"
                   clientKey:@"7tX9CXryVtkOLkasJJBef0cWQ57QLlUEac6LRNpe"]; 
@@ -256,6 +283,51 @@
 
     return YES;
 }
+
+// In case the app was sent into the background when there was no network connection, we will use
+// the background data fetching mechanism to send any pending Google Analytics data.  Note that
+// this app has turned on background data fetching in the capabilities section of the project.
+-(void)application:(UIApplication *)application
+performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [self sendHitsInBackground];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+// We'll try to dispatch any hits queued for dispatch as the app goes into the background.
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self sendHitsInBackground];
+}
+
+// This method sends hits in the background until either we're told to stop background processing,
+// we run into an error, or we run out of hits.  We use this to send any pending Google Analytics
+// data since the app won't get a chance once it's in the background.
+- (void)sendHitsInBackground {
+    self.okToWait = YES;
+    __weak eZoeAppDelegate *weakSelf = self;
+    __block UIBackgroundTaskIdentifier backgroundTaskId =
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        weakSelf.okToWait = NO;
+    }];
+    
+    if (backgroundTaskId == UIBackgroundTaskInvalid) {
+        return;
+    }
+    
+    self.dispatchHandler = ^(GAIDispatchResult result) {
+        // If the last dispatch succeeded, and we're still OK to stay in the background then kick off
+        // again.
+        if (result == kGAIDispatchGood && weakSelf.okToWait ) {
+            [[GAI sharedInstance] dispatchWithCompletionHandler:weakSelf.dispatchHandler];
+        } else {
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskId];
+        }
+    };
+    [[GAI sharedInstance] dispatchWithCompletionHandler:self.dispatchHandler];
+}
+
+
 //TabBar test
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -433,15 +505,6 @@
     
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
-    //[[DBHelper newInstance] closeDatabase];
-}
-
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     /*
@@ -461,6 +524,9 @@
      //[FBAppCall handleDidBecomeActiveWithSession:self.fbSession];
      [[DBHelper newInstance] openDatabase];
      [[DBHelperEngDict newInstance] openDatabase];
+    
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

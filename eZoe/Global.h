@@ -14,7 +14,13 @@
 #define kSiteHttpRoot @"so.twgbr.org"
 #define kProductPrefix @"tw.org.twgbr.BasicSubs."
 
+#define SECRET_STRING_LENGTH 5
+
 #import <Foundation/Foundation.h>
+
+
+static unsigned char secretString[5] = "twgbr";
+
 @interface UIScreen(ZBScreenRetinaAdditions)
 
 // Returns YES if this is a Retina display.

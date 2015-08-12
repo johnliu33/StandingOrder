@@ -25,6 +25,7 @@
 
 #import "ReaderDocument.h"
 #import "CGPDFDocument.h"
+#import "Global.h"
 #import <fcntl.h>
 
 @implementation ReaderDocument
@@ -129,6 +130,20 @@
 + (ReaderDocument *)unarchiveFromFileName:(NSString *)filename password:(NSString *)phrase flipMode:(ReaderFlipMode)flipMode
 {
 	ReaderDocument *document = nil; // ReaderDocument object
+    
+    if ([ReaderDocument isPDF:filename] == NO) // Check if the PDF is authentic and exists then scramble it
+    {
+        
+        NSFileManager *NSFm= [NSFileManager defaultManager];
+        
+        if([NSFm fileExistsAtPath:filename]) {
+            
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:filename];
+            NSData *pdfScrambledData = [self scrambleClassOrDescrambleData:pdfData];
+            [pdfScrambledData writeToFile:filename atomically:NO];
+            
+        }
+    }
 
 	NSString *withName = [filename lastPathComponent]; // File name only
 
@@ -192,64 +207,109 @@
 	return state;
 }
 
+#pragma mark - scrabmble PDF
+- (NSData *)scrambleOrDescrambleData:(NSData*)input
+{
+    unsigned char *outputBytes = malloc(input.length);
+    memcpy(outputBytes, input.bytes, input.length);
+    for (int i = 0; i < input.length; i++)
+    {
+        outputBytes[i] = outputBytes[i] ^ secretString[i % SECRET_STRING_LENGTH];
+    }
+    
+    NSData *outputData = [[NSData alloc] initWithBytes:outputBytes length:input.length];
+    free(outputBytes);
+    
+    return outputData;
+}
+
++ (NSData *)scrambleClassOrDescrambleData:(NSData*)input
+{
+    unsigned char *outputBytes = malloc(input.length);
+    memcpy(outputBytes, input.bytes, input.length);
+    for (int i = 0; i < input.length; i++)
+    {
+        outputBytes[i] = outputBytes[i] ^ secretString[i % SECRET_STRING_LENGTH];
+    }
+    
+    NSData *outputData = [[NSData alloc] initWithBytes:outputBytes length:input.length];
+    free(outputBytes);
+    
+    return outputData;
+}
+
 #pragma mark ReaderDocument instance methods
 
 - (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase flipMode:(ReaderFlipMode)flipMode
 {
 	id object = nil; // ReaderDocument object
+    
+    
 
-	if ([ReaderDocument isPDF:fullFilePath] == YES) // File must exist
-	{
-		if ((self = [super init])) // Initialize superclass object first
-		{
-            _flipMode = flipMode;
-			_guid = [ReaderDocument GUID]; // Create a document GUID
+	if ([ReaderDocument isPDF:fullFilePath] == NO) // Check if the PDF is authentic and exists then scramble it
+    {
+        
+        NSFileManager *NSFm= [NSFileManager defaultManager];
+    
+        if([NSFm fileExistsAtPath:fullFilePath]) {
+           
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:fullFilePath];
+            NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
+            [pdfScrambledData writeToFile:fullFilePath atomically:NO];
+            
+        }
+    }
+	
+    if ((self = [super init])) // Initialize superclass object first
+    {
+        _flipMode = flipMode;
+        _guid = [ReaderDocument GUID]; // Create a document GUID
 
-			_password = [phrase copy]; // Keep copy of any document password
+        _password = [phrase copy]; // Keep copy of any document password
 
-			_bookmarks = [NSMutableIndexSet new]; // Bookmarked pages index set
+        _bookmarks = [NSMutableIndexSet new]; // Bookmarked pages index set
 
-			_fileName = [ReaderDocument relativeFilePath:fullFilePath]; // File name
+        _fileName = [ReaderDocument relativeFilePath:fullFilePath]; // File name
 
-			CFURLRef docURLRef = (__bridge CFURLRef)[self fileURL]; // CFURLRef from NSURL
+        CFURLRef docURLRef = (__bridge CFURLRef)[self fileURL]; // CFURLRef from NSURL
 
-			CGPDFDocumentRef thePDFDocRef = CGPDFDocumentCreateX(docURLRef, _password);
+        CGPDFDocumentRef thePDFDocRef = CGPDFDocumentCreateX(docURLRef, _password);
 
-			if (thePDFDocRef != NULL) // Get the number of pages in the document
-			{
-				NSInteger pageCount = CGPDFDocumentGetNumberOfPages(thePDFDocRef);
+        if (thePDFDocRef != NULL) // Get the number of pages in the document
+        {
+            NSInteger pageCount = CGPDFDocumentGetNumberOfPages(thePDFDocRef);
 
-				_pageCount = [NSNumber numberWithInteger:pageCount];
-                
-                if (self.flipMode == ReaderFlipModeRight) {
-                    _pageNumber = [NSNumber numberWithInteger:pageCount];
-                }else
-                {
-                    _pageNumber = [NSNumber numberWithInteger:1]; // Start on page 1
-                }
+            _pageCount = [NSNumber numberWithInteger:pageCount];
+            
+            if (self.flipMode == ReaderFlipModeRight) {
+                _pageNumber = [NSNumber numberWithInteger:pageCount];
+            }else
+            {
+                _pageNumber = [NSNumber numberWithInteger:1]; // Start on page 1
+            }
 
-				CGPDFDocumentRelease(thePDFDocRef); // Cleanup
-			}
-			else // Cupertino, we have a problem with the document
-			{
-				NSAssert(NO, @"CGPDFDocumentRef == NULL");
-			}
+            CGPDFDocumentRelease(thePDFDocRef); // Cleanup
+        }
+        else // Cupertino, we have a problem with the document
+        {
+            NSAssert(NO, @"CGPDFDocumentRef == NULL");
+        }
 
-			NSFileManager *fileManager = [NSFileManager new]; // File manager instance
+        NSFileManager *fileManager = [NSFileManager new]; // File manager instance
 
-			_lastOpen = [NSDate dateWithTimeIntervalSinceReferenceDate:0.0]; // Last opened
+        _lastOpen = [NSDate dateWithTimeIntervalSinceReferenceDate:0.0]; // Last opened
 
-			NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:fullFilePath error:NULL];
+        NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:fullFilePath error:NULL];
 
-			_fileDate = [fileAttributes objectForKey:NSFileModificationDate]; // File date
+        _fileDate = [fileAttributes objectForKey:NSFileModificationDate]; // File date
 
-			_fileSize = [fileAttributes objectForKey:NSFileSize]; // File size (bytes)
+        _fileSize = [fileAttributes objectForKey:NSFileSize]; // File size (bytes)
 
-			[self saveReaderDocument]; // Save the ReaderDocument object
+        [self saveReaderDocument]; // Save the ReaderDocument object
 
-			object = self; // Return initialized ReaderDocument object
-		}
-	}
+        object = self; // Return initialized ReaderDocument object
+    }
+	
 
 	return object;
 }
@@ -281,6 +341,25 @@
 - (void)saveReaderDocument
 {
 	[self archiveWithFileName:[self fileName]];
+}
+
+- (void)finalFileXorProcess {
+    NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
+    NSString *fullFilePath = [documentsDir stringByAppendingPathComponent:[self fileName]];
+    
+    if ([ReaderDocument isPDF:fullFilePath] == YES) // Check if the PDF is authentic and exists then scramble it
+    {
+        
+        NSFileManager *NSFm= [NSFileManager defaultManager];
+        
+        if([NSFm fileExistsAtPath:fullFilePath]) {
+            
+            NSData *pdfData = [[NSData alloc] initWithContentsOfFile:fullFilePath];
+            NSData *pdfScrambledData = [self scrambleOrDescrambleData:pdfData];
+            [pdfScrambledData writeToFile:fullFilePath atomically:NO];
+            
+        }
+    }
 }
 
 - (void)updateProperties
