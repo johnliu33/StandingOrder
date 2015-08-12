@@ -217,7 +217,7 @@
         } else if([[bookInfo objectForKey:@"section"] isEqualToString:@"11"]) {
             [morningBooks addObject:bookInfo];
         }  else {
-            [etcBooks addObject:bookInfo];
+            [resalesBooks addObject:bookInfo];
         }
     }
     _createBooks = [createBooks retain];

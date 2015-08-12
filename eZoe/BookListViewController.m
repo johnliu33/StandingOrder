@@ -746,7 +746,7 @@
         [bookManager copyFileFromResource:@"8887.pdf"];
         
         
-        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"1",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
+        NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"8887",@"bookId",@"9",@"section",NSLocalizedString(@"操作指引", @"Guide"),@"title", nil];
         
         NSArray *initBooks = [NSArray arrayWithObjects:dict1, nil];
         [initBooks writeToFile:dataPath atomically:YES];
