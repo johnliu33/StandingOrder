@@ -110,6 +110,7 @@
 @synthesize iResources;
 @synthesize _statusLabel;
 @synthesize bookid = _bookid;
+@synthesize productid = _productid;
 @synthesize booktype = _booktype;
 @synthesize storeType = _storeType;
 @synthesize batchNumber = _batchNumber;
@@ -220,6 +221,7 @@
    
     [_booktype release];
     [_bookid release];
+    [_productid release];
     [_storeType release];
     [_batchNumber release];
     
@@ -253,7 +255,7 @@
 - (void)setupButtonPrice
 {
     
-    NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_bookid];
+    NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_productid];
     
     //TT_RELEASE_SAFELY(_downloadButton);
     NSDictionary *prices = [[MKStoreManager sharedManager] pricesDictionary];
@@ -310,7 +312,7 @@
     TT_RELEASE_SAFELY(_downloadButton);
     if([_booktype isEqualToString:@"debug"])
         _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:@"免費下載"];
-    else if([_booktype isEqualToString:@"normal"])
+    else if([_booktype isEqualToString:@"singleBooks"] || [_booktype isEqualToString:@"basicSubs"])
     {
         NSString *_desc;
         NSString *_coverName = [NSString stringWithFormat:@"%@l.png",_bookid];
@@ -319,36 +321,24 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if([fileManager fileExistsAtPath:dataPath])
         {
-            /*_desc = [NSString stringWithString:NSLocalizedString(@"已安裝",@"Installed")];
-            TT_RELEASE_SAFELY(_downloadButton);
-            _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-            _downloadButton.userInteractionEnabled = YES;
-             */
             
-            NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_bookid];
+            NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_productid];
             
             
             
             TT_RELEASE_SAFELY(_downloadButton);
             NSDictionary *prices = [[MKStoreManager sharedManager] pricesDictionary];
             NSString *subPrice = [prices objectForKey:_apple_productid];
+
+    
             
-            //NSLog(@"Price of %@:%@",_apple_productid,subPrice);
-            
-            NSString *_version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] substringToIndex:1];
-            
-            if([_version integerValue] < 2 && [_bookid isEqualToString:@"8889"])
-            {
-                _desc = [NSString stringWithString:NSLocalizedString(@"請升級至最新版本",@"Update")];
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-                _downloadButton.userInteractionEnabled = NO;
-            }else if (!subPrice || [subPrice isKindOfClass:[NSNull class]])
+            if (!subPrice || [subPrice isKindOfClass:[NSNull class]])
             {
                 //grayToolbarButton:
                 _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:@"檢查中"];
                 //_downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:@"查詢中"];
                 _downloadButton.userInteractionEnabled = NO;
-                [[MKStoreManager sharedManager] requestProductDataWithBookId:_bookid];
+                [[MKStoreManager sharedManager] requestProductDataWithBookId:_productid];
             }else
             {
                 _desc = [NSString stringWithString:NSLocalizedString(@"已安裝",@"Installed")];
@@ -362,30 +352,21 @@
         }else
         {
             
-            NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_bookid];
+            NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_productid];
         
             
             
             TT_RELEASE_SAFELY(_downloadButton);
             NSDictionary *prices = [[MKStoreManager sharedManager] pricesDictionary];
             NSString *subPrice = [prices objectForKey:_apple_productid];
-            
-            //NSLog(@"Price of %@:%@",_apple_productid,subPrice);
-            
-            NSString *_version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] substringToIndex:1];
-            
-            if([_version integerValue] < 2 && [_bookid isEqualToString:@"8889"])
-            {
-                _desc = [NSString stringWithString:NSLocalizedString(@"請升級至最新版本",@"Update")];
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:_desc];
-                _downloadButton.userInteractionEnabled = NO;
-            }else if (!subPrice || [subPrice isKindOfClass:[NSNull class]])
+        
+            if (!subPrice || [subPrice isKindOfClass:[NSNull class]])
             {
                 //grayToolbarButton:
                _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:@"查詢中"];
                //_downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:@"查詢中"];
                _downloadButton.userInteractionEnabled = NO;
-                [[MKStoreManager sharedManager] requestProductDataWithBookId:_bookid];
+                [[MKStoreManager sharedManager] requestProductDataWithBookId:_productid];
             }else
             {
                 _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:subPrice];
@@ -395,9 +376,8 @@
             }
          
         }
-    }
-    else
-    {
+    } else {
+        
         NSString *_desc;
         NSString *_coverName = [NSString stringWithFormat:@"%@l.png",_bookid];
         NSString *dataPath = [[NSString stringWithString:_coverName] getDocPathWithPList];
@@ -415,13 +395,18 @@
         }else
         {
             TT_RELEASE_SAFELY(_downloadButton);
-            if([MKStoreManager isFeaturePurchased:[NSString stringWithFormat:@"%@%@%@",kProductPrefix,@"SO",_batchNumber]]) {
-                _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:NSLocalizedString(@"下載書報",@"Download Books")];
-                _downloadButton.userInteractionEnabled = YES;
-            } else {
-                _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:NSLocalizedString(@"請先購買基本訂戶",@"Order First")];
-                _downloadButton.userInteractionEnabled = NO;
-            }
+            //if([_storeType isEqualToString:@"000"]) { //訂閱
+                if([MKStoreManager isFeaturePurchased:[NSString stringWithFormat:@"%@%@%@",kProductPrefix,@"SO",_batchNumber]]) {
+                    _downloadButton = [TTButton buttonWithStyle:@"toolbarButton:" title:NSLocalizedString(@"下載書報",@"Download Books")];
+                    _downloadButton.userInteractionEnabled = YES;
+                } else {
+                    _downloadButton = [TTButton buttonWithStyle:@"grayToolbarButton:" title:NSLocalizedString(@"請先購買基本訂戶",@"Order First")];
+                    _downloadButton.userInteractionEnabled = NO;
+                }
+            //} else if([_storeType isEqualToString:@"001"]) { //單冊
+                
+                
+           // }
             
         }
         
@@ -611,7 +596,7 @@
 
 - (void)downloadButtonAction:(TTButton*)button {
     
-    if([_booktype isEqualToString:@"normal"])
+    if([_booktype isEqualToString:@"basicSubs"])
     {
     
         [_dismissButton setEnabled:NO];
@@ -621,7 +606,7 @@
         _activityLabel.isAnimating = YES;
         
         //NSString *_subsid = _subscriptId;
-        NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_bookid];
+        NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_productid];
         MKStoreManager  *_storemanager = [MKStoreManager sharedManager];
         [_storemanager buyFeature:_apple_productid onComplete:^(NSString* purchasedFeature, NSData*purchasedReceipt, NSArray* availableDownloads) {
             
@@ -644,8 +629,31 @@
              
              NSLog(@"User cancel phurchasing");
          }];
-    }else
-    {
+    } else if ([_booktype isEqualToString:@"singleBooks"]) {
+        [_dismissButton setEnabled:NO];
+        [_downloadButton setEnabled:NO];
+        
+        [_activityLabel setText:NSLocalizedString(@"處理中",@"Processing")];
+        _activityLabel.isAnimating = YES;
+       
+        NSString *_apple_productid = [NSString stringWithFormat:@"%@%@",kProductPrefix,_productid];
+        MKStoreManager  *_storemanager = [MKStoreManager sharedManager];
+        [_storemanager buyFeature:_apple_productid onComplete:^(NSString* purchasedFeature, NSData*purchasedReceipt, NSArray* availableDownloads) {
+            
+            _activityLabel.isAnimating = NO;
+            [self downloadTest:purchasedFeature];
+            [_dismissButton setEnabled:YES];
+            
+        } onCancelled:^
+         {
+             _activityLabel.isAnimating = NO;
+             [_activityLabel setText:@""];
+             
+             [_dismissButton setEnabled:YES];
+             [_downloadButton setEnabled:YES];
+             
+         }];
+    } else {
         [self downloadTest:@""];
     }
 
@@ -681,7 +689,8 @@
     if([_booktype isEqualToString:@"debug"])
         _bid = [_bookid substringFromIndex:1];
     else
-        _bid = _bookid;
+        _bid = [_bookid stringByReplacingOccurrencesOfString:@"_"
+        withString:@"-"];
     
     NSLog(@"_bid:%@",_bid);
     
@@ -809,7 +818,7 @@
    
      /*save download data to file*/
     NSString *sDownloadFile = [NSString stringWithFormat:@"http://%@/subs_product_file/%@.zip",kSiteHttpRoot,_bookid];
-    NSLog(@"sDownloadFile:%@",sDownloadFile);
+    //NSLog(@"sDownloadFile:%@",sDownloadFile);
    	request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:sDownloadFile]];
     NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
 	[request setDownloadDestinationPath:[documentsDir stringByAppendingPathComponent:@"tempdn.zip"]];

@@ -895,9 +895,9 @@ static MKStoreManager* _sharedStoreManager;
             NSLog(@"restored purchase id:%@",_pid);
       
 
-      //eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
-      //if(![[_pid substringFromIndex:18] hasPrefix:@"sub"])
-      //    [appDelegate.restoredBooks setObject:@"" forKey:_pid];
+      eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+      if(![[_pid substringFromIndex:18] hasPrefix:@"sub"])
+          [appDelegate.restoredBooks setObject:@"" forKey:_pid];
       
       if([[_pid substringToIndex:25] isEqualToString:@"tw.org.twgbr.BasicSubs.SO"])
           [MKStoreManager setObject:[NSNumber numberWithInt:1] forKey:transaction.originalTransaction.payment.productIdentifier];

@@ -15,6 +15,7 @@
     {
         
         [self setTabURLs:[NSArray arrayWithObjects:@"tt://menu/1", //基本訂戶
+                          @"tt://menu/2", //單冊購買
                           @"tt://menu/6", //回復購買
                           @"tt://menu/5", //關於
                           nil]];

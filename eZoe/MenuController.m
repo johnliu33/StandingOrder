@@ -151,10 +151,11 @@
 	
 	ASIHTTPRequest *request;
     
-    NSString *_id = [mybookid substringFromIndex:1];
+    NSString *_id = [[mybookid substringFromIndex:1] stringByReplacingOccurrencesOfString:@"_"
+                                                                                   withString:@"-"];
     
     NSString *sDownloadFile = [NSString stringWithFormat:@"http://%@/subs_product_file/%@.zip",kSiteHttpRoot,_id];
-    NSLog(@"sDownloadFile:%@",sDownloadFile);
+    //NSLog(@"sDownloadFile:%@",sDownloadFile);
     
 	request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:sDownloadFile]];
     NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
@@ -219,7 +220,8 @@
     
     eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    NSString *_bid = [appDelegate.dbookid substringFromIndex:1];
+    NSString *_bid = [[appDelegate.dbookid substringFromIndex:1] stringByReplacingOccurrencesOfString:@"_"
+withString:@"-"];
 
     [_unzipobj unzip:filePath file_id:_bid];
     [_unzipobj release];
@@ -450,11 +452,43 @@
             {
                 NSString *_id = [_key objectAtIndex:i];
                 
-                //tw.org.twgbr.BasicSubs.SO47
-                //NSLog(@"_id subsstrig:%@",[_id substringToIndex:25]);
                 NSString *itemCaption = _id;
                 if(![[_id substringToIndex:25] isEqualToString:[NSString stringWithFormat:@"%@SO",kProductPrefix]]) {
+                    NSString *_id = [_key objectAtIndex:i];
+                    
                     UIButton* button = [UIButton buttonWithType:UIButtonTypeContactAdd];//UIButtonTypeRoundedRect
+                    
+                    [button setTitle:@"" forState:UIControlStateNormal];
+                    
+                    button.tag = i;
+                    [button addTarget:self action:@selector(ASIDownload:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    NSString *urlString = [NSString stringWithFormat:@"http://%@/subs_product_desc/%@.txt",kSiteHttpRoot,[[_id substringFromIndex:24] stringByReplacingOccurrencesOfString:@"_" withString:@"-"]];
+                    NSLog(@"urlString:%@",urlString);
+                    
+                    
+                    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+                                                    [NSURL URLWithString:urlString]];
+                    
+                    NSData *data = [ NSURLConnection sendSynchronousRequest:request returningResponse: nil error: nil ];
+                    
+                    NSString *returnData = [[NSString alloc] initWithBytes: [data bytes] length:[data length] encoding: NSUTF8StringEncoding];
+                    
+                    
+                    NSString *stopBefore = @"</span></b>";
+                    NSRange firstRange = [returnData rangeOfString:@"<b><span class='largeText'>"];
+                    NSRange secondRange = [[returnData substringFromIndex:firstRange.location + 0] rangeOfString:stopBefore];
+                    NSRange finalRange = NSMakeRange(firstRange.location + firstRange.length, secondRange.location - firstRange.length);
+                    
+                    NSString *match =  [returnData substringWithRange:finalRange];
+                    NSLog(@"Found string '%@'", match);
+                    
+                    NSString *itemCaption = match;
+                    
+                    buttonItem = [TTTableControlItem itemWithCaption:itemCaption control:button];
+                    [_itemarray addObject:buttonItem];
+
+                    /*UIButton* button = [UIButton buttonWithType:UIButtonTypeContactAdd];//UIButtonTypeRoundedRect
                 
                     [button setTitle:@"" forState:UIControlStateNormal];
                 
@@ -462,7 +496,7 @@
                     [button addTarget:self action:@selector(ASIDownload:) forControlEvents:UIControlEventTouchUpInside];
                    
                     buttonItem = [TTTableControlItem itemWithCaption:itemCaption control:button];
-                    [_itemarray addObject:buttonItem];
+                    [_itemarray addObject:buttonItem];*/
                 } else {
                     NSString *p_ = [_id substringFromIndex:25];
                     NSString *batch_ = NSLocalizedString(@"梯次基本訂戶購買已回復",@"Batch Restore");
@@ -744,18 +778,21 @@
         NSString *content=[url substringFromIndex:13];
         //NSLog(@"content String: %@", content);
         NSArray *lines = [content componentsSeparatedByString:@"&"];
-        NSMutableArray *_value = [NSMutableArray arrayWithCapacity:3];
+        //NSMutableArray *_value = [NSMutableArray arrayWithCapacity:3];
+        NSMutableDictionary *_kv = [NSMutableDictionary dictionaryWithCapacity:3];
         for(NSString *line in lines)
         {
             //NSLog(@"line String: %@", line);
             NSArray *value =[line componentsSeparatedByString:@"="];
             //NSLog(@"value is: %@",  [value objectAtIndex: 1] );
-            [_value addObject:[value objectAtIndex: 1]];
+            //[_value addObject:[value objectAtIndex: 1]];
+            [_kv setObject:[value objectAtIndex: 1] forKey:[value objectAtIndex: 0]];
         }
         
-        NSString *_bookid = [_value objectAtIndex:0];
-        NSString *_batchNumber = [_value objectAtIndex:1];
-        NSString *_storeType = [_value objectAtIndex:2];
+        NSString *_bookid = [_kv objectForKey:@"product"];//[ objectAtIndex:0];
+        
+        NSString *_batchNumber = [_kv objectForKey:@"batch"];//[_value objectAtIndex:1];
+        NSString *_storeType = [_kv objectForKey:@"type"];//[_value objectAtIndex:2];
         
         
         
@@ -775,7 +812,15 @@
         else
         {
             //NSString *_type = @"debug";
-            NSString *_type = @"singlebook";
+            NSString *_type = @"";
+            if([_storeType isEqualToString:@"002"]) {
+                _type = @"Subscription";
+                ctrl.productid = _bookid;
+            } else if([_storeType isEqualToString:@"001"]) {
+                _type = @"singleBooks";
+                ctrl.productid = [[NSString stringWithFormat:@"b%@",_bookid] stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
+            }
+
             ctrl.booktype = _type;
             ctrl.storeType = _storeType;
             ctrl.batchNumber = _batchNumber;
@@ -845,6 +890,7 @@
         NSLog(@"%@ %@ %@",_bookid,_batch,_contentType);
         SimpleController *ctrl = [[[SimpleController alloc] init] autorelease];
         ctrl.bookid = _bookid;
+        ctrl.productid = _bookid;
         NSString *_firstWord = [_bookid substringToIndex:1];
         if([_firstWord isEqualToString:@"z"]) //d for debug files
         {
@@ -856,7 +902,7 @@
         {
             //SString *_type = @"debug";
             //NSString *_type = @"singlebook";
-            NSString *_type = @"normal";
+            NSString *_type = @"basicSubs";
             ctrl.booktype = _type;
             
         }

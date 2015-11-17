@@ -37,7 +37,7 @@
 // when you include MKStoreManager in your clss, these macros get defined there
 
 #define kConsumableBaseFeatureId @"tw.org.twgbr.BasicSubs"
-#define kFeatureAId @"tw.org.twgbr.BasicSubs.1001"
+#define kFeatureAId @"tw.org.twgbr.BasicSubs.b1001"
 #define kConsumableFeatureBId @"com.mycompany.myapp.005"
 #define FishBasket @"FishBasket"
 //#define kSubscription3MonthIdentifier @"tw.org.ct.iReadCT.sub3month"//tw.org.ct.iReadCT.sub7days//sub3month

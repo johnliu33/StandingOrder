@@ -33,13 +33,13 @@
 "main_url_iphone" = "http://so.twgbr.org/subs/basic_main.php";
 
 /* Catalogue */
-"分類瀏覽" = "分類瀏覽";
+"分類瀏覽" = "單冊購買";
 
 /* Catalogue url */
-"catalogue_url" = "http://ipad.twgbr.org/mon2.php";
+"catalogue_url" = "http://so.twgbr.org/subs/single_main.php";
 
 /* Catalogue url iphone */
-"catalogue_url_iphone" = "http://ipad.twgbr.org/iphone_mon2.php";
+"catalogue_url_iphone" = "http://so.twgbr.org/subs/single_main.php";
 
 /* Book Search */
 "書報搜尋" = "書報搜尋";

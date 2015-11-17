@@ -41,6 +41,7 @@
     NSArray           *iResources;
     
     NSString          *_bookid;
+    NSString          *_productid;
     NSString          *_booktype;
     NSString          *_storeType;
     NSString          *_batchNumber;
@@ -58,6 +59,7 @@
 @property(nonatomic, retain) NSArray *iResources;
 @property(nonatomic, retain)IBOutlet UILabel *_statusLabel;
 @property(nonatomic, retain)NSString *bookid;
+@property(nonatomic, retain)NSString *productid;
 @property(nonatomic, retain)NSString *booktype;
 @property(nonatomic, retain)NSString *storeType;
 @property(nonatomic, retain)NSString *batchNumber;

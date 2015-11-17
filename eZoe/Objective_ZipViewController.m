@@ -209,7 +209,7 @@
 	NSString *documentsDir= [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Private Documents"];
 	//NSString *zipFilePath= [documentsDir stringByAppendingPathComponent:downLoadFN];
 	NSString *zipFilePath=downLoadFN;
-    //NSLog(@"%@",zipFilePath);
+    NSLog(@"%@",zipFilePath);
 	ZipFile *zipFile = [[ZipFile alloc] initWithFileName:zipFilePath mode:ZipFileModeUnzip];
 	[zipFile goToFirstFileInZip];
 	
