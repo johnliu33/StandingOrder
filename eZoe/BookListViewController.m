@@ -1370,60 +1370,51 @@
 - (void)loadPDFDocument:(NSString *)sBookNumber
 {
 #ifdef DEBUG
-        NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
-        
-        NSString *phrase = nil;
     
-        eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSLog(@"appDelegate.bookDirectionMode:%d",appDelegate.bookDirectionMode);
-        NSString *filePath = [[NSString stringWithFormat:@"%@.pdf",sBookNumber] getDocPathWithPList];
-        
-        ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase flipMode:appDelegate.bookDirectionMode];
-        
-        NSLog(@"filePath:%@",filePath);
-        
-        
-        if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
-        {
-            ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
-             
-            readerViewController.delegate = self; // Set the ReaderViewController delegate to self
-            
-            
-            SideMenuViewController *leftMenuViewController = [[SideMenuViewController alloc] init];
-            [leftMenuViewController setBookId:sBookNumber];
-            
-            MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
-                                                            containerWithCenterViewController:readerViewController
-                                                            leftMenuViewController:leftMenuViewController
-                                                            rightMenuViewController:nil];
-            
-            [self presentViewController:container animated:NO completion:nil];
-            [readerViewController release];
-            
-            /*ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
-            
-            readerViewController.delegate = self; // Set the ReaderViewController delegate to self
-            
-            readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            
-            
-            [self presentModalViewController:readerViewController animated:YES];
-            [readerViewController release]; // Release the ReaderViewController*/
-        }
+    NSString *phrase = nil;
     
-        id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    eZoeAppDelegate *appDelegate = (eZoeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSLog(@"appDelegate.bookDirectionMode:%d",appDelegate.bookDirectionMode);
+    NSString *filePath = [[NSString stringWithFormat:@"%@.pdf",sBookNumber] getDocPathWithPList];
     
-        NSString *plistFileName = [NSString stringWithFormat:@"%@.plist",sBookNumber];
-        NSDictionary *bookPlist = [NSDictionary dictionaryWithContentsOfFile:[plistFileName getDocPathWithPList]];
+    ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase flipMode:appDelegate.bookDirectionMode];
     
-        NSString *_bookName = [bookPlist objectForKey:@"bookName"];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Book Opened Analysis"
+    NSLog(@"filePath:%@",filePath);
+    
+    
+    if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
+    {
+        ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+        
+        readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+        
+        
+        SideMenuViewController *leftMenuViewController = [[SideMenuViewController alloc] init];
+        [leftMenuViewController setBookId:sBookNumber];
+        
+        MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                        containerWithCenterViewController:readerViewController
+                                                        leftMenuViewController:leftMenuViewController
+                                                        rightMenuViewController:nil];
+        
+        [self presentViewController:container animated:NO completion:nil];
+        [readerViewController release];
+        
+    }
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    
+    NSString *plistFileName = [NSString stringWithFormat:@"%@.plist",sBookNumber];
+    NSDictionary *bookPlist = [NSDictionary dictionaryWithContentsOfFile:[plistFileName getDocPathWithPList]];
+    
+    NSString *_bookName = [bookPlist objectForKey:@"bookName"];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Book Opened Analysis"
                                                           action:sBookNumber
                                                            label:_bookName
-                                                           value:@1] build]];}
+                                                           value:@1] build]];
+}
 
 #pragma mark dismissModalViewController methods
 - (void)dismissMyModalViewController

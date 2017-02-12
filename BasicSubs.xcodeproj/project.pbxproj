@@ -38,15 +38,6 @@
 		022BF141137B9890002191E0 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 022BF13C137B9890002191E0 /* zip.c */; };
 		0238C02215C00B2200F90DE4 /* AQPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238C01D15C00B2200F90DE4 /* AQPlayer.m */; };
 		0238C02315C00B2200F90DE4 /* ReleaseNote.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C01F15C00B2200F90DE4 /* ReleaseNote.txt */; };
-		0238C02415C00B2200F90DE4 /* StreamPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238C02115C00B2200F90DE4 /* StreamPlayer.m */; };
-		0238C2CD15F49EAD0057C4F0 /* prosody_CHT_male_YouKan_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2C515F49EAD0057C4F0 /* prosody_CHT_male_YouKan_hts_char.txt */; };
-		0238C2CE15F49EAD0057C4F0 /* synther_CHT_male_YouKan_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2C615F49EAD0057C4F0 /* synther_CHT_male_YouKan_hts_char.txt */; };
-		0238C2CF15F49EAD0057C4F0 /* prosody_CHT_female_DaiYu_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2C715F49EAD0057C4F0 /* prosody_CHT_female_DaiYu_hts_char.txt */; };
-		0238C2D015F49EAD0057C4F0 /* prosody_CHT_female_ZhiFen_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2C815F49EAD0057C4F0 /* prosody_CHT_female_ZhiFen_hts_char.txt */; };
-		0238C2D115F49EAD0057C4F0 /* prosody_ENU_female_DaiYu_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2C915F49EAD0057C4F0 /* prosody_ENU_female_DaiYu_hts_char.txt */; };
-		0238C2D215F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2CA15F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt */; };
-		0238C2D315F49EAD0057C4F0 /* synther_CHT_female_ZhiFen_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2CB15F49EAD0057C4F0 /* synther_CHT_female_ZhiFen_hts_char.txt */; };
-		0238C2D415F49EAD0057C4F0 /* synther_ENU_female_DaiYu_hts_char.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0238C2CC15F49EAD0057C4F0 /* synther_ENU_female_DaiYu_hts_char.txt */; };
 		025E78AA15B58A1D005B2421 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E78A915B58A1C005B2421 /* AudioToolbox.framework */; };
 		026B36D815CD906300B94720 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026B36D715CD906300B94720 /* AVFoundation.framework */; };
 		02743F00159184270065D0CD /* jquery.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02743EFF159184270065D0CD /* jquery.txt */; };
@@ -569,16 +560,6 @@
 		0238C01D15C00B2200F90DE4 /* AQPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AQPlayer.m; sourceTree = "<group>"; };
 		0238C01E15C00B2200F90DE4 /* CReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CReader.h; sourceTree = "<group>"; };
 		0238C01F15C00B2200F90DE4 /* ReleaseNote.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNote.txt; sourceTree = "<group>"; };
-		0238C02015C00B2200F90DE4 /* StreamPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamPlayer.h; sourceTree = "<group>"; };
-		0238C02115C00B2200F90DE4 /* StreamPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamPlayer.m; sourceTree = "<group>"; };
-		0238C2C515F49EAD0057C4F0 /* prosody_CHT_male_YouKan_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prosody_CHT_male_YouKan_hts_char.txt; sourceTree = "<group>"; };
-		0238C2C615F49EAD0057C4F0 /* synther_CHT_male_YouKan_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = synther_CHT_male_YouKan_hts_char.txt; sourceTree = "<group>"; };
-		0238C2C715F49EAD0057C4F0 /* prosody_CHT_female_DaiYu_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prosody_CHT_female_DaiYu_hts_char.txt; sourceTree = "<group>"; };
-		0238C2C815F49EAD0057C4F0 /* prosody_CHT_female_ZhiFen_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prosody_CHT_female_ZhiFen_hts_char.txt; sourceTree = "<group>"; };
-		0238C2C915F49EAD0057C4F0 /* prosody_ENU_female_DaiYu_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prosody_ENU_female_DaiYu_hts_char.txt; sourceTree = "<group>"; };
-		0238C2CA15F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = synther_CHT_female_DaiYu_hts_char.txt; sourceTree = "<group>"; };
-		0238C2CB15F49EAD0057C4F0 /* synther_CHT_female_ZhiFen_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = synther_CHT_female_ZhiFen_hts_char.txt; sourceTree = "<group>"; };
-		0238C2CC15F49EAD0057C4F0 /* synther_ENU_female_DaiYu_hts_char.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = synther_ENU_female_DaiYu_hts_char.txt; sourceTree = "<group>"; };
 		025E78A915B58A1C005B2421 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		026B36D715CD906300B94720 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		02743EFF159184270065D0CD /* jquery.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jquery.txt; sourceTree = "<group>"; };
@@ -1251,14 +1232,6 @@
 		025E78C015B58A9A005B2421 /* bin */ = {
 			isa = PBXGroup;
 			children = (
-				0238C2C515F49EAD0057C4F0 /* prosody_CHT_male_YouKan_hts_char.txt */,
-				0238C2C615F49EAD0057C4F0 /* synther_CHT_male_YouKan_hts_char.txt */,
-				0238C2C715F49EAD0057C4F0 /* prosody_CHT_female_DaiYu_hts_char.txt */,
-				0238C2C815F49EAD0057C4F0 /* prosody_CHT_female_ZhiFen_hts_char.txt */,
-				0238C2C915F49EAD0057C4F0 /* prosody_ENU_female_DaiYu_hts_char.txt */,
-				0238C2CA15F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt */,
-				0238C2CB15F49EAD0057C4F0 /* synther_CHT_female_ZhiFen_hts_char.txt */,
-				0238C2CC15F49EAD0057C4F0 /* synther_ENU_female_DaiYu_hts_char.txt */,
 			);
 			name = bin;
 			sourceTree = "<group>";
@@ -1270,8 +1243,6 @@
 				0238C01D15C00B2200F90DE4 /* AQPlayer.m */,
 				0238C01E15C00B2200F90DE4 /* CReader.h */,
 				0238C01F15C00B2200F90DE4 /* ReleaseNote.txt */,
-				0238C02015C00B2200F90DE4 /* StreamPlayer.h */,
-				0238C02115C00B2200F90DE4 /* StreamPlayer.m */,
 				025E78C015B58A9A005B2421 /* bin */,
 			);
 			name = AudioLibrary;
@@ -2527,14 +2498,8 @@
 				290AA82A187878E500CF00B7 /* Default-Portrait@2x.png in Resources */,
 				04320E5B1B300A7B0058200F /* Default-568h@2x.png in Resources */,
 				042D513E1845D56200269A12 /* Reader-Mark-pub-N.png in Resources */,
-				0238C2CD15F49EAD0057C4F0 /* prosody_CHT_male_YouKan_hts_char.txt in Resources */,
-				0238C2CE15F49EAD0057C4F0 /* synther_CHT_male_YouKan_hts_char.txt in Resources */,
 				042D52501845D86C00269A12 /* about@2x.png in Resources */,
-				0238C2CF15F49EAD0057C4F0 /* prosody_CHT_female_DaiYu_hts_char.txt in Resources */,
-				0238C2D015F49EAD0057C4F0 /* prosody_CHT_female_ZhiFen_hts_char.txt in Resources */,
-				0238C2D115F49EAD0057C4F0 /* prosody_ENU_female_DaiYu_hts_char.txt in Resources */,
 				042D52631845D86C00269A12 /* bookBox@2x.png in Resources */,
-				0238C2D215F49EAD0057C4F0 /* synther_CHT_female_DaiYu_hts_char.txt in Resources */,
 				046D31541B384FAE00E4C4E2 /* Reader-Index.png in Resources */,
 				045F335F1B32D5B5003D349A /* Icon-Small@3x.png in Resources */,
 				04FFA4DB1B3CE29500A0F68B /* 8887.pdf in Resources */,
@@ -2542,8 +2507,6 @@
 				042D51511845D59D00269A12 /* Reader-Button-H@2x.png in Resources */,
 				29DAECEA1856D5E900F4458B /* navbar@2x.png in Resources */,
 				290AA8231878775800CF00B7 /* Icon-60.png in Resources */,
-				0238C2D315F49EAD0057C4F0 /* synther_CHT_female_ZhiFen_hts_char.txt in Resources */,
-				0238C2D415F49EAD0057C4F0 /* synther_ENU_female_DaiYu_hts_char.txt in Resources */,
 				042D513F1845D56200269A12 /* Reader-Thumbs-pub.png in Resources */,
 				04B9598F18DDE3FE0048FA50 /* play.png in Resources */,
 				290AA81A1878748600CF00B7 /* iTunesArtwork in Resources */,
@@ -2716,7 +2679,6 @@
 				049BCD251A48263F0069ADEB /* TEImageLoader.m in Sources */,
 				04B9598818DDE3FE0048FA50 /* BookListDelegate.m in Sources */,
 				049BCD361A48265B0069ADEB /* TEPhoto.m in Sources */,
-				0238C02415C00B2200F90DE4 /* StreamPlayer.m in Sources */,
 				046D31511B384AED00E4C4E2 /* SideMenuViewController.m in Sources */,
 				29DAED3B185735F300F4458B /* MKSKSubscriptionProduct.m in Sources */,
 				02A85B181605B34E00ABA86D /* ASIAuthenticationDialog.m in Sources */,
@@ -2820,9 +2782,11 @@
 		0223037F1344A0E400D368DF /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR) (G6827LDER4)";
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_THUMB_SUPPORT = NO;
@@ -2834,7 +2798,7 @@
 					"$(BUILT_PRODUCTS_DIR)/../../three20",
 					../three20/Build/Products/three20,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6164fb78-3e1d-4cc7-bbdd-32431f62ba48";
@@ -2848,9 +2812,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR) (G6827LDER4)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/eZoeTests\\\\\\\"",
@@ -2890,9 +2857,11 @@
 		02AB5A2A1337D88000B8DB1B /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR) (G6827LDER4)";
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -2906,7 +2875,7 @@
 					"$(BUILT_PRODUCTS_DIR)/../../three20",
 					../three20/Build/Products/three20,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00436cc4-0379-4b13-ad81-4c75f04849fb";
 				SDKROOT = iphoneos;
@@ -2919,9 +2888,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR) (G6827LDER4)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/eZoeTests\\\\\\\"",
@@ -2957,9 +2929,11 @@
 		02B48246132FD76E001B9B7D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Liu (7RM69B555R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -2973,10 +2947,10 @@
 					"$(BUILT_PRODUCTS_DIR)/../../three20",
 					../three20/Build/Products/three20,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4cf17511-be34-4b31-99b5-99f7a5d046b4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2986,9 +2960,11 @@
 		02B48247132FD76E001B9B7D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR)";
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_THUMB_SUPPORT = NO;
@@ -3000,7 +2976,7 @@
 					"$(BUILT_PRODUCTS_DIR)/../../three20",
 					../three20/Build/Products/three20,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3EFF939B-28BA-4B86-AA1C-106261A673A9";
@@ -3014,9 +2990,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Liu (7RM69B555R)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/eZoeTests\\\\\\\"",
@@ -3039,7 +3018,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = BasicSubs;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4cf17511-be34-4b31-99b5-99f7a5d046b4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3051,8 +3030,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taiwan Gospel Book Room (TWGBR)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/eZoeTests\\\\\\\"",

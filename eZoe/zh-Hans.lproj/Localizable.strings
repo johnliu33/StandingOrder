@@ -36,10 +36,10 @@
 "分類瀏覽" = "单册购买";
 
 /* Catalogue url */
-"catalogue_url" = "http://ipad.twgbr.org/mon2s.php";
+"catalogue_url" = "http://so.twgbr.org/subs/single_main_c.php";
 
 /* Catalogue url iphone */
-"catalogue_url_iphone" = "http://ipad.twgbr.org/iphone_mon2s.php";
+"catalogue_url_iphone" = "http://so.twgbr.org/subs/single_main_c.php";
 
 /* Book Search */
 "書報搜尋" = "书报搜寻";
