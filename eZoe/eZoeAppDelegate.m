@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////
 #import "KNModalTableViewController.h"
 ///////////////////////////////////////////////////////
-#import <Parse/Parse.h>
+
 
 
 
@@ -25,6 +25,9 @@
 @end
 
 @implementation eZoeAppDelegate
+
+NSString *const kGCMMessageIDKey = @"gcm.message_id";
+
 @synthesize sBookLastOpened;
 @synthesize tazzecuid;
 @synthesize sIdForRef;
@@ -89,21 +92,106 @@
     [dbookid release];
     [super dealloc];
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//parse
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global" ];
-    [currentInstallation saveInBackground];
-}
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
-}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // UIApplicationDelegate
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+// Receive data message on iOS 10 devices while app is in the foreground.
+- (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
+    // Print full message
+    NSLog(@"%@", remoteMessage.appData);
+}
+#endif
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // If you are receiving a notification message while your app is in the background,
+    // this callback will not be fired till the user taps on the notification launching the application.
+    // TODO: Handle data of notification
+    
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+    
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // If you are receiving a notification message while your app is in the background,
+    // this callback will not be fired till the user taps on the notification launching the application.
+    // TODO: Handle data of notification
+    
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+    
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        
+        NSDictionary *dictAps = userInfo[@"aps"];
+        NSString *myMessage = dictAps[@"alert"];
+        
+        
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"推播訊息"
+                                                        message:myMessage
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    // Request to reload table view data
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    
+    // Set icon badge number to zero
+    application.applicationIconBadgeNumber = 0;
+}
+#pragma mark -- Custom Firebase code
+
+
+- (void)tokenRefreshCallback:(NSNotification *) notification{
+    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSLog(@"IstanceID token: %@", refreshedToken);
+    
+    // Connect To FCM since connection may have failed when attempt before having a token
+    [self connectToFirebase];
+}
+
+-(void) connectToFirebase{
+    
+    [[FIRMessaging messaging] connectWithCompletion:^(NSError * _Nullable error)
+     {
+         if ( error != nil)
+         {
+             NSLog(@"Unable to Connect To FCM. %@",error);
+         }
+         else
+         {
+             NSLog((@"Connected To FCM"));
+         }
+     }];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // for development
+//            [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeSandbox];
+//            NSLog(@"IstanceID token: %@",deviceToken);
+    //     for production
+    [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeProd];
+    
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -115,6 +203,8 @@
      } else if (sizeof(void*) == 8) {
          NSLog(@"You're running in 64 bit");
      }*/
+    
+    [FIRApp configure];
     
     NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
@@ -134,25 +224,32 @@
                                               trackingId:kTrackingId];
     
     
-    [Parse setApplicationId:@"ChSMLWtqR4jlMjESLi13uHB8xEM6ahv49ACKVG9J"
-                  clientKey:@"7tX9CXryVtkOLkasJJBef0cWQ57QLlUEac6LRNpe"]; 
-    
     
     //-- Set Notification
-    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
-    {
-        // iOS 8 Notifications
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    //Add an observer for handling a token refresh callback.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshCallback:) name:kFIRInstanceIDTokenRefreshNotification object:nil];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
+        UIUserNotificationType allNotificationTypes =
+        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    } else {
+        // iOS 10 or later
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        }];
         
-        [application registerForRemoteNotifications];
+        // For iOS 10 display notification (sent via APNS)
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        // For iOS 10 data message (sent via FCM)
+        [FIRMessaging messaging].remoteMessageDelegate = self;
+#endif
     }
-    else
-    {
-        // iOS < 8 Notifications
-        [application registerForRemoteNotificationTypes:
-         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    }
-   
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     displaypageMode = 0;
     pdfRectageMode = 0;

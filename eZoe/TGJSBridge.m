@@ -7,7 +7,6 @@
 //
 
 #import "TGJSBridge.h"
-#import "SBJson.h"
 
 #define kTGJSBridgeProtocolScheme @"jsbridge"
 #define kTGJSBridgeNotificationSeparator @"-"
@@ -94,7 +93,17 @@
 {
     if(userInfo)
     {
-        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"jsBridge.trigger('%@',%@)",name,[userInfo JSONRepresentation]]];
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        if (!jsonData) {
+            //Deal with error
+        } else {
+            NSString *requestJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"jsBridge.trigger('%@',%@)",name,requestJson]];
+            
+        }
     }
     else 
     {
@@ -140,7 +149,10 @@
 
 {
     NSString *responseString = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"jsBridge.popNotificationObject(%@)", notificationId]];
-    NSDictionary *responseDict = [responseString JSONValue];
+    NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    NSDictionary *responseDict = json;//[responseString JSONValue];
     return responseDict;
 }
 

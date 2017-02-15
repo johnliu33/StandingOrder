@@ -9,7 +9,6 @@
 #import "BookManager.h"
 #import "BookHelper.h"
 #import "ASIHTTPRequest.h"
-#import "JSON.h"
 #import "Global.h"
 
 @implementation BookManager
@@ -28,25 +27,7 @@
 #pragma mark - Public methods
 
 - (void)requestBookList {
-    /*
-    NSString *sn = [BookHelper generateSN];
-    NSString *afterSHA = [BookHelper getnerateSHA:sn
-                                     functionName:@"GetEbookList"];
-    NSString *cuid = [BookHelper CUID];
-    NSString *url = [NSString stringWithFormat:@"http://ebook.taaze.tw/api/ebook/GetEbookList.ashx?cuid=%@&sn=%@&token=%@", cuid, sn, afterSHA];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-    request.delegate = self;
-    [request startAsynchronous];
-     */
-    
-    /*[self copyFileFromResource:@"2148l.png"];
-    [self copyFileFromResource:@"1044l.png"];
-    [self copyFileFromResource:@"2019l.png"];
-    
-    NSDictionary *bookDict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2148",@"pid",@"神的經營",@"title", nil];
-    NSDictionary *bookDict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"1044",@"pid",@"人生的奧秘",@"title", nil];
-    NSDictionary *bookDict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"2019",@"pid",@"正常的基督徒生活",@"title", nil];
-    */
+   
     
     NSString *newfileName = [@"bookListInfo.plist" getDocPathWithPList];
     NSArray *bookList = [NSArray arrayWithContentsOfFile:newfileName];
@@ -155,17 +136,6 @@
     _createBooks = nil;
     
     
-    /*
-    [_gospelBooks release];
-    NSMutableArray *gospelBooks = [NSMutableArray array];
-    
-    
-     for (NSDictionary *bookInfo in self.books) {
-         [gospelBooks addObject:bookInfo];
-     }
-     _gospelBooks = [gospelBooks retain];
-    _createBooks = nil;
-    */
 }
 
 - (void)refreshBooksByGroup {
@@ -292,7 +262,10 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     if (200 == request.responseStatusCode) {
-        NSDictionary *results = [request.responseString JSONValue];
+        NSData *data = [request.responseString dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSDictionary *results = json;
         if (results) {
             NSArray *bookList = [results objectForKey:@"ebookList"];
             if (bookList) {
