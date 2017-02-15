@@ -15,49 +15,43 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "02B48216132FD76D001B9B7D"
-               BuildableName = "eZoe.app"
-               BlueprintName = "eZoe"
-               ReferencedContainer = "container:eZoe.xcodeproj">
+               BuildableName = "BasicSubs.app"
+               BlueprintName = "BasicSubs"
+               ReferencedContainer = "container:BasicSubs.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "02B48234132FD76E001B9B7D"
-               BuildableName = "eZoeTests.octest"
-               BlueprintName = "eZoeTests"
-               ReferencedContainer = "container:eZoe.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       displayScaleIsEnabled = "NO"
       displayScale = "1.00"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "02B48216132FD76D001B9B7D"
-            BuildableName = "eZoe.app"
-            BlueprintName = "eZoe"
-            ReferencedContainer = "container:eZoe.xcodeproj">
+            BuildableName = "BasicSubs.app"
+            BlueprintName = "BasicSubs"
+            ReferencedContainer = "container:BasicSubs.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -66,20 +60,20 @@
    <ProfileAction
       displayScaleIsEnabled = "NO"
       displayScale = "1.00"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "02B48216132FD76D001B9B7D"
-            BuildableName = "eZoe.app"
-            BlueprintName = "eZoe"
-            ReferencedContainer = "container:eZoe.xcodeproj">
+            BuildableName = "BasicSubs.app"
+            BlueprintName = "BasicSubs"
+            ReferencedContainer = "container:BasicSubs.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

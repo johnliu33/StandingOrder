@@ -10,6 +10,8 @@
 #import "BookListViewController.h"
 
 #import "GAI.h"
+#import "Firebase.h"
+#import <UserNotifications/UserNotifications.h>
 
 /******* Set your tracking ID here *******/
 static NSString *const kTrackingId = @"UA-66240230-1";//UA-66240230-1  //UA-66094417-1
@@ -23,7 +25,7 @@ typedef enum {
     Sinaweibo
 } WaitingSocialLoginType;
 
-@interface eZoeAppDelegate : UIResponder <UIApplicationDelegate>
+@interface eZoeAppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate,FIRMessagingDelegate>
 {
     //setting
     NSMutableDictionary *setting;
