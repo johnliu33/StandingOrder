@@ -1303,37 +1303,10 @@
 #pragma mark - open Modal reader
 - (void)showModal:(NSNotification *)notification
 {
-    /*
-    NSString *bookId = [[notification userInfo] objectForKey:@"bookId"];
-    
-    MyWebViewController *_mwreadViewContoller = [[MyWebViewController alloc] initWithBookName:bookId];
-    
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:_mwreadViewContoller leftViewController:nil rightViewController:nil] ;
     
     
-    deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    deckController.modalPresentationStyle = UIModalPresentationFullScreen;
+    NSString *sbooknumber_= [[notification userInfo] objectForKey:@"bookId"];
     
-    [[self navigationController] pushViewController:deckController animated:NO];
-    [[self navigationController] setToolbarHidden:YES animated:NO];
-    
-    [_mwreadViewContoller release];
-    [deckController release];
-    */
-  /*
-    - (void)loadPDFDocument:(NSString *)sBookNumber
-    {
-#ifdef DEBUG
-        NSLog(@"%s", __FUNCTION__);
-#endif*/
-    
-     NSString *sbooknumber_= [[notification userInfo] objectForKey:@"bookId"];
-    /*if(IS_IOS_7)
-    {
-        ios7statusbarhide = YES;
-        
-        [self setNeedsStatusBarAppearanceUpdate];
-    }*/
     NSString *filePath = [[NSString stringWithFormat:@"%@.pdf",sbooknumber_] getDocPathWithPList];
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {

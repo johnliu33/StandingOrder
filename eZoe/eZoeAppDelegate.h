@@ -31,7 +31,6 @@ typedef enum {
     NSMutableDictionary *setting;
     NSMutableArray  *bookList;
     NSMutableArray  *pageList;
-    //NSMutableArray  *bookInstalledList;
 
     //history
     NSString *sBookLastOpened;

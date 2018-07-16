@@ -41,9 +41,4 @@ typedef enum {
 
 @property (assign, nonatomic) BookListSortType listSortType;
 
-//- (void)tableViewWithGroup;
-//- (void)tableViewWithName;
-//- (void)tableViewWithNumber;
-//- (void)tableViewWithSearch:(NSString *)searchString;
-
 @end
