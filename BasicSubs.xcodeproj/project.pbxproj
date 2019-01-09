@@ -310,7 +310,6 @@
 		177FAA0F210628FD0016135C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA0D210628FC0016135C /* libsqlite3.dylib */; };
 		177FAA10210628FD0016135C /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA0E210628FC0016135C /* libz.1.dylib */; };
 		177FAA122106294D0016135C /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA112106294D0016135C /* libxml2.2.dylib */; };
-		290AA81A1878748600CF00B7 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 290AA8191878748600CF00B7 /* iTunesArtwork */; };
 		290AA8211878775800CF00B7 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 290AA81B1878775800CF00B7 /* Icon-40.png */; };
 		290AA8221878775800CF00B7 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 290AA81C1878775800CF00B7 /* Icon-40@2x.png */; };
 		290AA8231878775800CF00B7 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 290AA81D1878775800CF00B7 /* Icon-60.png */; };
@@ -348,6 +347,7 @@
 		320CC833B8AF0ACFD35E6225 /* libThree20Style.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320CC833B8AF0ACFD35E6224 /* libThree20Style.a */; };
 		320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320D7DCCE32703ACAB9A45E4 /* libThree20.a */; };
 		320F2C48872C2E2C4DF86205 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F2C48872C2E2C4DF86204 /* libThree20UI.a */; };
+		3FF1F4C821E4E152003B3B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179032C1216D01E0006498AC /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2397,6 +2397,7 @@
 				042D524E1845D86C00269A12 /* search@2x.png in Resources */,
 				29DAECE71856D5E900F4458B /* chest_L@2x.png in Resources */,
 				04B9598E18DDE3FE0048FA50 /* stop.png in Resources */,
+				3FF1F4C821E4E152003B3B17 /* Assets.xcassets in Resources */,
 				290AA8241878775800CF00B7 /* Icon-60@2x.png in Resources */,
 				042D52681845D86C00269A12 /* Default@2x.png in Resources */,
 				290AA8251878775800CF00B7 /* Icon-76.png in Resources */,
@@ -2483,7 +2484,6 @@
 				290AA8231878775800CF00B7 /* Icon-60.png in Resources */,
 				042D513F1845D56200269A12 /* Reader-Thumbs-pub.png in Resources */,
 				04B9598F18DDE3FE0048FA50 /* play.png in Resources */,
-				290AA81A1878748600CF00B7 /* iTunesArtwork in Resources */,
 				042D51541845D59D00269A12 /* Reader-Email.png in Resources */,
 				04D1992D1A4C139700476843 /* InfoPlist.strings in Resources */,
 				29DAECE61856D5E900F4458B /* chest_L.png in Resources */,
@@ -2781,7 +2781,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = G6827LDER4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2866,7 +2866,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = G6827LDER4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2976,7 +2976,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = G6827LDER4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3026,7 +3026,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = G6827LDER4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
