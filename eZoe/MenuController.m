@@ -373,7 +373,7 @@ withString:@"-"];
         self.title = [self nameForMenuPage:page];
     else
     {
-        NSString *_sAbout = [NSString stringWithFormat:@"%@v%@",[self nameForMenuPage:page],[[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleVersion"]];
+        NSString *_sAbout = [NSString stringWithFormat:@"%@v%@",[self nameForMenuPage:page],[[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"]];
         self.title = _sAbout;
     }
     
