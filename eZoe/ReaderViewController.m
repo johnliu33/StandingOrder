@@ -31,6 +31,7 @@
 #import "ReaderContentView.h"
 #import "ReaderThumbCache.h"
 #import "ReaderThumbQueue.h"
+#import "ReaderAppearance.h"
 
 #import "eZoeAppDelegate.h"
 
@@ -38,6 +39,7 @@
 
 #import "MFSideMenu.h"
 #import "SideMenuViewController.h"
+
 
 
 
@@ -83,6 +85,9 @@
 #pragma mark Constants
 
 #define PAGING_VIEWS 3
+
+#define IPHONEX_SPACE 40.0f
+#define STATUSBAR_HEIGHT 20.0f
 
 #define TOOLBAR_HEIGHT 44.0f
 #define PAGEBAR_HEIGHT 48.0f
@@ -781,6 +786,12 @@
 	CGRect toolbarRect = viewRect;
 	toolbarRect.size.height = TOOLBAR_HEIGHT;
     
+    if([ReaderAppearance isIPhoneX]) {
+        toolbarRect.origin.y = IPHONEX_SPACE;
+    } else {
+        toolbarRect.origin.y = STATUSBAR_HEIGHT;
+    }
+    
     [self readFromPlistData];
     
 
@@ -792,7 +803,11 @@
 
 	CGRect pagebarRect = viewRect;
 	pagebarRect.size.height = PAGEBAR_HEIGHT;
-	pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT);
+    if([ReaderAppearance isIPhoneX]) {
+        pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT - IPHONEX_SPACE);
+    } else {
+        pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT);
+    }
 
 	mainPagebar = [[ReaderMainPagebar alloc] initWithFrame:pagebarRect document:document]; // At bottom
 

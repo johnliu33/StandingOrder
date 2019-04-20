@@ -307,6 +307,7 @@
 		04FFA4D81B3CE28A00A0F68B /* 8887l@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FFA4D61B3CE28A00A0F68B /* 8887l@2x.png */; };
 		04FFA4DB1B3CE29500A0F68B /* 8887.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFA4D91B3CE29500A0F68B /* 8887.pdf */; };
 		04FFA4DE1B3CE6E200A0F68B /* 8887.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04FFA4DD1B3CE6E200A0F68B /* 8887.plist */; };
+		176665FF222A894200A9F9DB /* ReaderAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 176665F6222A894100A9F9DB /* ReaderAppearance.m */; };
 		177FAA0F210628FD0016135C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA0D210628FC0016135C /* libsqlite3.dylib */; };
 		177FAA10210628FD0016135C /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA0E210628FC0016135C /* libz.1.dylib */; };
 		177FAA122106294D0016135C /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FAA112106294D0016135C /* libxml2.2.dylib */; };
@@ -986,6 +987,8 @@
 		04FFA4D61B3CE28A00A0F68B /* 8887l@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8887l@2x.png"; sourceTree = "<group>"; };
 		04FFA4D91B3CE29500A0F68B /* 8887.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 8887.pdf; sourceTree = "<group>"; };
 		04FFA4DD1B3CE6E200A0F68B /* 8887.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 8887.plist; sourceTree = "<group>"; };
+		176665F6222A894100A9F9DB /* ReaderAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReaderAppearance.m; sourceTree = "<group>"; };
+		176665FE222A894100A9F9DB /* ReaderAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReaderAppearance.h; sourceTree = "<group>"; };
 		177FAA0D210628FC0016135C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		177FAA0E210628FC0016135C /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		177FAA112106294D0016135C /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = ../../../../../../usr/lib/libxml2.2.dylib; sourceTree = "<group>"; };
@@ -1722,6 +1725,8 @@
 		042D517D1845D5BE00269A12 /* PDFReader */ = {
 			isa = PBXGroup;
 			children = (
+				176665FE222A894100A9F9DB /* ReaderAppearance.h */,
+				176665F6222A894100A9F9DB /* ReaderAppearance.m */,
 				042D515F1845D5B900269A12 /* ReaderConstants.h */,
 				042D51601845D5B900269A12 /* ReaderConstants.m */,
 				042D51611845D5B900269A12 /* ReaderDocument.h */,
@@ -2657,6 +2662,7 @@
 				29DAED441857360000F4458B /* SFHFKeychainUtils.m in Sources */,
 				042D51A31845D67D00269A12 /* FPPopoverController.m in Sources */,
 				02A85B1E1605B34E00ABA86D /* ASIDataDecompressor.m in Sources */,
+				176665FF222A894200A9F9DB /* ReaderAppearance.m in Sources */,
 				02A85B1F1605B34E00ABA86D /* ASIDataCompressor.m in Sources */,
 				04B9599D18DDE7660048FA50 /* DownloadManager.m in Sources */,
 			);

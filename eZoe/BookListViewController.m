@@ -18,6 +18,9 @@
 #import "MyWebViewController.h"
 #import "IIViewDeckController.h"
 
+//iphonex
+#import "ReaderAppearance.h"
+
 #import "Reachability.h"
 #import "LoadingView.h"
 
@@ -1013,10 +1016,13 @@
             sbOffset = bg.frame.size.width-70-sbLength-30;
             
             
-        }else {
+//        } else if([ReaderAppearance isIPhoneX])
+            
+        } else {
             bg = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)] autorelease];
             //for iphone
-            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(54, 0, 130, 45)] autorelease];
+//            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(54, 0, 130, 45)] autorelease];
+            eZoeTitle = [[[UILabel alloc] initWithFrame:CGRectMake(76, 0, 130, 45)] autorelease];
             eZoeTitle.text =  NSLocalizedString(@"書報•訂戶", @"eZoe");
             eZoeTitle.textColor = [UIColor whiteColor];
             eZoeTitle.backgroundColor = [UIColor clearColor];
@@ -1025,7 +1031,8 @@
             hOffset = 45.0;
             fHeight = 8.0;
             
-            sbOffset = 140.0;
+//            sbOffset = 140.0;
+            sbOffset = 200.0;
             sbLength = 105.0;
         }
         
@@ -1119,7 +1126,9 @@
     
     //if(IS_IOS_7)
     //{
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor brownColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor brownColor]];
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
         [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor],  UITextAttributeTextColor,nil] forState:UIControlStateNormal];
         
     //}

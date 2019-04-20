@@ -28,6 +28,7 @@
 #import "ReaderThumbRequest.h"
 #import "ReaderThumbCache.h"
 #import "ReaderDocument.h"
+#import "ReaderAppearance.h"
 
 #import "eZoeAppDelegate.h"
 
@@ -60,6 +61,9 @@
 
 #define PAGE_THUMB_SMALL 160
 #define PAGE_THUMB_LARGE 256
+
+#define IPHONEX_SPACE 40.0f
+#define STATUSBAR_HEIGHT 20.0f
 
 #pragma mark Properties
 
@@ -99,6 +103,12 @@
 	//NSString *toolbarTitle = [document.fileName stringByDeletingPathExtension];
 
 	CGRect toolbarRect = viewRect; toolbarRect.size.height = TOOLBAR_HEIGHT;
+    
+    if([ReaderAppearance isIPhoneX]) {
+        toolbarRect.origin.y = IPHONEX_SPACE;
+    } else {
+        toolbarRect.origin.y = STATUSBAR_HEIGHT;
+    }
 
 	mainToolbar = [[ThumbsMainToolbar alloc] initWithFrame:toolbarRect title:@""]; //toolbarTitle// At top
 
