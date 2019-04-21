@@ -104,11 +104,7 @@
 
 	CGRect toolbarRect = viewRect; toolbarRect.size.height = TOOLBAR_HEIGHT;
     
-    if([ReaderAppearance isIPhoneX]) {
-        toolbarRect.origin.y = IPHONEX_SPACE;
-    } else {
-        toolbarRect.origin.y = STATUSBAR_HEIGHT;
-    }
+    toolbarRect.origin.y = UIApplication.sharedApplication.statusBarFrame.size.height;
 
 	mainToolbar = [[ThumbsMainToolbar alloc] initWithFrame:toolbarRect title:@""]; //toolbarTitle// At top
 
@@ -116,20 +112,15 @@
 
 	[self.view addSubview:mainToolbar];
 
-	CGRect thumbsRect = viewRect; UIEdgeInsets insets = UIEdgeInsetsZero;
+	CGRect thumbsRect = viewRect;
+//    UIEdgeInsets insets = UIEdgeInsetsZero;
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		thumbsRect.origin.y += TOOLBAR_HEIGHT; thumbsRect.size.height -= TOOLBAR_HEIGHT;
-	}
-	else // Set UIScrollView insets for non-UIUserInterfaceIdiomPad case
-	{
-		insets.top = TOOLBAR_HEIGHT;
-	}
 
+    if (@available(iOS 11.0, *)) {
+        thumbsRect.origin.y += ( TOOLBAR_HEIGHT + toolbarRect.origin.y);
+        thumbsRect.size.height -= thumbsRect.origin.y;
+    }
 	theThumbsView = [[ReaderThumbsView alloc] initWithFrame:thumbsRect]; // Rest
-
-	theThumbsView.contentInset = insets; theThumbsView.scrollIndicatorInsets = insets;
 
 	theThumbsView.delegate = self;
 

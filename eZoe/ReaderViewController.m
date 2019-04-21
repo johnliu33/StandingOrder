@@ -786,12 +786,8 @@
 	CGRect toolbarRect = viewRect;
 	toolbarRect.size.height = TOOLBAR_HEIGHT;
     
-    if([ReaderAppearance isIPhoneX]) {
-        toolbarRect.origin.y = IPHONEX_SPACE;
-    } else {
-        toolbarRect.origin.y = STATUSBAR_HEIGHT;
-    }
-    
+    toolbarRect.origin.y = UIApplication.sharedApplication.statusBarFrame.size.height;
+
     [self readFromPlistData];
     
 
@@ -803,12 +799,15 @@
 
 	CGRect pagebarRect = viewRect;
 	pagebarRect.size.height = PAGEBAR_HEIGHT;
-    if([ReaderAppearance isIPhoneX]) {
-        pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT - IPHONEX_SPACE);
+    
+    [self.view layoutIfNeeded];
+
+    if (@available(iOS 11.0, *)) {
+        pagebarRect.origin.y = viewRect.size.height - [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom - PAGEBAR_HEIGHT;
     } else {
         pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT);
     }
-
+    
 	mainPagebar = [[ReaderMainPagebar alloc] initWithFrame:pagebarRect document:document]; // At bottom
 
 	mainPagebar.delegate = self;
