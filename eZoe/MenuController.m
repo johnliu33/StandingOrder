@@ -520,28 +520,25 @@ withString:@"-"];
     CGRect rect;
      NSInteger iOSHeightPlus = 0;
     if(IS_IOS_7)
-        iOSHeightPlus = 45;
+        iOSHeightPlus = self.navigationController.navigationBar.frame.size.height;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         if(TTIsOrienLandscape())
         {
             rect = CGRectMake(0, iOSHeightPlus, 1024, 680);
-            
         }
         else
         {
-            
             rect = CGRectMake(0, iOSHeightPlus, 768, 950);
-            
         }
     }else
     {
-        if(IS_IPHONE_5)
-            rect = CGRectMake(0, iOSHeightPlus, 320, 568);
-        else
-            rect = CGRectMake(0, iOSHeightPlus, 320, 480);
+//        if(IS_IPHONE_5)
+//            rect = CGRectMake(0, iOSHeightPlus, 320, 568);
+//        else
+//            rect = CGRectMake(0, iOSHeightPlus, 320, 480);
         
-        
+        rect = CGRectMake(0, iOSHeightPlus, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height);
     }
     
     //if(webView != nil)
@@ -971,20 +968,22 @@ withString:@"-"];
     CGRect rect;
     NSUInteger iPlusHeight = 0;
     if(IS_IOS_7)
-        iPlusHeight = 45;
+        iPlusHeight = 0;
+    
+     rect = CGRectMake(0, iPlusHeight, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height);
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        if(TTIsOrienLandscape())
-        {
-            rect = CGRectMake(0, 0+iPlusHeight, 1024, 680);
-            
-        }
-        else
-        {
-            rect = CGRectMake(0, 0+iPlusHeight, 768, 950);
-            
-        }
+//        if(TTIsOrienLandscape())
+//        {
+//            rect = CGRectMake(0, 0+iPlusHeight, 1024, 680);
+//            
+//        }
+//        else
+//        {
+//            rect = CGRectMake(0, 0+iPlusHeight, 768, 950);
+//            
+//        }
     }else
     {
         /*if(TTIsOrienLandscape())
@@ -994,8 +993,7 @@ withString:@"-"];
          }
          else
          {*/
-        rect = CGRectMake(0, 0+iPlusHeight, 320, 480);
-        
+        rect = CGRectMake(0, iPlusHeight, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height);
         //}
         
     }
