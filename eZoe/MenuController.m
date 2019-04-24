@@ -670,40 +670,31 @@ withString:@"-"];
 - (void)setupPopupDialog:(SimpleController *)ctrl {
     
     ctrl.modalPresentationStyle = UIModalPresentationFormSheet;
-    
     ctrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    
-    if(UIUserInterfaceIdiomPad && IS_IOS_ONLY_7 && UIInterfaceOrientationIsLandscape(orientation)) {
+    if(UIUserInterfaceIdiomPad) {
        
         //特別去處理這種狀況
-        ctrl.preferredContentSize = CGSizeMake(600, 480);
+        CGFloat prefHeight =  self.view.frame.size.height * 0.7;
+        CGFloat prefWidth =  self.view.frame.size.width * 0.7;
+        ctrl.preferredContentSize = CGSizeMake(prefWidth, prefHeight);
         [self presentViewController:ctrl animated:NO completion:nil];
         
-        ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
+        ctrl.view.superview.frame = CGRectMake(0, 0, prefWidth, prefHeight);
         
         ctrl.view.superview.center = self.view.center;
         
-        [ctrl.view.superview setFrame:CGRectMake(150.0, 350.0, 600.0, 480.0)];
-        [ctrl.view.superview setBackgroundColor:nil];
-        [ctrl.view setFrame:CGRectMake(0, 0, 600, 480)];
+//        [ctrl.view.superview setFrame:CGRectMake(150.0, 350.0, 600.0, 480.0)];
+//        [ctrl.view.superview setBackgroundColor:nil];
+//        [ctrl.view setFrame:CGRectMake(0, 0, 600, 480)];
         
     } else {
     
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            ctrl.preferredContentSize = CGSizeMake(600, 480);
-        else
-            ctrl.preferredContentSize = [[UIScreen mainScreen] applicationFrame].size;
-        
+        ctrl.preferredContentSize = UIScreen.mainScreen.bounds.size;
         
         [self presentViewController:ctrl animated:NO completion:nil];
-        //[self presentModalViewController:ctrl animated:NO];
         
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            ctrl.view.superview.frame = CGRectMake(0, 0, 600, 480);
-        else
-            ctrl.view.superview.frame = [[UIScreen mainScreen] applicationFrame];
+        ctrl.view.superview.frame = UIScreen.mainScreen.bounds;
         
         ctrl.view.superview.center = self.view.center;
     }
@@ -1009,8 +1000,15 @@ withString:@"-"];
     //[self setPage:MenuPageLunch];
 
     //[self setPage:_page];
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
         [self reloadWeb];
+        if([self.presentedViewController isKindOfClass:SimpleController.class]) {
+            SimpleController *vc = (SimpleController *)self.presentedViewController;
+            CGSize frame = vc.preferredContentSize;
+            vc.preferredContentSize = CGSizeMake(frame.height, frame.width);
+        }
+    }
 }
 
 

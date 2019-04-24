@@ -37,7 +37,6 @@
 #import "ZipReadStream.h"
 
 
-
 @interface TextTestStyleSheet : TTDefaultStyleSheet
 @end
 
@@ -52,7 +51,7 @@
 }
 
 - (TTStyle*)largeText {
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(IS_IPAD)
     {
         return [TTTextStyle styleWithFont:[UIFont systemFontOfSize:32] next:nil];
     }else
@@ -121,12 +120,11 @@
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(IS_IPAD)
         return YES;
     else
         return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
 // initiation
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -292,16 +290,7 @@
                                                object:nil];
     
     
-    //NSString *formattedString;// = [[NSString alloc] init];
-    CGRect _rect;
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        _rect = CGRectMake(0, 0, 600,480);
-    else
-        _rect = [[UIScreen mainScreen] applicationFrame];
-    
-    
-    [self setView: [[[UIView alloc] initWithFrame:_rect] autorelease]];
+    [self setView: [[[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds] autorelease]];
     
     //[self.view setBackgroundColor: [UIColor groupTableViewBackgroundColor]];
     //[self.view setBackgroundColor: [UIColor scrollViewTexturedBackgroundColor]];
@@ -421,22 +410,15 @@
    
     
     TTImageView* imageView;
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(25,20,0, 0)]
-                                autorelease];
-        imageView.autoresizesToImage = YES;
-    }else
-    {
-        if (IS_IPHONE_5)
-            imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(15,10,0, 180)]
-                         autorelease];
-        else
-            imageView = [[[TTImageView alloc] initWithFrame:CGRectMake(15,5,0, 180)]
-                     autorelease];
-
+    CGFloat y = 0.0;
+    CGFloat screenHeight = UIScreen.mainScreen.bounds.size.height;
+    if (@available(iOS 11.0, *)) {
+        y = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top + 10;
+    } else {
+        y = 10;
     }
+    imageView = [[TTImageView alloc]initWithFrame:CGRectMake(20, y, 0, screenHeight * 0.3)];
+    imageView.autoresizesToImage = IS_IPAD;
     
     NSString *_coverurl = [NSString stringWithFormat:@"http://%@/subs_product_pic/%@.jpg",kSiteHttpRoot,_bookid];
     imageView.urlPath = _coverurl;
@@ -445,15 +427,14 @@
     
 
     UIScrollView* _scrollView;
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(IS_IPAD)
     {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(285, 20, 300, 300)]; 
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(255, y, 290, 300)];
     }else
     {
-        if (IS_IPHONE_5)
-            _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 200 , 300, 250)];
-        else
-            _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 190 , 300, 180)]; //170
+        y = imageView.frame.size.height + imageView.frame.origin.y + 5;
+        CGFloat height = screenHeight * 0.55 - 10;
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, y , 300, height)];
     }
    
     
@@ -471,31 +452,30 @@
     
     NSString *returnData = [[NSString alloc] initWithBytes: [data bytes] length:[data length] encoding: NSUTF8StringEncoding];
    
-    CGFloat contentHeight;
     TTStyledTextLabel* label1;
     
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    
+    
+    label1 = [[[TTStyledTextLabel alloc] init] autorelease];//self.view.bounds
+
+    if(IS_IPAD)
     {
-        contentHeight = (([returnData length]/16.0) + 10)*25;
-        _scrollView.contentSize = CGSizeMake(300, contentHeight);
-        
-        label1 = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)] autorelease];//self.view.bounds
         label1.font = [UIFont systemFontOfSize:17];
-        
-        
     }else
     {
-        
-        if(IS_IPHONE_5) {
-            contentHeight = (([returnData length]/12.0))*24;
-            _scrollView.contentSize = CGSizeMake(300, contentHeight);
-        } else {
-            contentHeight = (([returnData length]/12.0))*18;
-            _scrollView.contentSize = CGSizeMake(300, contentHeight);
-        }
-        label1 = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)] autorelease];//self.view.bounds
         label1.font = [UIFont systemFontOfSize:14];
     }
+    
+    CGSize size =
+    [returnData
+     boundingRectWithSize:CGSizeMake(_scrollView.frame.size.width, CGFLOAT_MAX)
+     options:NSStringDrawingUsesLineFragmentOrigin
+     attributes:@{ NSFontAttributeName:label1.font }
+     context:nil]
+    .size;
+    label1.frame = CGRectMake(0, 0, size.width, size.height);
+    _scrollView.contentSize = size;
+
     label1.textColor = [UIColor blackColor];
     
     NSString *_lang = NSLocalizedString(@"lang",@"lang");
@@ -525,17 +505,18 @@
     
     [_downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents: UIControlEventTouchUpInside];
     [_downloadButton sizeToFit];
-    [_downloadButton setFrame:CGRectMake(160, 410,145, 40)];
+    y = y + _scrollView.frame.size.height + 10;
+    [_downloadButton setFrame:CGRectMake(160, y,145, 40)];
     [self.view addSubview:_downloadButton];
     
     [_dismissButton addTarget:self action:@selector(dismissButtonAction:) forControlEvents: UIControlEventTouchUpInside];
      [_dismissButton sizeToFit];
-    [_dismissButton setFrame:CGRectMake(10, 410, 145, 40)];
+    [_dismissButton setFrame:CGRectMake(10, y, 145, 40)];
     [self.view addSubview:_dismissButton];
 
     
      
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(IS_IPAD)
     {
         if (!progressIndicator) {
 			progressIndicator = [[UIProgressView alloc] initWithFrame:CGRectMake(25, 350, 550, 50)];
@@ -546,8 +527,8 @@
         
         
         [_activityLabel setFrame:CGRectMake(25, 360, 550, 50)];
-        [_downloadButton setFrame:CGRectMake(305, 410,265, 40)];
-        [_dismissButton setFrame:CGRectMake(25, 410, 265, 40)];
+        [_downloadButton setFrame:CGRectMake(305, y,265, 40)];
+        [_dismissButton setFrame:CGRectMake(25, y, 265, 40)];
     }else
     {
         if (!progressIndicator) {
@@ -561,8 +542,6 @@
         if( IS_IPHONE_5) {
             [progressIndicator setFrame:CGRectMake(10, 460, 300, 2)];
             [_activityLabel setFrame:CGRectMake(0, 460, 320, 50)];
-            [_downloadButton setFrame:CGRectMake(160, 510,145, 40)];
-            [_dismissButton setFrame:CGRectMake(10, 510, 145, 40)];
             
         }   else
             [_activityLabel setFrame:CGRectMake(25, 385, 550, 50)];//10, 390, 300, 40
