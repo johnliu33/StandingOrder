@@ -11,6 +11,10 @@
 #define IS_IOS_ONLY_7 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) < 8.0)
 #define IS_IOS_6 (fabs( ( double )[[[UIDevice currentDevice] systemVersion] intValue]) < 7.0)
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+
 #define kSiteHttpRoot @"so.twgbr.org"
 #define kProductPrefix @"tw.org.twgbr.BasicSubs."
 
