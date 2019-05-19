@@ -114,12 +114,10 @@
 
 	CGRect thumbsRect = viewRect;
 //    UIEdgeInsets insets = UIEdgeInsetsZero;
+    
+    thumbsRect.origin.y += ( TOOLBAR_HEIGHT + toolbarRect.origin.y);
+    thumbsRect.size.height -= thumbsRect.origin.y;
 
-
-    if (@available(iOS 11.0, *)) {
-        thumbsRect.origin.y += ( TOOLBAR_HEIGHT + toolbarRect.origin.y);
-        thumbsRect.size.height -= thumbsRect.origin.y;
-    }
 	theThumbsView = [[ReaderThumbsView alloc] initWithFrame:thumbsRect]; // Rest
 
 	theThumbsView.delegate = self;
